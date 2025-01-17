@@ -1,9 +1,22 @@
 <script lang="ts">
     import '../app.css';
 
-    import { ThemeBuilder } from '$lib/components';
+    import type { LayoutServerData } from './$types';
 
-    const { children } = $props();
+    import { setContext, type Snippet } from 'svelte';
+
+    import { ThemeSelector } from '$lib/components';
+    import { THEME_COOKIE } from '$lib/cookies';
+
+    type Props = {
+        children: Snippet;
+        data: LayoutServerData;
+    };
+    const { children, data }: Props = $props();
+
+    // Proxying the objet for reactivity
+    const themeState = $state({ theme: data.theme });
+    setContext(THEME_COOKIE, themeState);
 </script>
 
 <div class="flex shrink-0 flex-col h-screen">
@@ -27,4 +40,4 @@
     </footer>
 </div>
 
-<ThemeBuilder />
+<ThemeSelector />
