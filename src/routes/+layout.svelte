@@ -1,6 +1,8 @@
 <script lang="ts">
     import '../app.css';
 
+    import { ThemeBuilder } from '$lib/components';
+
     const { children } = $props();
 </script>
 
@@ -25,3 +27,4 @@
     </footer>
 </div>
 
+<ThemeBuilder />

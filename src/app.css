@@ -4,7 +4,7 @@
 
 /* Default theme and variable initialization */
 :root,
-:root .macchiato {
+:root.macchiato {
   --rosewater: 10 57.692% 89.804%;
   --flamingo: 0 58.333% 85.882%;
   --pink: 316.071 73.684% 85.098%;
@@ -39,7 +39,7 @@ html {
   font-family: 'JetBrains Mono', monospace;
 }
 
-:root .latte {
+:root.latte {
   --rosewater: 10.8 58.824% 66.667%;
   --flamingo: 0 59.763% 66.863%;
   --pink: 316.034 73.418% 69.02%;
@@ -68,7 +68,7 @@ html {
   --crust: 220 20.69% 88.627%;
 }
 
-:root .frappe {
+:root.frappe {
   --rosewater: 10.286 57.377% 88.039%;
   --flamingo: 0 58.537% 83.922%;
   --pink: 316 73.171% 83.922%;
@@ -97,7 +97,7 @@ html {
   --crust: 229.412 19.54% 17.059%;
 }
 
-:root .mocha {
+:root.mocha {
   --rosewater: 9.6 55.556% 91.176%;
   --flamingo: 0 58.73% 87.647%;
   --pink: 316.471 71.831% 86.078%;
