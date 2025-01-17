@@ -97,7 +97,6 @@ html {
   --crust: 229.412 19.54% 17.059%;
 }
 
-
 :root .mocha {
   --rosewater: 9.6 55.556% 91.176%;
   --flamingo: 0 58.73% 87.647%;
@@ -125,4 +124,82 @@ html {
   --base: 240 21.053% 14.902%;
   --mantle: 240 21.311% 11.961%;
   --crust: 240 22.727% 8.627%;
+}
+
+/* Animations */
+:root {
+  --blob-x-offset-a: 30px;
+  --blob-y-offset-a: 15px;
+  --blob-x-offset-b: 0px;
+  --blob-y-offset-b: 40px;
+  --blob-x-offset-c: -30px;
+  --blob-y-offset-c: 15px;
+  --blob-offset-factor: 1;
+
+  @media screen(md) {
+    --blob-offset-factor: 1.25;
+  }
+
+  @media screen(xl) {
+    --blob-offset-factor: 1.75;
+  }
+
+  /* Disable animation */
+  @media (prefers-reduced-motion) {
+    --blob-offset-factor: 0;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(
+      calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
+    );
+  }
+  50% {
+    transform: translate(
+      calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
+    );
+  }
+  75% {
+    transform: translate(
+      calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
+    );
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes blob_alt {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(
+      calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
+    );
+  }
+  50% {
+    transform: translate(
+      calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
+    );
+  }
+  75% {
+    transform: translate(
+      calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
+      calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
+    );
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }

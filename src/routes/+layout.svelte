@@ -16,7 +16,7 @@
         </nav>
     </header>
     <main class="bg-base h-full flex-1">
-        <div class="container h-full w-full">
+        <div class="px-4 md:px-8 lg:px-0 container h-full w-full">
             {@render children()}
         </div>
     </main>
