@@ -45,6 +45,8 @@
                 </li>
             {/each}
         </ul>
+
+        <p class="italic hidden md:block">Open the command palette with <span class="text-peach">:</span></p>
     </div>
 </div>
 

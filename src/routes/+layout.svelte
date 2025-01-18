@@ -5,7 +5,7 @@
 
     import { setContext, type Snippet } from 'svelte';
 
-    import { ThemeSelector } from '$lib/components';
+    import { Command, ThemeSelector } from '$lib/components';
     import { THEME_COOKIE } from '$lib/cookies';
 
     type Props = {
@@ -41,3 +41,4 @@
 </div>
 
 <ThemeSelector />
+<Command />
