@@ -1,10 +1,12 @@
 <script lang="ts">
+    // TODO: Add hrefs to each command
     const COMMANDS = [
-        { desc: 'Go to /about', key: '⌘ Cmd + a' },
-        { desc: 'Go to /projects', key: '⌘ Cmd + p' },
-        { desc: 'Open my GitHub profile', key: '⌘ Cmd + g' },
-        { desc: 'See how I implemented this!', key: '⌘ Cmd + i' },
-        { desc: 'Change theme', key: '⌘ Cmd + t' }
+        { desc: 'Go to /about', key: '⌘ Cmd + a', sm: true },
+        { desc: 'Go to /projects', key: '⌘ Cmd + p', sm: true },
+        { desc: 'Open my GitHub profile', key: '⌘ Cmd + g', sm: true },
+        { desc: 'See how I implemented this!', key: '⌘ Cmd + i', sm: true },
+        { desc: 'Designs are also available!', key: '⌘ Cmd + d', sm: true },
+        { desc: 'Change theme', key: '⌘ Cmd + t', sm: false }
     ];
 </script>
 
@@ -20,7 +22,7 @@
         </div>
         <div class="flex items-end gap-4">
             <span class="text-overlay1">2</span>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold">Miquel de Domingo</h1>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-bold">Miquel de Domingo</h1>
         </div>
         <div class="flex items-center gap-4 text-sm md:text-md">
             <span class="text-overlay1">3</span>
@@ -29,16 +31,17 @@
     </div>
 
     <!-- Currently hidden on sm devices -->
-    <div class="hidden lg:flex flex-col gap-9 lg:mx-auto lg:w-1/2">
+    <div class="flex flex-col gap-4 sm:gap-6 lg:gap-9 lg:mx-auto lg:w-1/2">
         <div>
             <p>Shortcuts</p>
-            <p class="italic">You can run the shortcuts page wide!</p>
+            <p class="italic hidden md:block">You can run the shortcuts page wide!</p>
         </div>
-        <ul class="flex flex-col gap-1">
-            {#each COMMANDS as { desc, key }(key)}
-                <li class="flex justify-between items-center">
+        <!-- TODO: Decide if text should stay smaller -->
+        <ul class="text-sm md:text-md flex flex-col gap-1">
+            {#each COMMANDS as { desc, key, sm }(key)}
+                <li class:hidden={!sm} class="flex justify-between items-center">
                     <p>{desc}</p>
-                    <p class="text-peach">{key}</p>
+                    <p class="hidden md:block text-peach">{key}</p>
                 </li>
             {/each}
         </ul>

@@ -34,17 +34,17 @@
 </script>
 
 <div
-    class="fixed bottom-12 left-2"
+    class="fixed bottom-10 right-0 md:right-auto md:bottom-12 left-0 md:left-2"
     use:useClickAway={onHide}
 >
     {#if show}
         <div
             transition:fade={{ duration: 125, easing: sineInOut }}
-            class="bg-mantle text-sm px-2 py-2.5 rounded-lg mb-1 flex flex-col gap-[1px]"
+            class="bg-mantle text-sm md:px-2 py-2.5 md:rounded-lg mb-1 flex flex-col gap-[1px]"
         >
             {#each THEMES as themeKey}
                 <button
-                    class="px-4 py-0.5 rounded-full hover:bg-base outline-none text-left"
+                    class="md:px-4 py-0.5 md:rounded-full hover:bg-base outline-none md:text-left"
                     class:bg-base={themeKey === themeState.theme}
                     onclick={onSelect(themeKey)}
                 >
@@ -54,7 +54,7 @@
         </div>
     {/if}
     <button
-        class="px-6 py-1 bg-mantle rounded-full hover:bg-crust w-[148px]"
+        class="px-6 py-1 bg-mantle w-full md:rounded-full hover:bg-crust md:w-[148px]"
         onclick={onClick}
     >
         <p class="text-sm">{themeState.theme}</p>
