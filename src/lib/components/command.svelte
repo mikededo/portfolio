@@ -2,13 +2,13 @@
     import type { Icon as LucideIcon } from 'lucide-svelte';
 
     import { FileCode, PaletteIcon, SearchIcon } from 'lucide-svelte';
-    import { getContext, tick } from 'svelte';
+    import { tick } from 'svelte';
     import { fade, scale } from 'svelte/transition';
 
     import { goto } from '$app/navigation';
     import { useTrapFocus } from '$lib/actions';
-    import { changeTheme, getThemeContext } from '$lib/context';
-    import { type Theme, THEME_COOKIE } from '$lib/cookies';
+    import { changeTheme } from '$lib/context';
+    import { type Theme } from '$lib/cookies';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
@@ -17,7 +17,6 @@
         goto(path);
     };
 
-    const themeState = getThemeContext();
     const onTheme = (value: Theme) => () => {
         changeTheme(value);
     };
