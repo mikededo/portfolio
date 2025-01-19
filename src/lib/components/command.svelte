@@ -73,16 +73,16 @@
 </script>
 
 {#if show}
-    <div transition:fade={{ duration: 150 }} class="hidden md:block fixed inset-0 bg-crust/90"></div>
+    <div transition:fade={{ duration: 150 }} class="fixed inset-0 hidden bg-crust/90 md:block"></div>
     <div
         transition:scale={{ duration: 250, start: 0.975 }}
-        class="hidden p-5 shadow-2xl fixed w-[720px] h-[480px] rounded-2xl border-4 border-base bg-mantle left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:flex flex-col gap-8"
+        class="fixed left-1/2 top-1/2 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 border-base bg-mantle p-5 shadow-2xl md:flex"
         use:useTrapFocus
     >
         <div class="relative">
-            <SearchIcon class="absolute top-1/2 -translate-y-1/2 left-4 size-4 stroke-text" strokeWidth={2} />
+            <SearchIcon class="absolute left-4 top-1/2 size-4 -translate-y-1/2 stroke-text" strokeWidth={2} />
             <input
-                class="rounded-xl outline-none text-sm flex gap-3 bg-crust items-center w-full py-3 pl-10 pr-4 transition-colors border-2 border-transparent hover:border-surface0 active:border-surface0 focus:border-surface0"
+                class="flex w-full items-center gap-3 rounded-xl border-2 border-transparent bg-crust py-3 pl-10 pr-4 text-sm outline-none transition-colors hover:border-surface0 focus:border-surface0 active:border-surface0"
                 placeholder="Start typing here..."
                 bind:value={search}
                 bind:this={input}
@@ -90,7 +90,7 @@
             />
         </div>
 
-        <div class="bg-crust w-full h-full rounded-xl flex flex-col p-3">
+        <div class="flex h-full w-full flex-col rounded-xl bg-crust p-3">
             {#if !search}
                 <pre class="m-auto text-overlay2">
 ┌─────────────────┐
@@ -105,7 +105,7 @@
             {:else}
                 <div class="flex flex-col gap-[1px]">
                     {#each matches as { html }}
-                        <button class="text-left px-3 py-2.5 transition hover:bg-base focus:bg-base active:bg-base rounded-lg outline-none">
+                        <button class="rounded-lg px-3 py-2.5 text-left outline-none transition hover:bg-base focus:bg-base active:bg-base">
                             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                             {@html html}
                         </button>

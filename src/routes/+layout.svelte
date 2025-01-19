@@ -19,27 +19,27 @@
     setContext(THEME_COOKIE, themeState);
 </script>
 
-<div class="flex shrink-0 flex-col h-screen">
-    <header class="w-full h-14 bg-crust/75 flex justify-between px-4 py-3 z-10">
-        <p class="font-semibold text-xl">
+<div class="flex h-screen shrink-0 flex-col">
+    <header class="z-10 flex h-14 w-full justify-between bg-crust/75 px-4 py-3">
+        <p class="text-xl font-semibold">
             @mikededo
         </p>
-        <nav class="flex gap-6 items-center">
+        <nav class="flex items-center gap-6">
             <a href="/" class="text-sm text-mauve">home</a>
             <a href="/projects" class="text-sm hover:text-mauve">projects</a>
             <a href="/about" class="text-sm hover:text-mauve">about</a>
         </nav>
     </header>
-    <div class="fixed top-14 left-0 right-0 bg-mantle py-2 under-construction">
-        <p class="text-center text-yellow text-sm">The site is still under construction!</p>
+    <div class="under-construction fixed left-0 right-0 top-14 bg-mantle py-2">
+        <p class="text-center text-sm text-yellow">The site is still under construction!</p>
     </div>
-    <main class="bg-base h-full flex-1">
-        <div class="px-4 md:px-8 lg:px-12 xl:px-0 container h-full w-full">
+    <main class="h-full flex-1 bg-base">
+        <div class="container h-full w-full px-4 md:px-8 lg:px-12 xl:px-0">
             {@render children()}
         </div>
     </main>
-    <footer class="bg-crust/75 z-10 flex p-3 justify-end">
-        <p class="text-sm text-mauve leading-4">@mikededo</p>
+    <footer class="z-10 flex justify-end bg-crust/75 p-3">
+        <p class="text-sm leading-4 text-mauve">@mikededo</p>
     </footer>
 </div>
 

@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center h-full gap-8 md:gap-12">
+<div class="flex h-full flex-col items-center justify-center gap-8 md:gap-12">
     <div>
         <pre>
  ___   ___  ________  ___   ___
@@ -9,7 +9,7 @@
          \ \__\ \_______\     \ \__\
           \|__|\|_______|      \|__|
         </pre>
-        <p class="text-lg text-center">Seems you got lost...</p>
+        <p class="text-center text-lg">Seems you got lost...</p>
     </div>
-    <a href="/" class="px-6 py-2 bg-mantle hover:bg-crust transition-colors rounded-full">Back to safety</a>
+    <a href="/" class="rounded-full bg-mantle px-6 py-2 transition-colors hover:bg-crust">Back to safety</a>
 </div>
