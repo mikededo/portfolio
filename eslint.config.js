@@ -78,15 +78,11 @@ export default antfu(
   },
   {
     files: ['**/*.d.ts'],
-    rules: {
-      'ts/consistent-type-definitions': ['off']
-    }
+    rules: { 'ts/consistent-type-definitions': ['off'] }
   },
   {
     files: ['**/*.html'],
-    rules: {
-      'style/indent': ['error', 4]
-    }
+    rules: { 'style/indent': ['error', 4] }
   }
 )
   .override('antfu/stylistic/rules', {
@@ -141,19 +137,10 @@ export default antfu(
       'perfectionist/sort-imports': [
         'error',
         {
-          customGroups: {
-            type: { 'repo-type': ['@stack\\/[^\\/]+'] },
-            value: {
-              repo: ['@stack\\/[^\\/]+'],
-              style: ['@stack\\/[^\\/]+/styles']
-            }
-          },
           environment: 'bun',
           groups: [
             'style',
-            'repo-type',
             'type',
-            'repo',
             'internal-type',
             ['parent-type', 'sibling-type', 'index-type'],
 

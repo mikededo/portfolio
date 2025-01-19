@@ -51,7 +51,7 @@
 </div>
 
 <svg
-    class="absolute inset-0 h-screen w-screen pointer-events-none"
+    class="hidden md:block absolute inset-0 h-screen w-screen pointer-events-none"
     viewBox="0 0 1440 1024"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -106,3 +106,56 @@
     </defs>
 </svg>
 
+<svg
+    class="block md:hidden absolute inset-0 h-screen w-screen pointer-events-none"
+    viewBox="0 0 390 844"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <g opacity="0.35" filter="url(#filter0_f_23_549)">
+        <rect
+            x="99.4341"
+            y="-268"
+            width="401.074"
+            height="416.279"
+            transform="rotate(8.20843 99.4341 -268)"
+            class="fill-blue animate-blob"
+        />
+        <path
+            class="fill-red animate-blob-alt"
+            d="M19.5173 423.151L141.791 728.988L-184.208 681.961L19.5173 423.151Z"
+            style="--delay: -10s"
+        />
+        <circle
+            cx="396.38"
+            cy="408.357"
+            r="164.55"
+            transform="rotate(8.20843 396.38 408.357)"
+            class="fill-mauve animate-blob-alt"
+            style="--delay: -6s"
+        />
+        <path
+            d="M290 755L461.473 854V1052L290 1151L118.527 1052V854L290 755Z"
+            class="fill-overlay0 animate-blob"
+            style="--delay: -4s"
+        />
+    </g>
+    <defs>
+        <filter id="filter0_f_23_549"
+            x="-384.208"
+            y="-468"
+            width="1145.16"
+            height="1819"
+            filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB"
+        >
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feBlend mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
+            />
+            <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_23_549" />
+        </filter>
+    </defs>
+</svg>
