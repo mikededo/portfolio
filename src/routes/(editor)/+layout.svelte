@@ -1,16 +1,10 @@
 <script lang="ts">
     import type { LayoutServerData } from './$types';
 
-    const content: Record<number, string> = {
-        12: '┌────────────────────────┐',
-        13: '│ Still working on this! │',
-        14: '└────────────────────────┘',
-        15: '             \\   ^__^',
-        16: '              \\  (oo)\\_______',
-        17: '                 (__)\\       )\\/\\',
-        18: '                     ||----w |',
-        19: '                     ||     ||'
-    };
+    import { Timer } from '$lib/components';
+    import { About } from '$lib/content';
+
+    const content = About.AboutInfoContent;
 
     type Props = { data: LayoutServerData };
     const { data }: Props = $props();
@@ -26,22 +20,33 @@
             <span>~/home{data.pathname}</span>
         </div>
 
-        <div class="flex">
-            <div class="flex flex-col gap-0 px-2 py-1">
-                {#each { length: 30 } as _, i}
+        <div class="flex flex-1 text-sm md:text-md">
+            <div class="flex flex-col px-2 py-1">
+                {#each { length: content.length } as _, i}
                     <span class="text-right text-overlay1">{i + 1}</span>
                 {/each}
             </div>
-            <div class="flex w-full flex-col gap-0 whitespace-normal">
-                {#each { length: 30 } as _, i}
+            <div class="flex w-full flex-col py-1">
+                {#each content as l, i}
                     <span>
                         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                        {@html content[i]?.replaceAll(' ', '<span class="text-surface1">·</span>')}
-                        {#if i !== 29}
+                        {@html l}
+                        {#if i !== content.length - 1}
                             <span class="text-surface1">↴</span>
                         {/if}
                     </span>
                 {/each}
+            </div>
+        </div>
+
+        <div class="flex h-6 items-center gap-4 overflow-hidden bg-mantle">
+            <div class="h-full bg-blue px-3 text-base">NORMAL</div>
+            <p>&middot;</p>
+            <p class="text-sm text-peach">main</p>
+            <p>&middot;</p>
+            <p class="text-sm">~/home{data.pathname}/file.md</p>
+            <div class="ml-auto box-content flex h-full items-center rounded-l-full bg-crust px-4 text-sm">
+                <Timer />
             </div>
         </div>
     </div>

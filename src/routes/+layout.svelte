@@ -53,7 +53,7 @@
     <main class="h-full flex-1 bg-base">
         {@render children()}
     </main>
-    <footer class="z-10 flex justify-end bg-crust/75 p-3">
+    <footer class="z-10 flex justify-end bg-crust p-3">
         <p class="text-sm leading-4 text-mauve">@mikededo</p>
     </footer>
 </div>
