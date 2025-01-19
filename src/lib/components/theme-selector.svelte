@@ -3,7 +3,7 @@
     import { sineInOut } from 'svelte/easing';
     import { fade } from 'svelte/transition';
 
-    import { useClickAway } from '$lib/actions/use-click-away';
+    import { useClickAway } from '$lib/actions';
     import { type Theme, THEME_COOKIE } from '$lib/cookies';
 
     const THEMES: Theme[] = ['latte', 'frappe', 'macchiato', 'mocha'];

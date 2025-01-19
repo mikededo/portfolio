@@ -3,7 +3,9 @@
     import { tick } from 'svelte';
     import { fade, scale } from 'svelte/transition';
 
+    import { useTrapFocus } from '$lib/actions';
     import { EventManager } from '$lib/event-manager';
+    import { Keys } from '$lib/keyboards';
 
     const OPTIONS = [
         'Open /home page',
@@ -36,7 +38,7 @@
     const showCommand = async (e: KeyboardEvent) => {
         e.preventDefault();
 
-        if (e.key === ':') {
+        if (e.key === Keys.Colon) {
             show = !show;
 
             if (!show) {
@@ -45,7 +47,7 @@
             tick().then(() => {
                 input?.focus();
             });
-        } else if (e.key === 'Escape' && show) {
+        } else if (e.key === Keys.Escape && show) {
             show = false;
         }
     };
@@ -54,7 +56,7 @@
     // pressed when the input is focused
     const onKeydownBlocker = (e: KeyboardEvent) => {
         // When Escape is pressed the command should be hidden, so no blocking
-        if (e.key === 'Escape') {
+        if (e.key === Keys.Escape) {
             return;
         }
 
@@ -75,6 +77,7 @@
     <div
         transition:scale={{ duration: 250, start: 0.975 }}
         class="hidden p-5 shadow-2xl fixed w-[720px] h-[480px] rounded-2xl border-4 border-base bg-mantle left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:flex flex-col gap-8"
+        use:useTrapFocus
     >
         <div class="relative">
             <SearchIcon class="absolute top-1/2 -translate-y-1/2 left-4 size-4 stroke-text" strokeWidth={2} />
@@ -102,7 +105,7 @@
             {:else}
                 <div class="flex flex-col gap-[1px]">
                     {#each matches as { html }}
-                        <button class="text-left px-3 py-2.5 transition hover:bg-base rounded-lg">
+                        <button class="text-left px-3 py-2.5 transition hover:bg-base focus:bg-base active:bg-base rounded-lg outline-none">
                             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                             {@html html}
                         </button>
