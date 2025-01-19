@@ -27,8 +27,8 @@
     };
 </script>
 
-<div class="flex h-screen shrink-0 flex-col">
-    <header class="z-10 flex h-14 w-full justify-between bg-crust px-4 py-3">
+<div class="flex h-screen flex-col">
+    <header class="z-10 flex h-14 w-full shrink-0 justify-between bg-crust px-4 py-3">
         <p class="text-xl font-semibold">
             @mikededo
         </p>
