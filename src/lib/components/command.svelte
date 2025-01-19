@@ -1,41 +1,79 @@
 <script lang="ts">
-    import { SearchIcon } from 'lucide-svelte';
-    import { tick } from 'svelte';
+    import type { Icon as LucideIcon } from 'lucide-svelte';
+
+    import { FileCode, PaletteIcon, SearchIcon } from 'lucide-svelte';
+    import { getContext, tick } from 'svelte';
     import { fade, scale } from 'svelte/transition';
 
+    import { goto } from '$app/navigation';
     import { useTrapFocus } from '$lib/actions';
+    import { type Theme, THEME_COOKIE } from '$lib/cookies';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
-    const OPTIONS = [
+    const to = (path: string) => () => {
+        goto(path);
+    };
+
+    // TODO: Extract into  separate file
+    // THIS IS JUST TEMPORARY
+    const themeState = getContext<{ theme: Theme }>(THEME_COOKIE);
+    const onTheme = (value: Theme) => () => {
+        document.documentElement.className = value;
+        themeState.theme = value;
+
+        fetch('/api/set-cookie', {
+            body: JSON.stringify({ name: THEME_COOKIE, value }),
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST'
+        });
+    };
+
+    type Option = {
+        value: string;
+        action: () => void;
+        Icon: typeof LucideIcon;
+    };
+    const OPTIONS: Option[] = [
         // TODO: Add actions
         // TODO: Add other actions
-        'Open /home page',
-        'Open /projects page',
-        'Open /about page'
+        { action: to('/'), Icon: FileCode, value: 'Open /home page' },
+        { action: to('/projects'), Icon: FileCode, value: 'Open /projects page' },
+        { action: to('/about'), Icon: FileCode, value: 'Open /about page' },
+
+        // Theme actions
+        { action: onTheme('latte'), Icon: PaletteIcon, value: 'Change theme to &apos;Latte&apos;' },
+        { action: onTheme('frappe'), Icon: PaletteIcon, value: 'Change theme to &apos;Frappé&apos;' },
+        { action: onTheme('macchiato'), Icon: PaletteIcon, value: 'Change theme to &apos;Macchiato&apos;' },
+        { action: onTheme('mocha'), Icon: PaletteIcon, value: 'Change theme to &apos;Mocha&apos;' }
     ];
 
     let show = $state(false);
-    let search = $state('');
+    let command = $state('');
     let input: HTMLInputElement | undefined = $state();
 
     const matches = $derived.by(() => OPTIONS.reduce<
-        { html: string; option: string }[]
-    >((acc, option) => {
-        const match = option.match(new RegExp(search, 'gi'));
+        { html: string; option: Option }[]
+    >((acc, { value, ...option }) => {
+        const match = value.match(new RegExp(command, 'gi'));
         if (!match) {
             return acc;
         }
 
-        const html = option
-            .split(new RegExp(`(${search})`, 'gi'))
+        const html = value
+            .split(new RegExp(`(${command})`, 'gi'))
             .reduce(
                 (acc, slice, i) => `${acc}${i % 2 === 0 ? slice : `<span class="text-peach underline">${slice}</span>`}`,
                 ''
             );
 
-        return [...acc, { html, option }];
+        return [...acc, { html, option: { value, ...option } }];
     }, []));
+
+    const resetState = () => {
+        show = false;
+        command = '';
+    };
 
     const showCommand = async (e: KeyboardEvent) => {
         if (e.key === Keys.Colon) {
@@ -64,6 +102,11 @@
         e.stopPropagation();
     };
 
+    const actionProxy = (action: Option['action']) => () => {
+        resetState();
+        action();
+    };
+
     $effect(() => {
         EventManager.register('keydown', showCommand);
 
@@ -84,31 +127,37 @@
             <SearchIcon class="absolute left-4 top-1/2 size-4 -translate-y-1/2 stroke-text" strokeWidth={2} />
             <input
                 class="flex w-full items-center gap-3 rounded-xl border-2 border-transparent bg-crust py-3 pl-10 pr-4 text-sm outline-none transition-colors hover:border-surface0 focus:border-surface0 active:border-surface0"
-                placeholder="Start typing here..."
-                bind:value={search}
+                placeholder="Try searching &apos;Open &mldr;&apos;"
+                bind:value={command}
                 bind:this={input}
                 onkeydown={onKeydownBlocker}
             />
         </div>
 
         <div class="flex h-full w-full flex-col rounded-xl bg-crust p-3">
-            {#if !search}
+            {#if !command}
                 <pre class="m-auto text-overlay2">
-┌─────────────────┐
-│ Command palette │
-└─────────────────┘
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+┌──────────────────────────────────────────┐
+│ Change the theme, open a page&mldr; Anything! │
+└──────────────────────────────────────────┘
+                  \   ^__^
+                   \  (oo)\_______
+                      (__)\       )\/\
+                          ||----w |
+                          ||     ||
                 </pre>
             {:else}
-                <div class="flex flex-col gap-[1px]">
-                    {#each matches as { html }}
-                        <button class="rounded-lg px-3 py-2.5 text-left outline-none transition hover:bg-base focus:bg-base active:bg-base">
-                            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                            {@html html}
+                <div class="flex flex-col gap-0.5">
+                    {#each matches as { html, option: { action, Icon } }}
+                        <button
+                            class="flex items-center gap-4 rounded-lg px-3 py-2.5 text-left outline-none transition hover:bg-base focus:bg-base active:bg-base"
+                            onclick={actionProxy(action)}
+                        >
+                            <Icon class="size-5" />
+                            <div>
+                                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                                {@html html}
+                            </div>
                         </button>
                     {/each}
                 </div>
