@@ -3,7 +3,9 @@
 
     import type { LayoutServerData } from './$types';
 
+    import { XIcon } from 'lucide-svelte';
     import { setContext, type Snippet } from 'svelte';
+    import { fly } from 'svelte/transition';
 
     import { Command, ThemeSelector } from '$lib/components';
     import { THEME_COOKIE } from '$lib/cookies';
@@ -17,10 +19,16 @@
     // Proxying the objet for reactivity
     const themeState = $state({ theme: data.theme });
     setContext(THEME_COOKIE, themeState);
+
+    let showBanner = $state(true);
+
+    const onHideBanner = () => {
+        showBanner = false;
+    };
 </script>
 
 <div class="flex h-screen shrink-0 flex-col">
-    <header class="z-10 flex h-14 w-full justify-between bg-crust/75 px-4 py-3">
+    <header class="z-10 flex h-14 w-full justify-between bg-crust px-4 py-3">
         <p class="text-xl font-semibold">
             @mikededo
         </p>
@@ -30,13 +38,21 @@
             <a href="/about" class="text-sm hover:text-mauve">about</a>
         </nav>
     </header>
-    <div class="under-construction fixed left-0 right-0 top-14 bg-mantle py-2">
-        <p class="text-center text-sm text-yellow">The site is still under construction!</p>
-    </div>
-    <main class="h-full flex-1 bg-base">
-        <div class="container h-full w-full px-4 md:px-8 lg:px-12 xl:px-0">
-            {@render children()}
+    {#if showBanner}
+        <div
+            out:fly={{ opacity: 1, y: -36 }}
+            class="under-construction fixed left-0 right-0 top-14 z-0 flex h-9 items-center bg-mantle px-4"
+        >
+            <p class="flex-1 text-center text-sm text-yellow">
+                The site is still under construction!
+            </p>
+            <button class="outline-none" onclick={onHideBanner}>
+                <XIcon class="size-5 transition-transform active:scale-[0.9]" />
+            </button>
         </div>
+    {/if}
+    <main class="h-full flex-1 bg-base">
+        {@render children()}
     </main>
     <footer class="z-10 flex justify-end bg-crust/75 p-3">
         <p class="text-sm leading-4 text-mauve">@mikededo</p>

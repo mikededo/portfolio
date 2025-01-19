@@ -8,6 +8,8 @@
     import { Keys } from '$lib/keyboards';
 
     const OPTIONS = [
+        // TODO: Add actions
+        // TODO: Add other actions
         'Open /home page',
         'Open /projects page',
         'Open /about page'
@@ -36,9 +38,8 @@
     }, []));
 
     const showCommand = async (e: KeyboardEvent) => {
-        e.preventDefault();
-
         if (e.key === Keys.Colon) {
+            e.preventDefault();
             show = !show;
 
             if (!show) {
