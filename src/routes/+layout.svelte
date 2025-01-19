@@ -1,14 +1,15 @@
 <script lang="ts">
     import '../app.css';
 
+    import type { Snippet } from 'svelte';
+
     import type { LayoutServerData } from './$types';
 
     import { XIcon } from 'lucide-svelte';
-    import { setContext, type Snippet } from 'svelte';
     import { fly } from 'svelte/transition';
 
     import { Command, ThemeSelector } from '$lib/components';
-    import { THEME_COOKIE } from '$lib/cookies';
+    import { initThemeContext } from '$lib/context';
 
     type Props = {
         children: Snippet;
@@ -16,9 +17,7 @@
     };
     const { children, data }: Props = $props();
 
-    // Proxying the objet for reactivity
-    const themeState = $state({ theme: data.theme });
-    setContext(THEME_COOKIE, themeState);
+    initThemeContext(data.theme);
 
     let showBanner = $state(true);
 

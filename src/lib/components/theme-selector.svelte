@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { getContext } from 'svelte';
     import { sineInOut } from 'svelte/easing';
     import { fade } from 'svelte/transition';
 
     import { useClickAway } from '$lib/actions';
-    import { type Theme, THEME_COOKIE } from '$lib/cookies';
+    import { changeTheme, getThemeContext } from '$lib/context';
+    import { type Theme } from '$lib/cookies';
 
     const THEMES: Theme[] = ['latte', 'frappe', 'macchiato', 'mocha'];
 
-    const themeState = getContext<{ theme: Theme }>(THEME_COOKIE);
     let show = $state(false);
+    const themeState = getThemeContext();
 
     const onClick = () => {
         show = !show;
@@ -22,14 +22,7 @@
     };
 
     const onSelect = (value: Theme) => () => {
-        document.documentElement.className = value;
-        themeState.theme = value;
-
-        fetch('/api/set-cookie', {
-            body: JSON.stringify({ name: THEME_COOKIE, value }),
-            headers: { 'Content-Type': 'application/json' },
-            method: 'POST'
-        });
+        changeTheme(value);
     };
 </script>
 

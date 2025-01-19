@@ -7,26 +7,19 @@
 
     import { goto } from '$app/navigation';
     import { useTrapFocus } from '$lib/actions';
+    import { changeTheme, getThemeContext } from '$lib/context';
     import { type Theme, THEME_COOKIE } from '$lib/cookies';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
+    // TODO: Move this into separate file [START]
     const to = (path: string) => () => {
         goto(path);
     };
 
-    // TODO: Extract into  separate file
-    // THIS IS JUST TEMPORARY
-    const themeState = getContext<{ theme: Theme }>(THEME_COOKIE);
+    const themeState = getThemeContext();
     const onTheme = (value: Theme) => () => {
-        document.documentElement.className = value;
-        themeState.theme = value;
-
-        fetch('/api/set-cookie', {
-            body: JSON.stringify({ name: THEME_COOKIE, value }),
-            headers: { 'Content-Type': 'application/json' },
-            method: 'POST'
-        });
+        changeTheme(value);
     };
 
     type Option = {
@@ -34,9 +27,9 @@
         action: () => void;
         Icon: typeof LucideIcon;
     };
+    // TODO: Add other options
     const OPTIONS: Option[] = [
-        // TODO: Add actions
-        // TODO: Add other actions
+        // Routes
         { action: to('/'), Icon: FileCode, value: 'Open /home page' },
         { action: to('/projects'), Icon: FileCode, value: 'Open /projects page' },
         { action: to('/about'), Icon: FileCode, value: 'Open /about page' },
@@ -47,6 +40,7 @@
         { action: onTheme('macchiato'), Icon: PaletteIcon, value: 'Change theme to &apos;Macchiato&apos;' },
         { action: onTheme('mocha'), Icon: PaletteIcon, value: 'Change theme to &apos;Mocha&apos;' }
     ];
+    // TODO: Move this into separate file [END]
 
     let show = $state(false);
     let command = $state('');
@@ -78,16 +72,17 @@
     const showCommand = async (e: KeyboardEvent) => {
         if (e.key === Keys.Colon) {
             e.preventDefault();
-            show = !show;
-
-            if (!show) {
+            if (show) {
+                resetState();
                 return;
             }
+
+            show = true;
             tick().then(() => {
                 input?.focus();
             });
         } else if (e.key === Keys.Escape && show) {
-            show = false;
+            resetState();
         }
     };
 
