@@ -2,6 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--overlay0)) transparent;
+}
+
 /* Default theme and variable initialization */
 :root,
 :root.macchiato {
@@ -124,6 +129,41 @@ html {
   --base: 240 21.053% 14.902%;
   --mantle: 240 21.311% 11.961%;
   --crust: 240 22.727% 8.627%;
+}
+
+/* Layout dimensions */
+:root {
+  /* Base layout */
+  --header: theme('spacing.14');
+  --footer: theme('spacing.10');
+  --content: calc(100vh - var(--header) - var(--footer) - var(--theme));
+  --theme: theme('spacing.7'); /* Container in which the theme selector is placed on xs, sm and md devices */
+
+  /* Editor specific */
+  --editor-subheader: theme('spacing.6');
+  --editor-bottom-pane: theme('spacing.6');
+  --editor-content-h: calc(
+    100dvh - var(--header) - var(--footer) - var(--editor-subheader) - var(--editor-bottom-pane) - var(--theme)
+  );
+
+  --editor-sidebar: theme('spacing.80');
+  --editor-content-w: 100vw;
+  --editor-line-numbers: theme('spacing.9');
+  --editor-code: calc(var(--editor-content-w) - var(--editor-line-numbers));
+
+  /* Media changes */
+  @media screen(md) {
+    --content: calc(100vh - var(--header) - var(--footer));
+
+    --editor-line-numbers: theme('spacing.12');
+  }
+
+  @media screen(lg) {
+    --editor-content-w: calc(100vw - var(--editor-sidebar));
+    --editor-content-h: calc(
+      100dvh - var(--header) - var(--footer) - var(--editor-subheader) - var(--editor-bottom-pane)
+    );
+  }
 }
 
 /* Animations */

@@ -27,7 +27,7 @@
 </script>
 
 <div class="flex h-screen flex-col">
-    <header class="z-10 flex h-14 w-full shrink-0 justify-between bg-crust px-4 py-3">
+    <header class="z-20 flex h-header w-full shrink-0 justify-between bg-crust px-4 py-3">
         <p class="text-xl font-semibold">
             @mikededo
         </p>
@@ -37,23 +37,24 @@
             <a href="/about" class="text-sm hover:text-mauve">about</a>
         </nav>
     </header>
+
     {#if showBanner}
         <div
             out:fly={{ opacity: 1, y: -36 }}
-            class="under-construction fixed left-0 right-0 top-14 z-0 flex h-9 items-center bg-mantle px-4"
+            class="under-construction fixed left-0 right-0 top-14 z-10 flex h-9 items-center bg-mantle px-4"
         >
-            <p class="flex-1 text-center text-sm text-yellow">
+            <p class="flex-1 text-center text-xs text-yellow md:text-sm">
                 The site is still under construction!
             </p>
             <button class="outline-none" onclick={onHideBanner}>
-                <XIcon class="size-5 transition-transform active:scale-[0.9]" />
+                <XIcon class="size-4 transition-transform active:scale-[0.9] md:size-5" />
             </button>
         </div>
     {/if}
-    <main class="h-full flex-1 bg-base">
-        {@render children()}
-    </main>
-    <footer class="z-10 flex justify-end bg-crust p-3">
+
+    {@render children()}
+
+    <footer class="z-10 flex h-footer justify-end bg-crust p-3">
         <p class="text-sm leading-4 text-mauve">@mikededo</p>
     </footer>
 </div>

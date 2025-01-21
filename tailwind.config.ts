@@ -49,6 +49,22 @@ export default {
       container: {
         center: true,
         screens: { xl: '1100px' }
+      },
+      height: {
+        // Use home-content so it does not collide with h-content
+        content: 'var(--content)',
+        'editor-bottom-pane': 'var(--editor-subheader)',
+        'editor-content': 'var(--editor-content-h)',
+        'editor-subheader': 'var(--editor-subheader)',
+        footer: 'var(--footer)',
+        header: 'var(--header)',
+        theme: 'var(--theme)'
+      },
+      width: {
+        'editor-code': 'var(--editor-code)',
+        'editor-content': 'var(--editor-content-w)',
+        'editor-line-numbers': 'var(--editor-line-numbers)',
+        'editor-sidebar': 'var(--editor-sidebar)'
       }
     },
     fontSize

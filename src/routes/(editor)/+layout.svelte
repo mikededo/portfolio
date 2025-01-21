@@ -10,24 +10,26 @@
 </script>
 
 <div class="flex h-full">
-    <aside class="hidden h-full w-60 bg-mantle md:flex">
+    <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex">
     </aside>
 
     <div class="flex h-full w-full flex-col">
         <!-- TODO: Add breadcrumbs -->
-        <div class="flex h-6 items-center bg-mantle px-10 text-xs">
+        <div class="flex h-editor-subheader shrink-0 items-center bg-mantle px-10 text-xs md:px-10">
             <span>~/home{data.pathname}</span>
         </div>
 
-        {@render children()}
+        <main class="flex h-editor-content w-editor-content overflow-auto text-sm md:text-md">
+            {@render children()}
+        </main>
 
-        <div class="flex h-6 items-center gap-4 overflow-hidden bg-mantle">
+        <div class="hidden h-editor-bottom-pane shrink-0 items-center gap-4 overflow-hidden bg-mantle text-sm md:flex md:text-md">
             <div class="h-full bg-blue px-3 text-base">NORMAL</div>
             <p>&middot;</p>
             <p class="text-sm text-peach">main</p>
             <p>&middot;</p>
             <p class="text-sm">~/home{data.pathname}/file.md</p>
-            <div class="ml-auto box-content flex h-full items-center rounded-l-full bg-crust px-4 text-sm">
+            <div class="ml-auto box-content hidden h-full items-center rounded-l-full bg-crust px-4 text-sm md:flex">
                 <Timer />
             </div>
         </div>
