@@ -3,14 +3,27 @@
 
     import type { LayoutServerData } from './$types';
 
-    import { ThemeSelector, Timer } from '$lib/components';
+    import { Editor, ThemeSelector, Timer } from '$lib/components';
 
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
+
+    // TODO: Export
+    const ft = [
+        {
+            children: [
+                { href: '/about', name: 'bio.md', type: 'file' as const },
+                { href: '/about/interests', name: 'interests.md', type: 'file' as const }
+            ],
+            name: 'routes',
+            type: 'folder' as const
+        }
+    ];
 </script>
 
 <div class="flex h-full">
-    <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex">
+    <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex lg:flex-col">
+        <Editor.FileTree filetree={ft} />
     </aside>
 
     <div class="flex h-full w-full flex-col">
