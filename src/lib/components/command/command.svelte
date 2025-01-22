@@ -1,45 +1,15 @@
 <script lang="ts">
-    import type { Icon as LucideIcon } from 'lucide-svelte';
+    import type { Option } from './options';
 
-    import { FileCode, PaletteIcon, SearchIcon } from 'lucide-svelte';
+    import { SearchIcon } from 'lucide-svelte';
     import { tick } from 'svelte';
     import { fade, scale } from 'svelte/transition';
 
-    import { goto } from '$app/navigation';
     import { useTrapFocus } from '$lib/actions';
-    import { changeTheme } from '$lib/context';
-    import { type Theme } from '$lib/cookies';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
-    // TODO: Move this into separate file [START]
-    const to = (path: string) => () => {
-        goto(path);
-    };
-
-    const onTheme = (value: Theme) => () => {
-        changeTheme(value);
-    };
-
-    type Option = {
-        value: string;
-        action: () => void;
-        Icon: typeof LucideIcon;
-    };
-    // TODO: Add other options
-    const OPTIONS: Option[] = [
-        // Routes
-        { action: to('/'), Icon: FileCode, value: 'Open /home page' },
-        { action: to('/projects'), Icon: FileCode, value: 'Open /projects page' },
-        { action: to('/about'), Icon: FileCode, value: 'Open /about page' },
-
-        // Theme actions
-        { action: onTheme('latte'), Icon: PaletteIcon, value: 'Change theme to &apos;Latte&apos;' },
-        { action: onTheme('frappe'), Icon: PaletteIcon, value: 'Change theme to &apos;Frappé&apos;' },
-        { action: onTheme('macchiato'), Icon: PaletteIcon, value: 'Change theme to &apos;Macchiato&apos;' },
-        { action: onTheme('mocha'), Icon: PaletteIcon, value: 'Change theme to &apos;Mocha&apos;' }
-    ];
-    // TODO: Move this into separate file [END]
+    import { OPTIONS } from './options';
 
     let show = $state(false);
     let command = $state('');
@@ -111,10 +81,17 @@
 </script>
 
 {#if show}
-    <div transition:fade={{ duration: 150 }} class="fixed inset-0 hidden bg-crust/90 md:block"></div>
+    <div
+        role="presentation"
+        tabindex="-1"
+        transition:fade={{ duration: 150 }}
+        class="fixed inset-0 z-30 hidden bg-crust/90 md:block"
+    ></div>
     <div
         transition:scale={{ duration: 250, start: 0.975 }}
-        class="fixed left-1/2 top-1/2 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 border-base bg-mantle p-5 shadow-2xl md:flex"
+        class="fixed left-1/2 top-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 border-base bg-mantle p-5 shadow-2xl md:flex"
+        role="dialog"
+        aria-modal="true"
         use:useTrapFocus
     >
         <div class="relative">
