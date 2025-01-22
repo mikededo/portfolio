@@ -40,8 +40,8 @@
 
     {#if showBanner}
         <div
-            out:fly={{ opacity: 1, y: -36 }}
             class="under-construction fixed left-0 right-0 top-14 z-10 flex h-9 items-center bg-mantle px-4"
+            out:fly={{ opacity: 1, y: -36 }}
         >
             <p class="flex-1 text-center text-xs text-yellow md:text-sm">
                 The site is still under construction!

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Editor } from '$lib/components';
-    import { About } from '$lib/content';
+    import { About, parseContent } from '$lib/content';
 
     const content = About.AboutInfoContent;
 </script>
@@ -10,7 +10,7 @@
     {#each content as l, i}
         <div class="whitespace-nowrap">
             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html l}
+            {@html parseContent(l)}
             {#if i !== content.length - 1}
                 <span class="text-surface1">↴</span>
             {/if}

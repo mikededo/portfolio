@@ -1,8 +1,8 @@
 // TODO: Create special tags such as {@link [...](...)} and parsed them when reading them!
 export const AboutInfoContent = [
-  `# Welcome!`,
+  `%title # Welcome!%`,
   ``,
-  `Hi! I’m Miquel (or Mike), a software engineer based in <span class="text-yellow hover:underline" rel="noreferrer noopener" target="_blank">[Girona](https://en.wikipedia.org/wiki/Girona)</span>`,
+  `Hi! I’m Miquel (or Mike), a software engineer based in %link [Girona](https://en.wikipedia.org/wiki/Girona)%`,
   `I’m a software engineer who mainly works with frontend frameworks, mainly with`,
   `React and Svelte. I’m also really interested in working with other technologies`,
   `and I often take the opportunity to challenge myself with Rust (for the Advent`,
@@ -16,7 +16,7 @@ export const AboutInfoContent = [
   `while training on the bike.`,
   ``,
   `When I’m not in my desktop, I’m most likely on the road, training and enjoying`,
-  `<span class="text-overlay2 italic">&lt;!-- TODO: Update the following line once it’s outdated! --&gt;</span>`,
+  `%comment TODO: Update the following line once it’s outdated! --&gt;%`,
   `cycling with my friends. This year (2025) I have started training to compete in the`,
   `national time trial championships!`,
   `Cycling and sport in general have been a gateway from my desk and it’s been`,
@@ -28,9 +28,9 @@ export const AboutInfoContent = [
   ``,
   `Last, I use neovim btw B)`,
   ``,
-  `## Links and others!`,
+  `%title ## Links and others!%`,
   ``,
-  `<span class="text-yellow">&nbsp;&bull; <a class="hover:underline" rel="noreferrer noopener" target="_blank">[Strava profile](https://www.strava.com/athletes/40516812)</a></span>`,
-  `<span class="text-yellow">&nbsp;&bull; <a class="hover:underline" rel="noreferrer noopener" target="_blank">[GitHub pofile](https://github.com/mikededo)</a></span>`,
-  `&nbsp;&bull; Open my projects with <span class="text-peach">\`CMD + p\`<span>`
+  `%class [text-yellow](&nbsp;&bull; %link [Strava profile](https://www.strava.com/athletes/40516812)%)%`,
+  `%class [text-yellow](&nbsp;&bull; %link [Github profile](https://github.com/mikededo)%)%`,
+  `&nbsp;&bull; Open my projects with %class [text-peach](\`CMD + p\`)%`
 ];
