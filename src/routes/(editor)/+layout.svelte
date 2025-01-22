@@ -3,7 +3,7 @@
 
     import type { LayoutServerData } from './$types';
 
-    import { Timer } from '$lib/components';
+    import { ThemeSelector, Timer } from '$lib/components';
 
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
@@ -23,12 +23,12 @@
             {@render children()}
         </main>
 
-        <div class="hidden h-editor-bottom-pane shrink-0 items-center gap-4 overflow-hidden bg-mantle text-sm md:flex md:text-md">
-            <div class="h-full bg-blue px-3 text-base">NORMAL</div>
-            <p>&middot;</p>
-            <p class="text-sm text-peach">main</p>
-            <p>&middot;</p>
-            <p class="text-sm">~/home{data.pathname}/file.md</p>
+        <div class="flex h-editor-bottom-pane shrink-0 items-center gap-4 overflow-hidden bg-mantle text-sm md:flex md:text-md">
+            <div class="flex h-full items-center bg-blue px-3 text-base">NORMAL</div>
+            <p class="hidden md:block">&middot;</p>
+            <p class="hidden text-sm text-peach md:block">main</p>
+            <p class="hidden md:block">&middot;</p>
+            <p class="ml-auto mr-2 text-sm md:ml-0 lg:mr-0">~/home{data.pathname}/file.md</p>
             <div class="ml-auto box-content hidden h-full items-center rounded-l-full bg-crust px-4 text-sm md:flex">
                 <Timer />
             </div>
@@ -36,3 +36,4 @@
     </div>
 </div>
 
+<ThemeSelector sidebar />

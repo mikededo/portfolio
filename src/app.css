@@ -136,15 +136,13 @@ html {
   /* Base layout */
   --header: theme('spacing.14');
   --footer: theme('spacing.10');
-  --content: calc(100vh - var(--header) - var(--footer) - var(--theme));
+  --content: calc(100dvh - var(--header) - var(--footer) - var(--theme));
   --theme: theme('spacing.7'); /* Container in which the theme selector is placed on xs, sm and md devices */
 
   /* Editor specific */
   --editor-subheader: theme('spacing.6');
   --editor-bottom-pane: theme('spacing.6');
-  --editor-content-h: calc(
-    100dvh - var(--header) - var(--footer) - var(--editor-subheader) - var(--editor-bottom-pane) - var(--theme)
-  );
+  --editor-content-h: calc(100dvh - var(--header) - var(--editor-subheader) - var(--editor-bottom-pane) - var(--theme));
 
   --editor-sidebar: theme('spacing.80');
   --editor-content-w: 100vw;
@@ -153,7 +151,7 @@ html {
 
   /* Media changes */
   @media screen(md) {
-    --content: calc(100vh - var(--header) - var(--footer));
+    --content: calc(100dvh - var(--header) - var(--footer));
 
     --editor-line-numbers: theme('spacing.12');
   }

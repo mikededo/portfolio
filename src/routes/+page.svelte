@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Link } from 'lucide-svelte';
 
-    import { HomeBackground } from '$lib/components';
+    import { HomeBackground, ThemeSelector } from '$lib/components';
 
     const COMMANDS = [
         {
@@ -88,6 +88,7 @@
 </main>
 
 <HomeBackground />
+<ThemeSelector />
 
 <style>
 /* Inspired by tailwind's bounce animation, but on the X axis */

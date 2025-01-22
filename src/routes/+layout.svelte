@@ -8,7 +8,7 @@
     import { XIcon } from 'lucide-svelte';
     import { fly } from 'svelte/transition';
 
-    import { Command, ThemeSelector } from '$lib/components';
+    import { Command } from '$lib/components';
     import { initThemeContext } from '$lib/context';
 
     type Props = {
@@ -54,12 +54,11 @@
 
     {@render children()}
 
-    <footer class="z-10 flex h-footer justify-end bg-crust p-3">
+    <footer class="z-10 hidden h-footer justify-end bg-crust p-3 lg:flex">
         <p class="text-sm leading-4 text-mauve">@mikededo</p>
     </footer>
 </div>
 
-<ThemeSelector />
 <Command />
 
 <style>
