@@ -8,22 +8,32 @@
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
 
-    // TODO: Export
-    const ft = [
+    const filetree: Editor.FileTreeNode[] = [
         {
             children: [
-                { href: '/about', name: 'bio.md', type: 'file' as const },
-                { href: '/about/interests', name: 'interests.md', type: 'file' as const }
+                {
+                    children: [
+                        { href: '/about', name: 'bio.md', type: 'file' },
+                        { href: '/about/interests', name: 'interests.md', type: 'file' }
+                    ],
+                    name: 'about',
+                    type: 'folder'
+                },
+                {
+                    href: '/projects',
+                    name: 'projects.md',
+                    type: 'file'
+                }
             ],
-            name: 'routes',
-            type: 'folder' as const
+            name: 'src',
+            type: 'folder'
         }
     ];
 </script>
 
 <div class="flex h-full">
     <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex lg:flex-col">
-        <Editor.FileTree filetree={ft} />
+        <Editor.FileTree {filetree} />
     </aside>
 
     <div class="flex h-full w-full flex-col">

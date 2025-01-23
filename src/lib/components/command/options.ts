@@ -2,7 +2,7 @@ import type { Icon as LucideIcon } from 'lucide-svelte';
 
 import type { Theme } from '$lib/cookies';
 
-import { FileCode, PaletteIcon } from 'lucide-svelte';
+import { FileCode, PaletteIcon, RssIcon } from 'lucide-svelte';
 
 import { goto } from '$app/navigation';
 import { changeTheme } from '$lib/context';
@@ -25,6 +25,8 @@ export const OPTIONS: Option[] = [
   { action: to('/'), Icon: FileCode, value: 'Open /home page' },
   { action: to('/projects'), Icon: FileCode, value: 'Open /projects page' },
   { action: to('/about'), Icon: FileCode, value: 'Open /about page' },
+  { action: to('/about/interests'), Icon: FileCode, value: 'Open /interests page' },
+  { action: to('/blog'), Icon: RssIcon, value: 'Check my blog page! (WIP)' },
 
   // Theme actions
   { action: onTheme('latte'), Icon: PaletteIcon, value: 'Change theme to latte' },

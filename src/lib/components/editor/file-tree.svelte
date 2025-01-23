@@ -1,10 +1,6 @@
-<script lang="ts">
-    import { File, Folder } from 'lucide-svelte';
-
-    import { page } from '$app/state';
-
-    type Node = {
-        children: Node[];
+<script module lang="ts">
+    export type FileTreeNode = {
+        children: FileTreeNode[];
         name: string;
         type: 'folder';
     } | {
@@ -12,13 +8,20 @@
         name: string;
         type: 'file';
     };
-    type Props = { filetree: Node[] };
+</script>
+
+<script lang="ts">
+    import { File, Folder } from 'lucide-svelte';
+
+    import { page } from '$app/state';
+
+    type Props = { filetree: FileTreeNode[] };
     const { filetree }: Props = $props();
 </script>
 
-{#snippet tree(node: Node, depth: number, pos: number)}
+{#snippet tree(node: FileTreeNode, depth: number, pos: number)}
     {#if node.type === 'folder'}
-        <li class="node flex cursor-default items-center gap-2" style="--depth: {depth}">
+        <li class="node flex h-6 cursor-default items-center gap-2" style="--depth: {depth}">
             <Folder class="size-4 fill-mauve stroke-none" />
             <p>{node.name}</p>
         </li>
@@ -29,11 +32,11 @@
         </ul>
     {:else}
         <li
-            class="hover:aria-not-current:bg-overlay0/15 aria-current:cursor-default aria-current:bg-overlay0/15"
+            class="flex h-6 items-center hover:aria-not-current:bg-overlay0/15 aria-current:cursor-default aria-current:bg-overlay0/15"
             aria-current={page.url.pathname === node.href}
         >
             <a
-                class="node flex items-center gap-2"
+                class="node flex w-full items-center gap-2"
                 class:fill-flamingo={pos % 4 === 0}
                 class:fill-maroon={pos % 4 === 1}
                 class:fill-yellow={pos % 4 === 2}
@@ -48,7 +51,7 @@
     {/if}
 {/snippet}
 
-<ul class="mt-6 flex flex-col">
+<ul class="mt-6 flex flex-col text-sm">
     {#each filetree as child, i}
         {@render tree(child, 1, i)}
     {/each}

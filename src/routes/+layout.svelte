@@ -46,8 +46,8 @@
         <nav>
             <ul class="flex items-center gap-6">
                 {@render link('/', 'home')}
-                {@render link('/projects', 'projects')}
                 {@render link('/about', 'about')}
+                {@render link('/blog', 'blog 🚧')}
             </ul>
         </nav>
     </header>
