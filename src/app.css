@@ -1,15 +1,18 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+
+@config '../tailwind.config.ts';
 
 * {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--overlay0)) transparent;
 }
 
-/* Default theme and variable initialization */
-:root,
-:root.macchiato {
+html {
+  color: theme(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.macchiato {
   --rosewater: 10 57.692% 89.804%;
   --flamingo: 0 58.333% 85.882%;
   --pink: 316.071 73.684% 85.098%;
@@ -38,13 +41,7 @@
   --crust: 235.714 22.581% 12.157%;
 }
 
-/* Some default values */
-html {
-  color: hsl(var(--text));
-  font-family: 'JetBrains Mono', monospace;
-}
-
-:root.latte {
+.latte {
   --rosewater: 10.8 58.824% 66.667%;
   --flamingo: 0 59.763% 66.863%;
   --pink: 316.034 73.418% 69.02%;
@@ -73,7 +70,7 @@ html {
   --crust: 220 20.69% 88.627%;
 }
 
-:root.frappe {
+.frappe {
   --rosewater: 10.286 57.377% 88.039%;
   --flamingo: 0 58.537% 83.922%;
   --pink: 316 73.171% 83.922%;
@@ -102,7 +99,7 @@ html {
   --crust: 229.412 19.54% 17.059%;
 }
 
-:root.mocha {
+.mocha {
   --rosewater: 9.6 55.556% 91.176%;
   --flamingo: 0 58.73% 87.647%;
   --pink: 316.471 71.831% 86.078%;
@@ -131,36 +128,136 @@ html {
   --crust: 240 22.727% 8.627%;
 }
 
-/* Layout dimensions */
-:root {
+@theme inline {
+  --color-rosewater: oklch(from hsl(var(--rosewater)) l c h);
+  --color-flamingo: oklch(from hsl(var(--flamingo)) l c h);
+  --color-pink: oklch(from hsl(var(--pink)) l c h);
+  --color-mauve: oklch(from hsl(var(--mauve)) l c h);
+  --color-red: oklch(from hsl(var(--red)) l c h);
+  --color-maroon: oklch(from hsl(var(--maroon)) l c h);
+  --color-peach: oklch(from hsl(var(--peach)) l c h);
+  --color-yellow: oklch(from hsl(var(--yellow)) l c h);
+  --color-green: oklch(from hsl(var(--green)) l c h);
+  --color-teal: oklch(from hsl(var(--teal)) l c h);
+  --color-sky: oklch(from hsl(var(--sky)) l c h);
+  --color-sapphire: oklch(from hsl(var(--sapphire)) l c h);
+  --color-blue: oklch(from hsl(var(--blue)) l c h);
+  --color-lavender: oklch(from hsl(var(--lavender)) l c h);
+  --color-text: oklch(from hsl(var(--text)) l c h);
+  --color-subtext1: oklch(from hsl(var(--subtext1)) l c h);
+  --color-subtext0: oklch(from hsl(var(--subtext0)) l c h);
+  --color-overlay2: oklch(from hsl(var(--overlay2)) l c h);
+  --color-overlay1: oklch(from hsl(var(--overlay1)) l c h);
+  --color-overlay0: oklch(from hsl(var(--overlay0)) l c h);
+  --color-surface2: oklch(from hsl(var(--surface2)) l c h);
+  --color-surface1: oklch(from hsl(var(--surface1)) l c h);
+  --color-surface0: oklch(from hsl(var(--surface0)) l c h);
+  --color-base: oklch(from hsl(var(--base)) l c h);
+  --color-mantle: oklch(from hsl(var(--mantle)) l c h);
+  --color-crust: oklch(from hsl(var(--crust)) l c h);
+  --color-base: oklch(from hsl(var(--base)) l c h);
+
   /* Base layout */
-  --header: theme('spacing.14');
-  --footer: theme('spacing.10');
-  --content: calc(100dvh - var(--header) - var(--footer) - var(--theme));
-  --theme: theme('spacing.7'); /* Container in which the theme selector is placed on xs, sm and md devices */
+  --height-header: --spacing(14);
+  --height-footer: --spacing(10);
+  --height-content: calc(100dvh - var(--height-header) - var(--height-footer) - var(--height-theme));
+  --height-theme: --spacing(7); /* Container in which the theme selector is placed on xs, sm and md devices */
 
   /* Editor specific */
-  --editor-subheader: theme('spacing.6');
-  --editor-bottom-pane: theme('spacing.6');
-  --editor-content-h: calc(100dvh - var(--header) - var(--editor-subheader) - var(--editor-bottom-pane) - var(--theme));
+  --height-editor-subheader: --spacing(6);
+  --height-editor-bottom-pane: --spacing(6);
+  --height-editor-content: calc(
+    100dvh - var(--height-header) - var(--height-editor-subheader) - var(--height-editor-bottom-pane) -
+      var(--height-footer)
+  );
 
-  --editor-sidebar: theme('spacing.80');
-  --editor-content-w: 100vw;
-  --editor-line-numbers: theme('spacing.9');
-  --editor-code: calc(var(--editor-content-w) - var(--editor-line-numbers));
+  --width-editor-sidebar: --spacing(80);
+  --width-editor-content: 100vw;
+  --width-editor-line-numbers: --spacing(9);
+  --width-editor-code: calc(var(--width-editor-content) - var(--width-editor-line-numbers));
 
-  /* Media changes */
-  @media screen(md) {
-    --content: calc(100dvh - var(--header) - var(--footer));
+  /* Animations */
+  --animate-blob: blob 20s ease-in-out infinite var(--delay, 0s);
+  --animate-blob-alt: blob_alt 20s ease-in-out infinite var(--delay, 0s);
 
-    --editor-line-numbers: theme('spacing.12');
+  @keyframes blob {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(
+        calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
+      );
+    }
+    50% {
+      transform: translate(
+        calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
+      );
+    }
+    75% {
+      transform: translate(
+        calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
+      );
+    }
+    100% {
+      transform: translate(0, 0);
+    }
   }
 
-  @media screen(lg) {
-    --editor-content-w: calc(100vw - var(--editor-sidebar));
-    --editor-content-h: calc(
-      100dvh - var(--header) - var(--footer) - var(--editor-subheader) - var(--editor-bottom-pane)
+  @keyframes blob_alt {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(
+        calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
+      );
+    }
+    50% {
+      transform: translate(
+        calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
+      );
+    }
+    75% {
+      transform: translate(
+        calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
+        calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
+      );
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+}
+
+/* Media changes */
+@media (width >= theme(--breakpoint-md)) {
+  @theme {
+    --height-content: calc(100dvh - var(--height-header) - var(--height-footer));
+    --width-editor-line-numbers: --spacing(12);
+  }
+}
+
+@media (width >= theme(--breakpoint-lg)) {
+  @theme {
+    --width-editor-content: calc(100vw - var(--editor-sidebar));
+    --height-editor-content-h: calc(
+      100dvh - var(--height-header) - var(--height-footer) - var(--height-editor-subheader) -
+        var(--height-editor-bottom-pane)
     );
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+
+  @media (width >= theme(--breakpoint-xl)) {
+    max-width: 1100px;
   }
 }
 
@@ -174,70 +271,16 @@ html {
   --blob-y-offset-c: 15px;
   --blob-offset-factor: 1;
 
-  @media screen(md) {
+  @media (width >= theme(--breakpoint-md)) {
     --blob-offset-factor: 1.25;
   }
 
-  @media screen(xl) {
+  @media (width >= theme(--breakpoint-xl)) {
     --blob-offset-factor: 1.75;
   }
 
   /* Disable animation */
   @media (prefers-reduced-motion) {
     --blob-offset-factor: 0;
-  }
-}
-
-@keyframes blob {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(
-      calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
-    );
-  }
-  50% {
-    transform: translate(
-      calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
-    );
-  }
-  75% {
-    transform: translate(
-      calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
-    );
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes blob_alt {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(
-      calc(var(--blob-x-offset-c) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-c) * var(--blob-offset-factor))
-    );
-  }
-  50% {
-    transform: translate(
-      calc(var(--blob-x-offset-b) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-b) * var(--blob-offset-factor))
-    );
-  }
-  75% {
-    transform: translate(
-      calc(var(--blob-x-offset-a) * var(--blob-offset-factor)),
-      calc(var(--blob-y-offset-a) * var(--blob-offset-factor))
-    );
-  }
-  100% {
-    transform: translate(0, 0);
   }
 }

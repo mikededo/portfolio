@@ -19,7 +19,7 @@
     const containerClasses = $derived(twMerge(
         'fixed bottom-0 left-0 right-0 lg:right-auto z-30',
         !sidebar && 'lg:left-2 lg:bottom-12',
-        sidebar && 'lg:bottom-[var(--footer)] lg:left-0'
+        sidebar && 'lg:bottom-(--height-footer) lg:left-0'
     ));
     const buttonClasses = $derived(twMerge(
         'flex w-full items-center justify-center gap-2 bg-crust px-6 py-1 hover:bg-mantle lg:py-0.5',
@@ -32,7 +32,7 @@
         sidebar && 'py-1.5 lg:gap-1 lg:py-2.5'
     ));
     const optionClasses = $derived(twMerge(
-        'py-0.5 outline-none hover:bg-base lg:px-4 lg:py-1 lg:text-left',
+        'py-0.5 outline-hidden hover:bg-base lg:px-4 lg:py-1 lg:text-left',
         !sidebar && 'lg:rounded-full'
     ));
 
@@ -54,7 +54,7 @@
 {#if show}
     <div
         transition:fade={{ duration: 100, easing: sineInOut }}
-        class="fixed inset-0 z-30 bg-base/75 lg:hidden"
+        class="bg-base/75 fixed inset-0 z-30 lg:hidden"
     ></div>
 {/if}
 <div

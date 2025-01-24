@@ -22,7 +22,7 @@
 {#snippet tree(node: FileTreeNode, depth: number, pos: number)}
     {#if node.type === 'folder'}
         <li class="node flex h-6 cursor-default items-center gap-2" style="--depth: {depth}">
-            <Folder class="size-4 fill-mauve stroke-none" />
+            <Folder class="fill-mauve size-4 stroke-none" />
             <p>{node.name}</p>
         </li>
         <ul>
@@ -32,7 +32,7 @@
         </ul>
     {:else}
         <li
-            class="flex h-6 items-center hover:aria-not-current:bg-overlay0/15 aria-current:cursor-default aria-current:bg-overlay0/15"
+            class="aria-not-current:hover:bg-overlay0/15 aria-current:bg-overlay0/15 flex h-6 items-center aria-current:cursor-default"
             aria-current={page.url.pathname === node.href}
         >
             <a

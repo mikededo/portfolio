@@ -29,7 +29,7 @@
     ];
 </script>
 
-<main class="h-content flex-1 overflow-x-hidden bg-base">
+<main class="bg-base h-content flex-1 overflow-x-hidden">
     <div class="container flex h-full w-full flex-col justify-center px-4 md:px-8 lg:px-12 xl:px-0">
         <div class="mb-32 flex flex-col gap-2">
             <div class="flex items-center gap-4 text-sm md:text-md">
@@ -74,7 +74,7 @@
                         {:else}
                             <p>{desc}</p>
                         {/if}
-                        <p class="hidden text-peach md:block">{key}</p>
+                        <p class="text-peach hidden md:block">{key}</p>
                     </li>
                 {/each}
             </ul>
