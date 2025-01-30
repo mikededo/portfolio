@@ -1,29 +1,18 @@
 <script lang="ts">
-    import LineNumbers from './line-numbers.svelte';
+    import Editor from './editor.svelte';
 
-    const content: Record<number, string> = {
-        12: '┌────────────────────────┐',
-        13: '│ Still working on this! │',
-        14: '└────────────────────────┘',
-        15: '             \\   ^__^',
-        16: '              \\  (oo)\\_______',
-        17: '                 (__)\\       )\\/\\',
-        18: '                     ||----w |',
-        19: '                     ||     ||'
-    };
+    const content: string[] = [
+        ...Array.from<string>({ length: 11 }).fill(''),
+        '┌────────────────────────┐',
+        '│ Still working on this! │',
+        '└────────────────────────┘',
+        '             \\   ^__^',
+        '              \\  (oo)\\_______',
+        '                 (__)\\       )\\/\\',
+        '                     ||----w |',
+        '                     ||     ||',
+        ...Array.from<string>({ length: 11 }).fill('')
+    ].map((l) => l.replaceAll(' ', '&nbsp;'));
 </script>
 
-<div class="flex flex-1 text-sm md:text-md">
-    <LineNumbers count={30} />
-    <div class="flex w-full flex-col py-1">
-        {#each { length: 30 } as _, i}
-            <span>
-                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                {@html content[i]?.replaceAll(' ', '&nbsp;')}
-                {#if i !== 29}
-                    <span class="text-surface1">↴</span>
-                {/if}
-            </span>
-        {/each}
-    </div>
-</div>
+<Editor {content} />

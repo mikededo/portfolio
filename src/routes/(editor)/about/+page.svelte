@@ -5,6 +5,5 @@
     const content = About.AboutInfoContent;
 </script>
 
-<Editor.LineNumbers count={content.length} />
-<Editor.Code code={content} />
+<Editor.Editor {content} />
 
