@@ -3,6 +3,11 @@ const replaceLinks = (text: string): string => text.replace(
   '<a href="$2" target="_blank" rel="noreferrer noopener" class="text-yellow hover:underline">($1)[$2]</a>'
 );
 
+const replaceInternalLinks = (text: string): string => text.replace(
+  /%page \[(.*?)\]\((.*?)\)%/g,
+  '<a href="$2" class="text-yellow hover:underline">($1)[$2]</a>'
+);
+
 const replaceHeader = (text: string): string => text.replace(
   /%title (.*?)%/g,
   '<span class="italic text-blue">$1</span>'
@@ -34,6 +39,7 @@ const chain = (value: string, ...fns: ((value: string) => string)[]): string =>
 export const parseContent = (content: string): string => chain(
   content,
   replaceLinks,
+  replaceInternalLinks,
   replaceHeader,
   replaceComments,
   replaceClasses

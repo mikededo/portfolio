@@ -1,4 +1,3 @@
-// TODO: Create special tags such as {@link [...](...)} and parsed them when reading them!
 export const AboutInfoContent = [
   `%title # Welcome!%`,
   ``,
