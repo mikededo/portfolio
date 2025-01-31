@@ -9,7 +9,7 @@
             class:text-text={i === active}
             class="text-overlay1 text-right"
         >
-            {i === active ? i : Math.abs(i - active)}
+            {Math.max(i === active ? i : Math.abs(i - active), 1)}
         </span>
     {/each}
 </div>

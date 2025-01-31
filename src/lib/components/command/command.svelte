@@ -105,7 +105,7 @@
             />
         </div>
 
-        <div class="bg-crust flex h-full w-full flex-col rounded-xl p-3">
+        <div class="bg-crust flex h-full w-full flex-col overflow-auto rounded-xl p-3">
             {#if !command}
                 <pre class="text-overlay2 m-auto">
 ┌──────────────────────────────────────────┐
@@ -121,7 +121,7 @@
                 <div class="flex flex-col gap-0.5">
                     {#each matches as { html, option: { action, Icon } }}
                         <button
-                            class="outline-hidden hover:bg-base focus:bg-base active:bg-base flex items-center gap-4 rounded-lg px-3 py-2.5 text-left transition"
+                            class="outline-hidden hover:bg-base focus:bg-base active:bg-base curosr-pointer flex h-11 items-center gap-4 rounded-lg px-3 py-2.5 text-left transition"
                             onclick={actionProxy(action)}
                         >
                             <Icon class="size-5" />

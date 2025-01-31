@@ -46,7 +46,7 @@
             {@render children()}
         </main>
 
-        <div class="bg-mantle h-editor-bottom-pane flex shrink-0 items-center gap-4 overflow-hidden text-sm md:flex md:text-md">
+        <div class="bg-mantle h-editor-bottom-pane w-editor-content flex shrink-0 items-center gap-4 overflow-hidden text-sm md:flex md:text-md">
             <div class="bg-blue text-base flex h-full items-center px-3">NORMAL</div>
             <p class="hidden md:block">&middot;</p>
             <p class="text-peach hidden text-sm md:block">main</p>
