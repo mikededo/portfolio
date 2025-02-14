@@ -5,7 +5,7 @@
     import { tick } from 'svelte';
     import { fade, scale } from 'svelte/transition';
 
-    import { useTrapFocus } from '$lib/actions';
+    import { useClickAway, useTrapFocus } from '$lib/actions';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
@@ -93,6 +93,7 @@
         role="dialog"
         aria-modal="true"
         use:useTrapFocus
+        use:useClickAway={resetState}
     >
         <div class="relative">
             <SearchIcon class="stroke-text absolute left-4 top-1/2 size-4 -translate-y-1/2" strokeWidth={2} />

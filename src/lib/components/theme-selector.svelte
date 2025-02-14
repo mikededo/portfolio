@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type { Theme } from '$lib/cookies';
+
     import { PaletteIcon } from 'lucide-svelte';
     import { sineInOut } from 'svelte/easing';
     import { fade } from 'svelte/transition';
@@ -6,7 +8,6 @@
 
     import { useClickAway } from '$lib/actions';
     import { changeTheme, getThemeContext } from '$lib/context';
-    import { type Theme } from '$lib/cookies';
 
     const THEMES: Theme[] = ['latte', 'frappe', 'macchiato', 'mocha'];
 
