@@ -27,6 +27,7 @@
         { desc: 'Designs are also available!', key: '⌘ Cmd + d', sm: true },
         { desc: 'Change theme', key: '⌘ Cmd + t', sm: false }
     ];
+
 </script>
 
 <main class="bg-base h-content flex-1 overflow-x-hidden">

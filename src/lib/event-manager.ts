@@ -21,7 +21,7 @@ class _EventManager {
     if (currentEvents.size === 0) {
       // No previous listeners, add the event listener
       document.addEventListener(event, (e) => {
-        newEvents.keys().forEach((listener) => {
+        this.getEvents(event).keys().forEach((listener) => {
           listener(e);
         });
       }, { signal: controller.signal });
@@ -49,6 +49,11 @@ class _EventManager {
     const newEvents = new Map([...currentEvents]);
     newEvents.delete(listener);
     this.events.set(event, newEvents);
+  }
+
+  private getEvents(event: EventKey) {
+    console.log(this.events);
+    return this.events.get(event) ?? new Map();
   }
 }
 

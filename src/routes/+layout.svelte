@@ -5,9 +5,12 @@
 
     import type { LayoutServerData } from './$types';
 
+    import { onMount } from 'svelte';
+
     import { page } from '$app/state';
     import { Command, UnderConstruction } from '$lib/components';
     import { initThemeContext } from '$lib/context';
+    import { GlobalEvents } from '$lib/global-events';
 
     type Props = {
         children: Snippet;
@@ -24,6 +27,12 @@
 
         return page.url.pathname.startsWith(href);
     };
+
+    onMount(() => {
+        GlobalEvents.register();
+
+        return GlobalEvents.unregister;
+    });
 </script>
 
 {#snippet link(href: string, value: string)}

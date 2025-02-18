@@ -39,6 +39,7 @@
     };
 
     const showCommand = async (e: KeyboardEvent) => {
+        console.log('show command');
         if (e.key === Keys.Colon) {
             e.preventDefault();
             if (show) {
