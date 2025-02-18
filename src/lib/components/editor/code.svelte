@@ -8,16 +8,18 @@
 <div
     class="w-editor-code shrink-0 py-1"
 >
-    {#each code as c, i}
-        <div
-            class="whitespace-nowrap"
-            class:active={i === active}
-        >
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html parseContent(c)}
-            <span class="text-surface1">↴</span>
-        </div>
-    {/each}
+    <div class="w-fit">
+        {#each code as c, i}
+            <div
+                class="whitespace-nowrap"
+                class:active={i === active}
+            >
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html parseContent(c)}
+                <span class="text-surface1">↴</span>
+            </div>
+        {/each}
+    </div>
 </div>
 
 <style>

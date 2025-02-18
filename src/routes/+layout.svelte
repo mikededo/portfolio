@@ -35,6 +35,11 @@
     });
 </script>
 
+<svelte:head>
+    <title>Miquel de Domingo</title>
+    <meta name="description" content="Miquel de Domingo's portfolio" />
+</svelte:head>
+
 {#snippet link(href: string, value: string)}
     <li>
         <a

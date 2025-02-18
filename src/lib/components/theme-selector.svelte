@@ -20,7 +20,7 @@
     const containerClasses = $derived(twMerge(
         'fixed bottom-0 left-0 right-0 lg:right-auto z-30',
         !sidebar && 'lg:left-2 lg:bottom-12',
-        sidebar && 'lg:bottom-(--height-footer) lg:left-0'
+        sidebar && 'h-theme lg:bottom-(--height-footer) lg:left-0'
     ));
     const buttonClasses = $derived(twMerge(
         'flex w-full items-center justify-center gap-2 bg-crust px-6 py-1 hover:bg-mantle lg:py-0.5',
