@@ -52,7 +52,6 @@ class _EventManager {
   }
 
   private getEvents(event: EventKey) {
-    console.log(this.events);
     return this.events.get(event) ?? new Map();
   }
 }
