@@ -15,7 +15,7 @@
 <div class={`font-lg fixed right-2 flex gap-0.5 ${containerClasses}`}>
     {#each keys as k (k)}
         <span
-            class="text-rosewater bg-crust/75 rounded-md px-2 py-1 text-sm md:text-md"
+            class="text-rosewater bg-mantle rounded-md px-2 py-1 text-sm md:text-md"
             transition:fade={{ duration: 100 }}
         >
             {k}

@@ -11,7 +11,11 @@ const getCtrlAndKey = (key: string, cb: () => void) => (event: KeyboardEvent) =>
 };
 
 const KEYDOWN_EVENTS = [
-  ...[['a', '/about'], ['p', '/projects']].map(([key, href]) =>
+  ...[
+    ['h', '/'],
+    ['a', '/about'],
+    ['p', '/projects']
+  ].map(([key, href]) =>
     getCtrlAndKey(key, () => {
       goto(href);
     })
