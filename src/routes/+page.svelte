@@ -7,25 +7,25 @@
         {
             desc: 'Go to /about',
             href: '/about',
-            key: '⌘ Cmd + a',
+            key: 'CTRL + a',
             sm: true
         },
         {
             desc: 'Go to /projects',
             href: '/projects',
-            key: '⌘ Cmd + p',
+            key: 'CTRL + p',
             sm: true
         },
         {
             desc: 'Open my GitHub profile',
             external: true,
             href: 'https://github.com/mikededo',
-            key: '⌘ Cmd + g',
+            key: 'CTRL + g',
             sm: true
         },
-        { desc: 'See how I implemented this!', key: '⌘ Cmd + i', sm: true },
-        { desc: 'Designs are also available!', key: '⌘ Cmd + d', sm: true },
-        { desc: 'Change theme', key: '⌘ Cmd + t', sm: false }
+        { desc: 'See how I implemented this!', key: 'CTRL + i', sm: true },
+        { desc: 'Designs are also available!', key: 'CTRL + d', sm: true },
+        { desc: 'Change theme', key: 'CTRL + t', sm: false }
     ];
 
 </script>

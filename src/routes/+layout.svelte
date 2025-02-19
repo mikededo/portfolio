@@ -8,8 +8,8 @@
     import { onMount } from 'svelte';
 
     import { page } from '$app/state';
-    import { Command, UnderConstruction } from '$lib/components';
-    import { initThemeContext } from '$lib/context';
+    import { Command, KeyWatcher, UnderConstruction } from '$lib/components';
+    import { initKeyWatcherContext, initThemeContext } from '$lib/context';
     import { GlobalEvents } from '$lib/global-events';
 
     type Props = {
@@ -19,6 +19,7 @@
     const { children, data }: Props = $props();
 
     initThemeContext(data.theme);
+    initKeyWatcherContext();
 
     const isCurrentPage = (href: string) => {
         if (href === '/') {
@@ -76,4 +77,5 @@
 </div>
 
 <Command />
+<KeyWatcher />
 

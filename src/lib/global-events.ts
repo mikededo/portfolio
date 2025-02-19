@@ -1,17 +1,18 @@
 import { goto } from '$app/navigation';
 
+import { clearKeyWatcher, registerKeyWatcherEvents, unregisterKeyWatcherEvents } from './context';
 import { EventManager } from './event-manager';
 
-const getCMDAndKey = (key: string, cb: () => void) => (event: KeyboardEvent) => {
-  if ((event.metaKey || event.ctrlKey) && event.key === key) {
+const getCtrlAndKey = (key: string, cb: () => void) => (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key === key) {
     event.preventDefault();
     cb();
   }
 };
 
-const EVENTS = [
+const KEYDOWN_EVENTS = [
   ...[['a', '/about'], ['p', '/projects']].map(([key, href]) =>
-    getCMDAndKey(key, () => {
+    getCtrlAndKey(key, () => {
       goto(href);
     })
   ),
@@ -20,7 +21,8 @@ const EVENTS = [
     ['i', 'https://github.com/mikededo/portfolio'],
     ['d', 'https://www.figma.com/community/file/1473722594978911600']
   ]
-    .map(([key, href]) => getCMDAndKey(key, () => {
+    .map(([key, href]) => getCtrlAndKey(key, () => {
+      clearKeyWatcher();
       const w = window.open(href, '_blank');
       if (w) {
         w.opener = null;
@@ -29,13 +31,15 @@ const EVENTS = [
 ];
 
 const register = () => {
-  EVENTS.forEach((event) => {
+  registerKeyWatcherEvents();
+  KEYDOWN_EVENTS.forEach((event) => {
     EventManager.register('keydown', event);
   });
 };
 
 const unregister = () => {
-  EVENTS.forEach((event) => {
+  unregisterKeyWatcherEvents();
+  KEYDOWN_EVENTS.forEach((event) => {
     EventManager.unregister('keydown', event);
   });
 };
