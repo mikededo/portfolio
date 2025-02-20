@@ -1,6 +1,10 @@
 import { goto } from '$app/navigation';
 
-import { clearKeyWatcher, registerKeyWatcherEvents, unregisterKeyWatcherEvents } from './context';
+import {
+  clearKeyWatcher,
+  registerKeyWatcherEvents,
+  unregisterKeyWatcherEvents
+} from './context';
 import { EventManager } from './event-manager';
 
 const getCtrlAndKey = (key: string, cb: () => void) => (event: KeyboardEvent) => {

@@ -6,12 +6,13 @@
     import { fade, scale } from 'svelte/transition';
 
     import { useClickAway, useTrapFocus } from '$lib/actions';
+    import { getAppContext, hideCommand, showCommand } from '$lib/context';
     import { EventManager } from '$lib/event-manager';
     import { Keys } from '$lib/keyboards';
 
     import { OPTIONS } from './options';
 
-    let show = $state(false);
+    const { command: commandState } = getAppContext();
     let command = $state('');
     let input: HTMLInputElement | undefined = $state();
 
@@ -34,23 +35,23 @@
     }, []));
 
     const resetState = () => {
-        show = false;
+        hideCommand();
         command = '';
     };
 
-    const showCommand = async (e: KeyboardEvent) => {
+    const toggleCommand = async (e: KeyboardEvent) => {
         if (e.key === Keys.Colon) {
             e.preventDefault();
-            if (show) {
+            if (commandState.show) {
                 resetState();
                 return;
             }
 
-            show = true;
+            showCommand();
             tick().then(() => {
                 input?.focus();
             });
-        } else if (e.key === Keys.Escape && show) {
+        } else if (e.key === Keys.Escape && commandState.show) {
             resetState();
         }
     };
@@ -72,15 +73,15 @@
     };
 
     $effect(() => {
-        EventManager.register('keydown', showCommand);
+        EventManager.register('keydown', toggleCommand);
 
         return () => {
-            EventManager.unregister('keydown', showCommand);
+            EventManager.unregister('keydown', toggleCommand);
         };
     });
 </script>
 
-{#if show}
+{#if commandState.show}
     <div
         role="presentation"
         tabindex="-1"

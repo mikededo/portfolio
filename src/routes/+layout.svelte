@@ -9,7 +9,7 @@
 
     import { page } from '$app/state';
     import { Command, KeyWatcher, UnderConstruction } from '$lib/components';
-    import { initKeyWatcherContext, initThemeContext } from '$lib/context';
+    import { initAppContext } from '$lib/context';
     import { GlobalEvents } from '$lib/global-events';
 
     type Props = {
@@ -18,8 +18,7 @@
     };
     const { children, data }: Props = $props();
 
-    initThemeContext(data.theme);
-    initKeyWatcherContext();
+    initAppContext(data.theme);
 
     const isCurrentPage = (href: string) => {
         if (href === '/') {

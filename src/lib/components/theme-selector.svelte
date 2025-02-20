@@ -7,7 +7,7 @@
     import { twMerge } from 'tailwind-merge';
 
     import { useClickAway } from '$lib/actions';
-    import { changeTheme, getThemeContext } from '$lib/context';
+    import { changeTheme, getAppContext } from '$lib/context';
 
     const THEMES: Theme[] = ['latte', 'frappe', 'macchiato', 'mocha'];
 
@@ -15,7 +15,7 @@
     const { sidebar }: Props = $props();
 
     let show = $state(false);
-    const themeState = getThemeContext();
+    const appState = getAppContext();
 
     const containerClasses = $derived(twMerge(
         'fixed bottom-0 left-0 right-0 lg:right-auto z-30',
@@ -70,7 +70,7 @@
             {#each THEMES as themeKey}
                 <button
                     class={optionClasses}
-                    class:bg-base={themeKey === themeState.theme}
+                    class:bg-base={themeKey === appState.theme}
                     onclick={onSelect(themeKey)}
                 >
                     {themeKey}
@@ -83,6 +83,6 @@
         onclick={onClick}
     >
         <PaletteIcon class="size-4" />
-        <p class="text-sm">{themeState.theme}</p>
+        <p class="text-sm">{appState.theme}</p>
     </button>
 </div>
