@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 
 import {
   clearKeyWatcher,
+  registerEvent,
   registerKeyWatcherEvents,
   unregisterKeyWatcherEvents
 } from './context';
@@ -16,18 +17,19 @@ const getCtrlAndKey = (key: string, cb: () => void) => (event: KeyboardEvent) =>
 
 const KEYDOWN_EVENTS = [
   ...[
-    ['h', '/'],
-    ['a', '/about'],
-    ['p', '/projects']
-  ].map(([key, href]) =>
+    ['h', '/', 'Go home'],
+    ['a', '/about', 'Go /about'],
+    ['p', '/projects', 'Go /projects']
+  ].map(([key, href, event]) =>
     getCtrlAndKey(key, () => {
       goto(href);
+      registerEvent(event);
     })
   ),
   ...[
-    ['g', 'https://github.com/mikededo'],
-    ['i', 'https://github.com/mikededo/portfolio'],
-    ['d', 'https://www.figma.com/community/file/1473722594978911600']
+    ['g', 'https://github.com/mikededo', 'Open GitHub'],
+    ['i', 'https://github.com/mikededo/portfolio', 'Open repository'],
+    ['d', 'https://www.figma.com/community/file/1473722594978911600', 'Open figma designs']
   ]
     .map(([key, href]) => getCtrlAndKey(key, () => {
       clearKeyWatcher();

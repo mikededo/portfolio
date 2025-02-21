@@ -1,25 +1,33 @@
 import type { Theme } from '$lib/cookies';
 
 import { getContext, setContext } from 'svelte';
-import { SvelteSet } from 'svelte/reactivity';
+import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 
 import { THEME_COOKIE } from '$lib/cookies';
 import { Keys } from '$lib/keyboards';
 
 import { EventManager } from '../event-manager';
 
+const EVENT_TIMEOUT = 2000;
+
 type AppState = {
-  keyWatcher: SvelteSet<string>;
   theme: Theme;
   command: {
     show: boolean;
+  };
+  eventWatcher: {
+    events: SvelteMap<string, number>;
+    keys: SvelteSet<string>;
   };
 };
 const state = $state<AppState>({
   command: {
     show: false
   },
-  keyWatcher: new SvelteSet<string>(),
+  eventWatcher: {
+    events: new SvelteMap<string, number>(),
+    keys: new SvelteSet<string>()
+  },
   theme: 'macchiato'
 });
 
@@ -46,22 +54,22 @@ export const changeTheme = (value: Theme) => {
   });
 };
 
-/* Key Watcher */
+/* Event Watcher */
 const registerKey = (e: KeyboardEvent) => {
   if (e.key === Keys.Colon) {
     // Avoid registering the color which opens the command
     return;
   }
 
-  state.keyWatcher.add(e.key);
+  state.eventWatcher.keys.add(e.key);
 };
 
 const unregisterKey = (e: KeyboardEvent) => {
-  state.keyWatcher.delete(e.key);
+  state.eventWatcher.keys.delete(e.key);
 };
 
 export const clearKeyWatcher = () => {
-  state.keyWatcher.clear();
+  state.eventWatcher.keys.clear();
 };
 
 export const registerKeyWatcherEvents = () => {
@@ -71,10 +79,30 @@ export const registerKeyWatcherEvents = () => {
 
 export const unregisterKeyWatcherEvents = () => {
   // Clear any key
-  state.keyWatcher.clear();
+  state.eventWatcher.keys.clear();
 
   EventManager.unregister('keydown', registerKey);
   EventManager.unregister('keyup', unregisterKey);
+};
+
+/* Events */
+export const registerEvent = (event: string) => {
+  const timeout = setTimeout(() => {
+    state.eventWatcher.events.delete(event);
+  }, EVENT_TIMEOUT);
+
+  const previous = state.eventWatcher.events.get(event);
+  if (previous) {
+    clearTimeout(previous);
+  }
+
+  state.eventWatcher.events.set(event, timeout);
+};
+
+export const cleanupEvents = () => {
+  state.eventWatcher.events.values().forEach((timeoutId) => {
+    clearTimeout(timeoutId);
+  });
 };
 
 /* Command */

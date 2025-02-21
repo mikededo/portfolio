@@ -8,8 +8,8 @@
     import { onMount } from 'svelte';
 
     import { page } from '$app/state';
-    import { Command, KeyWatcher, UnderConstruction } from '$lib/components';
-    import { initAppContext } from '$lib/context';
+    import { Command, EventWatcher, UnderConstruction } from '$lib/components';
+    import { cleanupEvents, initAppContext } from '$lib/context';
     import { GlobalEvents } from '$lib/global-events';
 
     type Props = {
@@ -31,7 +31,10 @@
     onMount(() => {
         GlobalEvents.register();
 
-        return GlobalEvents.unregister;
+        return () => {
+            cleanupEvents();
+            GlobalEvents.unregister();
+        };
     });
 </script>
 
@@ -76,5 +79,5 @@
 </div>
 
 <Command />
-<KeyWatcher />
+<EventWatcher />
 
