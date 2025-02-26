@@ -8,7 +8,12 @@
     import { onMount } from 'svelte';
 
     import { page } from '$app/state';
-    import { Command, EventWatcher, UnderConstruction } from '$lib/components';
+    import {
+        Command,
+        CookieConsent,
+        EventWatcher,
+        UnderConstruction
+    } from '$lib/components';
     import { cleanupEvents, initAppContext } from '$lib/context';
     import { GlobalEvents } from '$lib/global-events';
 
@@ -80,4 +85,5 @@
 
 <Command />
 <EventWatcher />
+<CookieConsent />
 

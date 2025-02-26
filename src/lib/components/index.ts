@@ -1,4 +1,5 @@
 export { Command } from './command';
+export { default as CookieConsent } from './cookie-consent.svelte';
 // TODO: Do not export as *
 export * as Editor from './editor';
 export { default as EventWatcher } from './event-watcher.svelte';

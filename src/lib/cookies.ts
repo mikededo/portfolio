@@ -2,6 +2,7 @@ import type { Cookies } from '@sveltejs/kit';
 
 export type Theme = 'frappe' | 'latte' | 'macchiato' | 'mocha';
 export const THEME_COOKIE = 'theme';
+export const ALLOW_ANALYTICS_COOKIE = 'allow-analytics';
 
 const isTheme = (theme: string): theme is Theme => ['frappe', 'latte', 'macchiato', 'mocha'].includes(theme);
 
