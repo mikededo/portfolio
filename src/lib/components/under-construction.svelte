@@ -17,7 +17,7 @@
         <p class="text-yellow flex-1 text-center text-xs md:text-sm">
             The site is still under construction!
         </p>
-        <button class="outline-hidden" onclick={onHideBanner}>
+        <button class="outline-hidden cursor-pointer" onclick={onHideBanner}>
             <XIcon class="size-4 transition-transform active:scale-[0.9] md:size-5" />
         </button>
     </div>
@@ -25,7 +25,7 @@
 
 <style>
 .under-construction {
-    --timer: 480s;
+    --timer: 240s;
     background: repeating-linear-gradient(
         -45deg,
         hsl(var(--mantle)),
