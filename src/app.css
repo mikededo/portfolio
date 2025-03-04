@@ -165,7 +165,7 @@ html {
   --height-footer: --spacing(10);
   --height-content: calc(100dvh - var(--height-header) - var(--height-footer) - var(--height-theme));
   --height-theme: --spacing(7); /* Container in which the theme selector is placed on xs, sm and md devices */
-  --spacing-cookies: var(--height-footer);
+  --spacing-cookies: --spacing(8);
 
   /* Editor specific */
   --height-editor-subheader: --spacing(6);

@@ -3,6 +3,7 @@
 
     import { SearchIcon } from 'lucide-svelte';
     import { tick } from 'svelte';
+    import { quintOut } from 'svelte/easing';
     import { fade, scale } from 'svelte/transition';
 
     import { useClickAway, useTrapFocus } from '$lib/actions';
@@ -89,7 +90,7 @@
         class="bg-crust/90 fixed inset-0 z-30 hidden md:block"
     ></div>
     <div
-        transition:scale={{ duration: 250, start: 0.975 }}
+        transition:scale={{ duration: 350, easing: quintOut, start: 0.975 }}
         class="border-base bg-mantle fixed left-1/2 top-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 p-5 shadow-2xl md:flex"
         role="dialog"
         aria-modal="true"

@@ -5,10 +5,8 @@
     const { active, code }: Props = $props();
 </script>
 
-<div
-    class="w-editor-code shrink-0 py-1"
->
-    <div class="w-fit">
+<div class="max-h-editor-bottom-pane shrink-0">
+    <div class="min-w-(--width-editor-code) w-fit">
         {#each code as c, i}
             <div
                 class="whitespace-nowrap"

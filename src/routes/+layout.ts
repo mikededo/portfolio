@@ -1,9 +1,9 @@
 import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
 import { dev } from '$app/environment';
-import { ALLOW_ANALYTICS_COOKIE } from '$lib/cookies';
+import { DENY_ANALYTICS } from '$lib/cookies';
 
 injectAnalytics({
-  beforeSend: (e) => window.localStorage.getItem(ALLOW_ANALYTICS_COOKIE) ? e : null,
+  beforeSend: (e) => window.localStorage.getItem(DENY_ANALYTICS) ? null : e,
   mode: dev ? 'development' : 'production'
 });

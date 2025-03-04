@@ -3,7 +3,7 @@
     const { active, count }: Props = $props();
 </script>
 
-<div class="w-editor-line-numbers bg-base sticky left-0 flex h-fit shrink-0 flex-col px-2 py-1">
+<div class="w-editor-line-numbers bg-base sticky left-0 flex h-fit shrink-0 flex-col px-2">
     {#each { length: count } as _, i}
         <span
             class:text-text={i === active}
