@@ -31,5 +31,5 @@ export const AboutInfoContent = [
   ``,
   `%class [text-yellow](&nbsp;&bull; %link [Strava profile](https://www.strava.com/athletes/40516812)%)%`,
   `%class [text-yellow](&nbsp;&bull; %link [Github profile](https://github.com/mikededo)%)%`,
-  `&nbsp;&bull; Open my projects with %class [text-peach](\`CMD + p\`)%`
+  `&nbsp;&bull; Open my projects with %class [text-peach](\`CTRL + p\`)%`
 ];
