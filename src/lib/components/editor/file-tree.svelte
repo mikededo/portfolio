@@ -1,4 +1,4 @@
-<script module lang="ts">
+<script lang="ts" module>
     export type FileTreeNode = {
         children: FileTreeNode[];
         name: string;
@@ -37,12 +37,12 @@
         >
             <a
                 class="node flex w-full items-center gap-2"
+                href={node.href}
+                style="--depth: {depth}"
                 class:fill-flamingo={pos % 4 === 0}
                 class:fill-maroon={pos % 4 === 1}
-                class:fill-yellow={pos % 4 === 2}
                 class:fill-sky={pos % 4 === 3}
-                style="--depth: {depth}"
-                href={node.href}
+                class:fill-yellow={pos % 4 === 2}
             >
                 <File class="size-4 fill-inherit stroke-none" />
                 <p>{node.name}</p>

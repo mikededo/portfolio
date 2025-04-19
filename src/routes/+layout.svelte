@@ -45,7 +45,7 @@
 
 <svelte:head>
     <title>Miquel de Domingo</title>
-    <meta name="description" content="Miquel de Domingo's portfolio" />
+    <meta content="Miquel de Domingo's portfolio" name="description" />
 </svelte:head>
 
 {#snippet link(href: string, value: string)}

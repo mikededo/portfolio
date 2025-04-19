@@ -1,5 +1,6 @@
 import antfu from '@antfu/eslint-config';
 import perfectionist from 'eslint-plugin-perfectionist';
+import svelteSortAttributes from 'eslint-plugin-svelte-sort-attributes';
 import svelteTailwindcss from 'eslint-plugin-svelte-tailwindcss';
 
 export default antfu(
@@ -85,7 +86,39 @@ export default antfu(
     files: ['**/*.html'],
     rules: { 'style/indent': ['error', 4] }
   },
-  ...svelteTailwindcss.configs['flat/base']
+  ...svelteTailwindcss.configs['flat/base'],
+  {
+    plugins: { 'svelte-sort-attributes': svelteSortAttributes },
+    rules: {
+      'svelte-sort-attributes/sort-attributes': [
+        'error',
+        {
+          customGroups: {
+            'bind-directives': 'bind:*',
+            'bind-this': 'bind:this',
+            class: 'class',
+            effects: 'on*',
+            'style-props': '--style-props',
+            this: 'this',
+            'use-directives': 'use:*'
+          },
+          groups: [
+            ['this', 'bind-this'],
+            'style-props',
+            'class',
+            ['bind-directives', 'use-directives'],
+            'unknown',
+            ['shorthand', 'svelte-shorthand'],
+            'multiline',
+            'effects'
+          ],
+          ignoreCase: true,
+          order: 'asc',
+          type: 'alphabetical'
+        }
+      ]
+    }
+  }
 )
   .override('antfu/stylistic/rules', {
     rules: {
@@ -182,32 +215,5 @@ export default antfu(
       ]
       // FIXME: This rule has been deprecated and it is no longer working.
       // It'd be ideal to find an alternative.
-      // 'perfectionist/sort-svelte-attributes': [
-      //   'error',
-      //   {
-      //     customGroups: {
-      //       'bind-directives': 'bind:*',
-      //       'bind-this': 'bind:this',
-      //       class: 'class',
-      //       effects: 'on*',
-      //       'style-props': '--style-props',
-      //       this: 'this',
-      //       'use-directives': 'use:*'
-      //     },
-      //     groups: [
-      //       ['this', 'bind-this'],
-      //       'style-props',
-      //       'class',
-      //       ['bind-directives', 'use-directives'],
-      //       'unknown',
-      //       ['shorthand', 'svelte-shorthand'],
-      //       'multiline',
-      //       'effects'
-      //     ],
-      //     ignoreCase: true,
-      //     order: 'asc',
-      //     type: 'alphabetical'
-      //   }
-      // ]
     }
   });

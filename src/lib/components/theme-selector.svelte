@@ -54,8 +54,8 @@
 
 {#if show}
     <div
-        transition:fade={{ duration: 100, easing: sineInOut }}
         class="bg-base/75 fixed inset-0 z-30 lg:hidden"
+        transition:fade={{ duration: 100, easing: sineInOut }}
     ></div>
 {/if}
 <div
@@ -64,8 +64,8 @@
 >
     {#if show}
         <div
-            transition:fade={{ duration: 150, easing: sineInOut }}
             class={optionContainerClasses}
+            transition:fade={{ duration: 150, easing: sineInOut }}
         >
             {#each THEMES as themeKey}
                 <button

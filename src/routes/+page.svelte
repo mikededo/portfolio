@@ -59,7 +59,7 @@
             </div>
             <ul class="flex flex-col gap-1 text-sm md:text-md">
                 {#each COMMANDS as { desc, external, href, key, sm }(key)}
-                    <li class:hidden={!sm} class="flex items-center justify-between lg:flex">
+                    <li class="flex items-center justify-between lg:flex" class:hidden={!sm}>
                         {#if href}
                             <a
                                 class="hover:underline"

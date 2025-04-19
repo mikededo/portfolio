@@ -11,5 +11,5 @@
         </pre>
         <p class="text-center text-lg">Seems you got lost...</p>
     </div>
-    <a href="/" class="bg-mantle hover:bg-crust rounded-full px-6 py-2 transition-colors">Back to safety</a>
+    <a class="bg-mantle hover:bg-crust rounded-full px-6 py-2 transition-colors" href="/">Back to safety</a>
 </div>

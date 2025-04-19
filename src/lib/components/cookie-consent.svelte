@@ -40,8 +40,8 @@
 {#snippet button(text: string, cb: () => void, left: boolean = false)}
     <button
         class="bg-base hover:bg-mantle cursor-pointer rounded-full px-4 py-1.5 transition-colors"
-        class:mr-auto={left}
         class:bg-crust={left}
+        class:mr-auto={left}
         onclick={cb}
     >
         {text}
@@ -50,8 +50,8 @@
 
 {#if show}
     <div
-        transition:fly={{ y: 28 }}
         class="border-base bg-crust bottom-cookies fixed left-2 right-2 z-50 rounded-xl border-2 p-4 text-sm md:left-auto md:right-2 md:max-w-[460px]"
+        transition:fly={{ y: 28 }}
     >
         <p class="mb-4">This site uses tracking technologies. You may opt in or opt out of the use of these technologies.</p>
         {#if knowMore}
@@ -60,7 +60,7 @@
                 transition:slide={{ duration: 450, easing: quintOut }}
             >
                 The site does not track any personal information nor any sensitive data! It tracks page visits, and other things that can help me provide a better experience to the site! Since I'm using Vercel's integrated tracking, check:
-                <a href="https://vercel.com/docs/analytics/privacy-policy#privacy-and-compliance" class="text-peach hover:underline">Vercel's conditions</a>
+                <a class="text-peach hover:underline" href="https://vercel.com/docs/analytics/privacy-policy#privacy-and-compliance">Vercel's conditions</a>
                 You can completely opt out of analytics without being able to use the site at it's 100%!
             </p>
         {/if}

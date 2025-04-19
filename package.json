@@ -25,6 +25,7 @@
     "eslint-plugin-format": "1.0.1",
     "eslint-plugin-perfectionist": "4.9.0",
     "eslint-plugin-svelte": "2.46.1",
+    "eslint-plugin-svelte-sort-attributes": "1.1.4",
     "eslint-plugin-svelte-tailwindcss": "0.1.0-next.6",
     "globals": "16.0.0",
     "svelte": "5.20.2",

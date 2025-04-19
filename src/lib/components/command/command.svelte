@@ -84,26 +84,26 @@
 
 {#if commandState.show}
     <div
+        class="bg-crust/90 fixed inset-0 z-30 hidden md:block"
         role="presentation"
         tabindex="-1"
         transition:fade={{ duration: 150 }}
-        class="bg-crust/90 fixed inset-0 z-30 hidden md:block"
     ></div>
     <div
-        transition:scale={{ duration: 350, easing: quintOut, start: 0.975 }}
         class="border-base bg-mantle fixed left-1/2 top-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 p-5 shadow-2xl md:flex"
-        role="dialog"
-        aria-modal="true"
-        use:useTrapFocus
         use:useClickAway={resetState}
+        use:useTrapFocus
+        aria-modal="true"
+        role="dialog"
+        transition:scale={{ duration: 350, easing: quintOut, start: 0.975 }}
     >
         <div class="relative">
             <SearchIcon class="stroke-text absolute left-4 top-1/2 size-4 -translate-y-1/2" strokeWidth={2} />
             <input
                 class="bg-crust outline-hidden hover:border-surface0 focus:border-surface0 active:border-surface0 flex w-full items-center gap-3 rounded-xl border-2 border-transparent py-3 pl-10 pr-4 text-sm transition-colors"
-                placeholder="Try searching &apos;Open &mldr;&apos;"
-                bind:value={command}
                 bind:this={input}
+                bind:value={command}
+                placeholder="Try searching &apos;Open &mldr;&apos;"
                 onkeydown={onKeydownBlocker}
             />
         </div>
