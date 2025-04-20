@@ -213,7 +213,5 @@ export default antfu(
           partitionByNewLine: true
         }
       ]
-      // FIXME: This rule has been deprecated and it is no longer working.
-      // It'd be ideal to find an alternative.
     }
   });
