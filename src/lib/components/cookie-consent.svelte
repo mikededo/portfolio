@@ -7,14 +7,13 @@
 
     let show = $state(false);
     let knowMore = $state(false);
-    const knowMoreClasses = $derived(knowMore ? 'fade-in' : 'fade-out');
 
     onMount(() => {
         if (!window.localStorage) {
             return;
         }
 
-        show = !window.localStorage.getItem(DENY_ANALYTICS);
+        show = window.localStorage.getItem(DENY_ANALYTICS) === null;
     });
 
     const onDeny = () => {
@@ -26,8 +25,9 @@
 
     const onAccept = () => {
         if (window.localStorage) {
-            window.localStorage.removeItem(DENY_ANALYTICS);
+            window.localStorage.setItem(DENY_ANALYTICS, 'false');
         }
+
         show = false;
     };
 

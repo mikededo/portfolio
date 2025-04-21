@@ -3,7 +3,7 @@
 
     import type { LayoutServerData } from './$types';
 
-    import { Editor, ThemeSelector, Timer } from '$lib/components';
+    import { Editor, StravaStats, ThemeSelector, Timer } from '$lib/components';
 
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
@@ -34,6 +34,9 @@
 <div class="flex h-full">
     <aside class="bg-mantle w-editor-sidebar hidden h-full shrink-0 lg:flex lg:flex-col">
         <Editor.FileTree {filetree} />
+        {#if data.strava}
+            <StravaStats data={data.strava} />
+        {/if}
     </aside>
 
     <div class="flex h-full w-full flex-col">

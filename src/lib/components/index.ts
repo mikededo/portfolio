@@ -4,6 +4,7 @@ export { default as CookieConsent } from './cookie-consent.svelte';
 export * as Editor from './editor';
 export { default as EventWatcher } from './event-watcher.svelte';
 export { default as HomeBackground } from './home-background.svelte';
+export { default as StravaStats } from './strava-stats.svelte';
 export { default as ThemeSelector } from './theme-selector.svelte';
 export { default as Timer } from './timer.svelte';
 export { default as UnderConstruction } from './under-construction.svelte';

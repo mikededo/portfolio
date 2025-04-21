@@ -1,3 +1,12 @@
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = ({ url }) => ({ pathname: url.pathname });
+import { getWeeklyActivitySummary } from '$lib/server';
+
+export const load: LayoutServerLoad = async ({ url }) => {
+  const stravaData = await getWeeklyActivitySummary();
+
+  return {
+    pathname: url.pathname,
+    strava: stravaData.unwrapOr(null)
+  };
+};
