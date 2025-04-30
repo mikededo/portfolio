@@ -30,7 +30,7 @@
 
 </script>
 
-<main class="bg-base h-content flex-1 overflow-x-hidden">
+<main class="h-content flex-1 overflow-x-hidden bg-base">
     <div class="container flex h-full w-full flex-col justify-center px-4 md:px-8 lg:px-12 xl:px-0">
         <div class="mb-32 flex flex-col gap-2">
             <div class="flex items-center gap-4 text-sm md:text-md">
@@ -70,12 +70,12 @@
                                 {desc}
                             </a>
                             {#if external}
-                                <Link class="ml-2 mr-auto size-4" strokeWidth={1.5} />
+                                <Link class="mr-auto ml-2 size-4" strokeWidth={1.5} />
                             {/if}
                         {:else}
                             <p>{desc}</p>
                         {/if}
-                        <p class="text-peach hidden md:block">{key}</p>
+                        <p class="hidden text-peach md:block">{key}</p>
                     </li>
                 {/each}
             </ul>

@@ -86,7 +86,16 @@ export default antfu(
     files: ['**/*.html'],
     rules: { 'style/indent': ['error', 4] }
   },
-  ...svelteTailwindcss.configs['flat/base'],
+  {
+    plugins: { 'svelte-tailwindcss': svelteTailwindcss },
+    rules: {
+      'svelte-tailwindcss/sort-classes': ['error', {
+        callees: ['twMerge'],
+        config: './src/app.css',
+        removeDuplicates: true
+      }]
+    }
+  },
   {
     plugins: { 'svelte-sort-attributes': svelteSortAttributes },
     rules: {

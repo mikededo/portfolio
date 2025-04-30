@@ -12,11 +12,11 @@
     const { eventWatcher } = getAppContext();
 </script>
 
-<div class={`font-lg fixed flex right-2 flex-col gap-0.5 items-end ${containerClasses}`}>
+<div class={`font-lg fixed right-2 flex flex-col items-end gap-0.5 ${containerClasses}`}>
     <div class="flex gap-0.5">
         {#each eventWatcher.keys as key (key)}
             <span
-                class="bg-mantle rounded-md px-2 py-1 text-sm md:text-md"
+                class="rounded-md bg-mantle px-2 py-1 text-sm md:text-md"
                 transition:fade={{ duration: 100 }}
             >
                 {key}
@@ -26,7 +26,7 @@
 
     {#each eventWatcher.events.keys() as event (event)}
         <span
-            class="text-peach bg-mantle rounded-md px-2 py-1 text-sm md:text-md"
+            class="rounded-md bg-mantle px-2 py-1 text-sm text-peach md:text-md"
             transition:fade={{ duration: 100 }}
         >
             {event}

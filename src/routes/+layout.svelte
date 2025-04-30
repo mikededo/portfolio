@@ -51,7 +51,7 @@
 {#snippet link(href: string, value: string)}
     <li>
         <a
-            class="hover:not:aria-current-page:text-mauve aria-current-page:text-mauve text-sm"
+            class="hover:not:aria-current-page:text-mauve text-sm aria-current-page:text-mauve"
             aria-current={isCurrentPage(href) ? 'page' : undefined}
             {href}
         >
@@ -61,7 +61,7 @@
 {/snippet}
 
 <div class="flex h-screen flex-col">
-    <header class="bg-crust height-header w-header h-header z-20 flex w-full shrink-0 justify-between px-4 py-3">
+    <header class="height-header w-header z-20 flex h-header w-full shrink-0 justify-between bg-crust px-4 py-3">
         <p class="text-xl font-semibold">
             @mikededo
         </p>
@@ -78,8 +78,8 @@
 
     {@render children()}
 
-    <footer class="bg-crust h-footer z-10 hidden justify-end p-3 lg:flex">
-        <p class="text-mauve text-sm leading-4">@mikededo</p>
+    <footer class="z-10 hidden h-footer justify-end bg-crust p-3 lg:flex">
+        <p class="text-sm leading-4 text-mauve">@mikededo</p>
     </footer>
 </div>
 

@@ -34,9 +34,9 @@
     };
 </script>
 
-<div class="bg-crust mx-4 mb-10 mt-auto rounded-xl p-4 text-sm">
+<div class="mx-4 mt-auto mb-10 rounded-xl bg-crust p-4 text-sm">
     <div class="mb-2 flex flex-col">
-        <p class="text-peach font-semibold">Ride stats</p>
+        <p class="font-semibold text-peach">Ride stats</p>
         <p class="text-overlay0 italic">Last 7 days</p>
     </div>
     <div class="flex flex-col">

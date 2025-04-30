@@ -32,7 +32,7 @@
 </script>
 
 <div class="flex h-full">
-    <aside class="bg-mantle w-editor-sidebar hidden h-full shrink-0 lg:flex lg:flex-col">
+    <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex lg:flex-col">
         <Editor.FileTree {filetree} />
         {#if data.strava}
             <StravaStats data={data.strava} />
@@ -41,21 +41,21 @@
 
     <div class="flex h-full w-full flex-col">
         <!-- TODO: Add breadcrumbs -->
-        <div class="bg-mantle h-editor-subheader flex shrink-0 items-center px-10 text-xs md:px-10">
+        <div class="flex h-editor-subheader shrink-0 items-center bg-mantle px-10 text-xs md:px-10">
             <span>~/home{data.pathname}</span>
         </div>
 
-        <main class="h-editor-content w-editor-content flex overflow-auto text-sm md:text-md">
+        <main class="flex h-editor-content w-editor-content overflow-auto text-sm md:text-md">
             {@render children()}
         </main>
 
-        <div class="bg-mantle h-editor-bottom-pane w-editor-content flex shrink-0 items-center gap-4 overflow-hidden text-sm md:flex md:text-md">
-            <div class="bg-blue text-base flex h-full items-center px-3">NORMAL</div>
+        <div class="flex h-editor-bottom-pane w-editor-content shrink-0 items-center gap-4 overflow-hidden bg-mantle text-sm md:flex md:text-md">
+            <div class="flex h-full items-center bg-blue px-3 text-base">NORMAL</div>
             <p class="hidden md:block">&middot;</p>
-            <p class="text-peach hidden text-sm md:block">main</p>
+            <p class="hidden text-sm text-peach md:block">main</p>
             <p class="hidden md:block">&middot;</p>
-            <p class="ml-auto mr-2 text-sm md:ml-0 lg:mr-0">~/home{data.pathname}/file.md</p>
-            <div class="bg-crust ml-auto box-content hidden h-full items-center rounded-l-full px-4 text-sm md:flex">
+            <p class="mr-2 ml-auto text-sm md:ml-0 lg:mr-0">~/home{data.pathname}/file.md</p>
+            <div class="ml-auto box-content hidden h-full items-center rounded-l-full bg-crust px-4 text-sm md:flex">
                 <Timer />
             </div>
         </div>

@@ -84,13 +84,13 @@
 
 {#if commandState.show}
     <div
-        class="bg-crust/90 fixed inset-0 z-30 hidden md:block"
+        class="fixed inset-0 z-30 hidden bg-crust/90 md:block"
         role="presentation"
         tabindex="-1"
         transition:fade={{ duration: 150 }}
     ></div>
     <div
-        class="border-base bg-mantle fixed left-1/2 top-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 p-5 shadow-2xl md:flex"
+        class="fixed top-1/2 left-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 border-base bg-mantle p-5 shadow-2xl md:flex"
         use:useClickAway={resetState}
         use:useTrapFocus
         aria-modal="true"
@@ -98,9 +98,9 @@
         transition:scale={{ duration: 350, easing: quintOut, start: 0.975 }}
     >
         <div class="relative">
-            <SearchIcon class="stroke-text absolute left-4 top-1/2 size-4 -translate-y-1/2" strokeWidth={2} />
+            <SearchIcon class="absolute top-1/2 left-4 size-4 -translate-y-1/2 stroke-text" strokeWidth={2} />
             <input
-                class="bg-crust outline-hidden hover:border-surface0 focus:border-surface0 active:border-surface0 flex w-full items-center gap-3 rounded-xl border-2 border-transparent py-3 pl-10 pr-4 text-sm transition-colors"
+                class="flex w-full items-center gap-3 rounded-xl border-2 border-transparent bg-crust py-3 pr-4 pl-10 text-sm outline-hidden transition-colors hover:border-surface0 focus:border-surface0 active:border-surface0"
                 bind:this={input}
                 bind:value={command}
                 placeholder="Try searching &apos;Open &mldr;&apos;"
@@ -108,9 +108,9 @@
             />
         </div>
 
-        <div class="bg-crust flex h-full w-full flex-col overflow-auto rounded-xl p-3">
+        <div class="flex h-full w-full flex-col overflow-auto rounded-xl bg-crust p-3">
             {#if !command}
-                <pre class="text-overlay2 m-auto">
+                <pre class="m-auto text-overlay2">
 ┌──────────────────────────────────────────┐
 │ Change the theme, open a page&mldr; Anything! │
 └──────────────────────────────────────────┘
@@ -124,7 +124,7 @@
                 <div class="flex flex-col gap-0.5">
                     {#each matches as { html, option: { action, Icon } }}
                         <button
-                            class="outline-hidden hover:bg-base focus:bg-base active:bg-base curosr-pointer flex h-11 items-center gap-4 rounded-lg px-3 py-2.5 text-left transition"
+                            class="curosr-pointer flex h-11 items-center gap-4 rounded-lg px-3 py-2.5 text-left outline-hidden transition hover:bg-base focus:bg-base active:bg-base"
                             onclick={actionProxy(action)}
                         >
                             <Icon class="size-5" />

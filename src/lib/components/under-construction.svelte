@@ -11,13 +11,13 @@
 
 {#if showBanner}
     <div
-        class="under-construction bg-mantle fixed left-0 right-0 top-14 z-10 flex h-9 items-center px-4"
+        class="under-construction fixed top-14 right-0 left-0 z-10 flex h-9 items-center bg-mantle px-4"
         out:fly={{ opacity: 1, y: -36 }}
     >
-        <p class="text-yellow flex-1 text-center text-xs md:text-sm">
+        <p class="flex-1 text-center text-xs text-yellow md:text-sm">
             The site is still under construction!
         </p>
-        <button class="outline-hidden cursor-pointer" onclick={onHideBanner}>
+        <button class="cursor-pointer outline-hidden" onclick={onHideBanner}>
             <XIcon class="size-4 transition-transform active:scale-[0.9] md:size-5" />
         </button>
     </div>

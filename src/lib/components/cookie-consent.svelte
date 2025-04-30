@@ -39,7 +39,7 @@
 
 {#snippet button(text: string, cb: () => void, left: boolean = false)}
     <button
-        class="bg-base hover:bg-mantle cursor-pointer rounded-full px-4 py-1.5 transition-colors"
+        class="cursor-pointer rounded-full bg-base px-4 py-1.5 transition-colors hover:bg-mantle"
         class:bg-crust={left}
         class:mr-auto={left}
         onclick={cb}
@@ -50,7 +50,7 @@
 
 {#if show}
     <div
-        class="border-base bg-crust bottom-cookies fixed left-2 right-2 z-50 rounded-xl border-2 p-4 text-sm md:left-auto md:right-2 md:max-w-[460px]"
+        class="fixed right-2 bottom-cookies left-2 z-50 rounded-xl border-2 border-base bg-crust p-4 text-sm md:right-2 md:left-auto md:max-w-[460px]"
         transition:fly={{ y: 28 }}
     >
         <p class="mb-4">This site uses tracking technologies. You may opt in or opt out of the use of these technologies.</p>

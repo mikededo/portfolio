@@ -11,11 +11,11 @@
 </script>
 
 <div
-    class={twMerge('w-editor-line-numbers px-2 bg-base sticky left-0 flex h-fit shrink-0 flex-col', restProps.class)}
+    class={twMerge('sticky left-0 flex h-fit w-editor-line-numbers shrink-0 flex-col bg-base px-2', restProps.class)}
 >
     {#each { length: count } as _, i}
         <span
-            class="text-overlay1 text-right"
+            class="text-right text-overlay1"
             style="height: {lineHeight}px;"
             class:text-text={i === active}
         >
