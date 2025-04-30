@@ -1,6 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { twMerge } from 'tailwind-merge';
 
     import LineNumbers from './line-numbers.svelte';
 
@@ -47,14 +46,6 @@
     });
 </script>
 
-{#snippet codeHover(classes: string, height: number)}
-    <div
-        class={twMerge('absolute right-0 left-0 bg-overlay0/15', classes)}
-        aria-hidden={true}
-        style="height: {height}px; top: {height * lineHover}px"
-    ></div>
-{/snippet}
-
 <LineNumbers
     class="md:hidden"
     active={lineHover}
@@ -69,8 +60,11 @@
 />
 
 <div class="relative max-h-editor-bottom-pane shrink-0">
-    {@render codeHover('md:hidden', SM_LINE_HEIGHT)}
-    {@render codeHover('hidden md:block', MD_LINE_HEIGHT)}
+    <div
+        class="absolute right-0 left-0 hidden bg-overlay0/15 md:block"
+        aria-hidden={true}
+        style="height: {MD_LINE_HEIGHT}px; top: {MD_LINE_HEIGHT * lineHover}px"
+    ></div>
 
     <div class="w-(--width-editor-code) pr-2" bind:this={textElement}>
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
