@@ -11,7 +11,7 @@
 </script>
 
 <script lang="ts">
-    import { File, Folder } from 'lucide-svelte';
+    import { File, Folder } from '@lucide/svelte';
 
     import { page } from '$app/state';
 

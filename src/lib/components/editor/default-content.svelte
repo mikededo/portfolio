@@ -1,7 +1,7 @@
 <script lang="ts">
     import Editor from './editor.svelte';
 
-    const content: string[] = [
+    const content = [
         ...Array.from<string>({ length: 11 }).fill(''),
         '┌────────────────────────┐',
         '│ Still working on this! │',
@@ -12,7 +12,7 @@
         '                     ||----w |',
         '                     ||     ||',
         ...Array.from<string>({ length: 11 }).fill('')
-    ].map((l) => l.replaceAll(' ', '&nbsp;'));
+    ].map((l) => l.replaceAll(' ', '&nbsp;')).join('<br/>');
 </script>
 
-<Editor {content} />
+<Editor text={content} />

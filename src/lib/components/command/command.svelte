@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Option } from './options';
 
-    import { SearchIcon } from 'lucide-svelte';
+    import { SearchIcon } from '@lucide/svelte';
     import { tick } from 'svelte';
     import { quintOut } from 'svelte/easing';
     import { fade, scale } from 'svelte/transition';

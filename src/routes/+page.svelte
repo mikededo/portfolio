@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Link } from 'lucide-svelte';
+    import { Link } from '@lucide/svelte';
 
     import { HomeBackground, ThemeSelector } from '$lib/components';
 

@@ -1,8 +1,8 @@
-import type { Icon as LucideIcon } from 'lucide-svelte';
+import type { Icon as LucideIcon } from '@lucide/svelte';
 
 import type { Theme } from '$lib/cookies';
 
-import { FileCode, PaletteIcon, RssIcon } from 'lucide-svelte';
+import { FileCode, PaletteIcon, RssIcon } from '@lucide/svelte';
 
 import { goto } from '$app/navigation';
 import { changeTheme } from '$lib/context';

@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Theme } from '$lib/cookies';
 
-    import { PaletteIcon } from 'lucide-svelte';
+    import { PaletteIcon } from '@lucide/svelte';
     import { sineInOut } from 'svelte/easing';
     import { fade } from 'svelte/transition';
     import { twMerge } from 'tailwind-merge';
