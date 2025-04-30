@@ -23,10 +23,14 @@ const replaceClasses = (text: string): string => text.replace(
   '<span class="$1">$2</span>'
 );
 
+const replaceBr = (text: string): string => text.length === 0 ? '<br /><br />' : text;
+
 const chain = (value: string, ...fns: ((value: string) => string)[]): string =>
   fns.reduce((acc, fn) => fn(acc), value);
 
 /**
+ * TODO: Replace for msdvex
+ *
  * This a small parser to simplify the strings defined in the content of each
  * section. Overegenieernig? Probably!
  *
@@ -38,6 +42,7 @@ const chain = (value: string, ...fns: ((value: string) => string)[]): string =>
  */
 export const parseContent = (content: string): string => chain(
   content,
+  replaceBr,
   replaceLinks,
   replaceInternalLinks,
   replaceHeader,

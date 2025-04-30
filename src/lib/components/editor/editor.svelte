@@ -1,31 +1,79 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { twMerge } from 'tailwind-merge';
 
-    import Code from './code.svelte';
     import LineNumbers from './line-numbers.svelte';
 
-    type Props = { content: string[] };
-    const { content }: Props = $props();
+    const SM_LINE_HEIGHT = 20;
+    const MD_LINE_HEIGHT = 24;
 
+    type Props = { text: string };
+    const { text = '' }: Props = $props();
+
+    let textElement: HTMLDivElement | undefined = $state();
+    let smLineCount = $state(0);
+    let mdLineCount = $state(0);
     let lineHover = $state(0);
 
+    const calculateLineCount = () => {
+        if (!textElement) {
+            return;
+        }
+
+        const height = textElement.offsetHeight;
+        smLineCount = Math.max(1, Math.ceil(height / SM_LINE_HEIGHT));
+        mdLineCount = Math.max(1, Math.ceil(height / MD_LINE_HEIGHT));
+    };
+
     onMount(() => {
-        const onKeydown = (e: KeyboardEvent) => {
+        calculateLineCount();
+        const controller = new AbortController();
+
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+            const isMd = window.innerWidth >= 768;
             if (e.key === 'j') {
-                lineHover = Math.min(lineHover + 1, content.length - 1);
+                lineHover = Math.min(lineHover + 1, (isMd ? mdLineCount : smLineCount) - 1);
             } else if (e.key === 'k') {
                 lineHover = Math.max(lineHover - 1, 0);
             }
-        };
+        }, { signal: controller.signal });
+        window.addEventListener('resize', calculateLineCount, { signal: controller.signal });
 
-        document.addEventListener('keydown', onKeydown);
         return {
             destroy() {
-                document.removeEventListener('keydown', onKeydown);
+                controller.abort();
             }
         };
     });
 </script>
 
-<LineNumbers active={lineHover} count={content.length} />
-<Code active={lineHover} code={content} />
+{#snippet codeHover(classes: string, height: number)}
+    <div
+        class={twMerge('absolute left-0 right-0 bg-overlay0/15', classes)}
+        aria-hidden={true}
+        style="height: {height}px; top: {height * lineHover}px"
+    ></div>
+{/snippet}
+
+<LineNumbers
+    class="md:hidden"
+    active={lineHover}
+    count={smLineCount}
+    lineHeight={SM_LINE_HEIGHT}
+/>
+<LineNumbers
+    class="hidden md:flex"
+    active={lineHover}
+    count={mdLineCount}
+    lineHeight={MD_LINE_HEIGHT}
+/>
+
+<div class="max-h-editor-bottom-pane relative shrink-0">
+    {@render codeHover('md:hidden', SM_LINE_HEIGHT)}
+    {@render codeHover('hidden md:block', MD_LINE_HEIGHT)}
+
+    <div class="w-(--width-editor-code) pr-2" bind:this={textElement}>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        {@html text}
+    </div>
+</div>
