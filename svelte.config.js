@@ -13,7 +13,8 @@ const config = {
   kit: { adapter: adapter() },
   preprocess: [vitePreprocess(), mdsvex({
     extensions: ['.md'],
-    layout: resolve(__dirname, './src/lib/components/markdown/layout.svelte')
+    layout: resolve(__dirname, './src/lib/components/markdown/layout.svelte'),
+    smartypants: false
   })]
 };
 
