@@ -93,9 +93,9 @@
         class="fixed top-1/2 left-1/2 z-30 hidden h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 flex-col gap-8 rounded-2xl border-4 border-base bg-mantle p-5 shadow-2xl md:flex"
         use:useClickAway={resetState}
         use:useTrapFocus
-        aria-modal="true"
         role="dialog"
         transition:scale={{ duration: 350, easing: quintOut, start: 0.975 }}
+        aria-modal="true"
     >
         <div class="relative">
             <SearchIcon class="absolute top-1/2 left-4 size-4 -translate-y-1/2 stroke-text" strokeWidth={2} />

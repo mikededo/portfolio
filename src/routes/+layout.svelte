@@ -52,8 +52,8 @@
     <li>
         <a
             class="hover:not:aria-current-page:text-mauve text-sm aria-current-page:text-mauve"
-            aria-current={isCurrentPage(href) ? 'page' : undefined}
             {href}
+            aria-current={isCurrentPage(href) ? 'page' : undefined}
         >
             {value}
         </a>

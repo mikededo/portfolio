@@ -103,9 +103,11 @@ export default antfu(
         'error',
         {
           customGroups: {
+            aria: 'aria-*',
             'bind-directives': 'bind:*',
             'bind-this': 'bind:this',
             class: 'class',
+            data: 'data-*',
             effects: 'on*',
             'style-props': '--style-props',
             this: 'this',
@@ -118,8 +120,10 @@ export default antfu(
             ['bind-directives', 'use-directives'],
             'unknown',
             ['shorthand', 'svelte-shorthand'],
-            'multiline',
-            'effects'
+            'effects',
+            'aria',
+            'data',
+            'multiline'
           ],
           ignoreCase: true,
           order: 'asc',

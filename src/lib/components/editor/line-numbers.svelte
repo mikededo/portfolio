@@ -17,9 +17,9 @@
     {#each { length: count } as _, i}
         <span
             class="text-right text-overlay1"
-            aria-hidden={true}
             style="height: {lineHeight}px;"
             class:text-text={i === active}
+            aria-hidden={true}
         >
             {relative && active ? Math.max(i === active ? i : Math.abs(i - active), 1) : i + 1}
         </span>

@@ -65,8 +65,8 @@
 <div class="relative max-h-editor-bottom-pane shrink-0">
     <div
         class="absolute right-0 left-0 hidden bg-overlay0/15 md:block"
-        aria-hidden={true}
         style="height: {MD_LINE_HEIGHT}px; top: {MD_LINE_HEIGHT * lineHover}px"
+        aria-hidden={true}
     ></div>
 
     <div class="w-(--width-editor-code) pr-2" bind:this={textElement}>
