@@ -42,7 +42,7 @@
                 <p>Hi, I&apos;m</p>
             </div>
             <div class="flex items-end gap-4">
-                <span class="text-overlay1">2</span>
+                <span class="text-sm text-overlay1 md:text-md">2</span>
                 <h1 class="text-3xl font-bold sm:text-5xl md:text-6xl xl:text-7xl">Miquel de Domingo</h1>
             </div>
             <div class="flex items-center gap-4 text-sm md:text-md">

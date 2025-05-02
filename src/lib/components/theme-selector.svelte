@@ -23,7 +23,7 @@
         sidebar && 'lg:bottom-(--height-footer) lg:left-0'
     ));
     const buttonClasses = $derived(twMerge(
-        'flex w-full items-center justify-center gap-2 bg-crust px-6 py-1 hover:bg-mantle lg:py-0.5',
+        'flex w-full cursor-pointer items-center justify-center gap-2 bg-crust px-6 py-1 hover:bg-mantle lg:py-0.5',
         !sidebar && 'lg:w-40 lg:rounded-full lg:py-1',
         sidebar && 'h-theme lg:w-editor-sidebar'
     ));

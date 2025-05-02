@@ -45,7 +45,7 @@
             <span>~/home{data.pathname}</span>
         </div>
 
-        <main class="flex h-editor-content w-editor-content overflow-auto text-sm md:text-md">
+        <main class="flex h-editor-content w-editor-content overflow-x-hidden overflow-y-auto pb-2 text-sm md:text-md">
             {@render children()}
         </main>
 

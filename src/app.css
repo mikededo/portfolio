@@ -129,6 +129,9 @@ html {
 }
 
 @theme {
+  --font-sans: 'JetBrains Mono', ui-monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace;
+
   /* Disable tailwind genearted colors */
   --color-*: initial;
 

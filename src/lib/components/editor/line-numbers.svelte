@@ -2,12 +2,13 @@
     import { twMerge } from 'tailwind-merge';
 
     type Props = {
-        active: number;
+        active: null | number;
         lineHeight: number;
         count: number;
         class?: string;
+        relative?: boolean;
     };
-    const { active, count, lineHeight, ...restProps }: Props = $props();
+    const { active, count, lineHeight, relative, ...restProps }: Props = $props();
 </script>
 
 <div
@@ -16,10 +17,11 @@
     {#each { length: count } as _, i}
         <span
             class="text-right text-overlay1"
+            aria-hidden={true}
             style="height: {lineHeight}px;"
             class:text-text={i === active}
         >
-            {Math.max(i === active ? i : Math.abs(i - active), 1)}
+            {relative && active ? Math.max(i === active ? i : Math.abs(i - active), 1) : i + 1}
         </span>
     {/each}
 </div>

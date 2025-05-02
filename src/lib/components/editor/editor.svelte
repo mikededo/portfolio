@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type { Snippet } from 'svelte';
+
     import { onMount } from 'svelte';
 
     import LineNumbers from './line-numbers.svelte';
@@ -6,8 +8,8 @@
     const SM_LINE_HEIGHT = 20;
     const MD_LINE_HEIGHT = 24;
 
-    type Props = { text: string };
-    const { text = '' }: Props = $props();
+    type Props = { children: Snippet };
+    const { children }: Props = $props();
 
     let textElement: HTMLDivElement | undefined = $state();
     let smLineCount = $state(0);
@@ -48,7 +50,7 @@
 
 <LineNumbers
     class="md:hidden"
-    active={lineHover}
+    active={null}
     count={smLineCount}
     lineHeight={SM_LINE_HEIGHT}
 />
@@ -57,6 +59,7 @@
     active={lineHover}
     count={mdLineCount}
     lineHeight={MD_LINE_HEIGHT}
+    relative
 />
 
 <div class="relative max-h-editor-bottom-pane shrink-0">
@@ -67,7 +70,6 @@
     ></div>
 
     <div class="w-(--width-editor-code) pr-2" bind:this={textElement}>
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html text}
+        {@render children()}
     </div>
 </div>
