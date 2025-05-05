@@ -16,10 +16,10 @@
     const { filetree, strava }: Props = $props();
 </script>
 
-<BottomDrawer class="flex flex-col gap-2" title="Menu">
+<BottomDrawer class="flex flex-col gap-2 lg:hidden" title="Menu">
     {#snippet trigger(props)}
         <button
-            class="fixed right-0 bottom-0 left-0 z-30 flex w-full cursor-pointer items-center justify-center gap-2 bg-crust px-6 py-1 text-sm hover:bg-mantle"
+            class="fixed right-0 bottom-0 left-0 z-30 flex w-full cursor-pointer items-center justify-center gap-2 bg-crust px-6 py-1 text-sm hover:bg-mantle lg:hidden"
             {...props}
         >
             <MenuIcon class="size-4" />
@@ -30,7 +30,7 @@
     {#snippet children({ onClose: onItemClick })}
         <div class="flex flex-col gap-6">
             <div>
-                <p class="text-sm">Project</p>
+                <p class="mb-1 text-sm">Project</p>
                 <FileTree drawer {filetree} {onItemClick} />
             </div>
 

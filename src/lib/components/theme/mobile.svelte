@@ -18,23 +18,20 @@
     const appState = getAppContext();
 
     const containerClasses = $derived(twMerge(
-        'fixed right-0 bottom-0 left-0 z-30 lg:right-auto',
-        !editor && 'lg:bottom-12 lg:left-2',
-        editor && 'lg:bottom-(--height-footer) lg:left-0'
+        'fixed right-auto z-30 hidden lg:block',
+        editor ? 'bottom-(--height-footer) left-0' : 'bottom-12 left-2'
     ));
     const buttonClasses = $derived(twMerge(
-        'flex w-full cursor-pointer items-center justify-center gap-2 bg-crust px-6 py-1 hover:bg-mantle lg:py-0.5',
-        !editor && 'lg:w-40 lg:rounded-full lg:py-1',
-        editor && 'h-theme lg:w-editor-sidebar'
+        'flex cursor-pointer items-center justify-center gap-2 bg-crust px-6 py-0.5 hover:bg-mantle',
+        editor ? 'h-theme w-editor-sidebar' : 'w-40 rounded-full py-1'
     ));
     const optionContainerClasses = $derived(twMerge(
-        'flex flex-col gap-[1px] border-t-2 border-crust bg-mantle text-sm',
-        !editor && 'py-1 lg:mb-1 lg:gap-1 lg:rounded-2xl lg:border-t-0 lg:px-1.5 lg:py-1.5',
-        editor && 'py-1.5 lg:gap-1 lg:py-2.5'
+        'flex flex-col gap-1 border-crust bg-mantle py-2.5 text-sm',
+        editor ? 'border-t-2' : 'mb-1 rounded-2xl border-t-0 px-1.5 py-1.5'
     ));
     const optionClasses = $derived(twMerge(
-        'cursor-pointer py-0.5 outline-hidden hover:bg-base lg:px-4 lg:py-1 lg:text-left',
-        !editor && 'lg:rounded-full'
+        'cursor-pointer px-4 py-1 text-left outline-hidden hover:bg-base',
+        !editor && 'rounded-full'
     ));
 
     const onClick = () => {
@@ -52,12 +49,6 @@
     };
 </script>
 
-{#if show}
-    <div
-        class="fixed inset-0 z-30 bg-base/75 lg:hidden"
-        transition:fade={{ duration: 100, easing: sineInOut }}
-    ></div>
-{/if}
 <div
     class={containerClasses}
     use:useClickAway={onHide}

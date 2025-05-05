@@ -7,6 +7,6 @@ export { default as EditorDrawer } from './editor-drawer.svelte';
 export { default as EventWatcher } from './event-watcher.svelte';
 export { default as HomeBackground } from './home-background.svelte';
 export { default as StravaStats } from './strava-stats.svelte';
-export { default as ThemeSelector } from './theme-selector.svelte';
+export { DesktopThemeSelector } from './theme';
 export { default as Timer } from './timer.svelte';
 export { default as UnderConstruction } from './under-construction.svelte';

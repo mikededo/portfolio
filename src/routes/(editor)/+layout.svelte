@@ -3,7 +3,13 @@
 
     import type { LayoutServerData } from './$types';
 
-    import { Editor, EditorDrawer, StravaStats, ThemeSelector, Timer } from '$lib/components';
+    import {
+        DesktopThemeSelector,
+        Editor,
+        EditorDrawer,
+        StravaStats,
+        Timer
+    } from '$lib/components';
 
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
@@ -62,5 +68,5 @@
     </div>
 </div>
 
-<ThemeSelector editor />
+<DesktopThemeSelector editor />
 <EditorDrawer strava={data.strava} {filetree} />
