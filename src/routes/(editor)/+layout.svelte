@@ -69,4 +69,3 @@
 </div>
 
 <DesktopThemeSelector editor />
-<EditorDrawer strava={data.strava} {filetree} />
