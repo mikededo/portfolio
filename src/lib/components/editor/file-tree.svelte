@@ -15,8 +15,12 @@
 
     import { page } from '$app/state';
 
-    type Props = { filetree: FileTreeNode[] };
-    const { filetree }: Props = $props();
+    type Props = {
+        filetree: FileTreeNode[];
+        drawer?: boolean;
+        onItemClick?: () => void;
+    };
+    const { drawer, filetree, onItemClick }: Props = $props();
 </script>
 
 {#snippet tree(node: FileTreeNode, depth: number, pos: number)}
@@ -43,6 +47,7 @@
                 class:fill-maroon={pos % 4 === 1}
                 class:fill-sky={pos % 4 === 3}
                 class:fill-yellow={pos % 4 === 2}
+                onclick={onItemClick}
             >
                 <File class="size-4 fill-inherit stroke-none" />
                 <p>{node.name}</p>
@@ -51,9 +56,9 @@
     {/if}
 {/snippet}
 
-<ul class="mt-6 flex flex-col text-sm">
+<ul class="flex flex-col text-sm" class:mt-6={!drawer}>
     {#each filetree as child, i}
-        {@render tree(child, 1, i)}
+        {@render tree(child, drawer ? 0 : 1, i)}
     {/each}
 </ul>
 

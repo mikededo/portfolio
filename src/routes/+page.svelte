@@ -54,7 +54,7 @@
         <!-- Currently hidden on sm devices -->
         <div class="flex flex-col gap-4 sm:gap-6 lg:mx-auto lg:w-1/2 lg:gap-9">
             <div>
-                <p>Shortcuts</p>
+                <p class="font-semibold">Shortcuts</p>
                 <p class="hidden italic md:block">You can run the shortcuts page wide!</p>
             </div>
             <ul class="flex flex-col gap-1 text-sm md:text-md">

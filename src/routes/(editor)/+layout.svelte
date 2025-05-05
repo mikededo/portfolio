@@ -3,7 +3,7 @@
 
     import type { LayoutServerData } from './$types';
 
-    import { Editor, StravaStats, ThemeSelector, Timer } from '$lib/components';
+    import { Editor, EditorDrawer, StravaStats, ThemeSelector, Timer } from '$lib/components';
 
     type Props = { children: Snippet; data: LayoutServerData };
     const { children, data }: Props = $props();
@@ -35,7 +35,7 @@
     <aside class="hidden h-full w-editor-sidebar shrink-0 bg-mantle lg:flex lg:flex-col">
         <Editor.FileTree {filetree} />
         {#if data.strava}
-            <StravaStats data={data.strava} />
+            <StravaStats class="mx-4 mt-auto" data={data.strava} />
         {/if}
     </aside>
 
@@ -62,4 +62,5 @@
     </div>
 </div>
 
-<ThemeSelector sidebar />
+<ThemeSelector editor />
+<EditorDrawer strava={data.strava} {filetree} />

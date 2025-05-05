@@ -1,12 +1,14 @@
 <script lang="ts">
     import type { ActivitySummary } from '$lib/server';
 
+    import { twMerge } from 'tailwind-merge';
+
     import { browser } from '$app/environment';
 
     import AnimatedNumber from './animated-number.svelte';
 
-    type Props = { data: ActivitySummary };
-    const { data }: Props = $props();
+    type Props = { data: ActivitySummary; class?: string };
+    const { data, ...restProps }: Props = $props();
 
     let summary = $state<ActivitySummary>({
         distance: 0,
@@ -34,7 +36,7 @@
     };
 </script>
 
-<div class="mx-4 mt-auto mb-10 rounded-xl bg-crust p-4 text-sm">
+<div class={twMerge('mb-10 rounded-xl bg-crust p-4 text-sm', restProps.class)}>
     <div class="mb-2 flex flex-col">
         <p class="font-semibold text-peach">Ride stats</p>
         <p class="text-overlay0 italic">Last 7 days</p>

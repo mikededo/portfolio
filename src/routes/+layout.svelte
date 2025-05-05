@@ -61,7 +61,7 @@
 {/snippet}
 
 <div class="flex h-screen flex-col">
-    <header class="height-header w-header z-20 flex h-header w-full shrink-0 justify-between bg-crust px-4 py-3">
+    <header class="height-header w-header z-20 flex h-header w-full shrink-0 items-center justify-between bg-crust px-4 py-3">
         <p class="text-xl font-semibold">
             @mikededo
         </p>
