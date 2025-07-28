@@ -16,5 +16,9 @@ html {
 }
 
 h2 {
-  @apply mt-6 mb-2 text-xl font-semibold md:text-2xl;
+  @apply mt-8 mb-2 text-xl font-semibold md:text-2xl relative;
+}
+h2:after {
+  content: '+';
+  @apply absolute -top-4 -left-4 font-thin text-slate-600;
 }

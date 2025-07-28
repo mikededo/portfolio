@@ -87,7 +87,7 @@
     </ul>
 
     <h2>experience</h2>
-    <ul>
+    <ul class="space-y-2">
         <li>
             <article>
                 <header class="flex items-center justify-between">
@@ -102,14 +102,14 @@
                 {#if expanded.has('xing')}
                     <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quadOut }}>
                         <p class="mb-1 text-slate-500 italic">
-                            Jobs marketplace platform, serving millions of users
+                            jobs marketplace platform, serving millions of users
                         </p>
                         <ul class="ml-8 list-disc">
-                            <li>Part of the search and recommendations team</li>
-                            <li>Facilitated cross-functional collaboration between product, design and engineering team</li>
-                            <li>Mentored a junior developer through a company program, providing technical guidance, teaching and review</li>
-                            <li>Architected and defined migration for old codebase deprecation</li>
-                            <li>Delivered rapid problem-solving to ensure high application standards</li>
+                            <li>part of the search and recommendations team</li>
+                            <li>facilitated cross-functional collaboration between product, design and engineering team</li>
+                            <li>mentored a junior developer through a company program, providing technical guidance, teaching and review</li>
+                            <li>architected and defined migration for old codebase deprecation</li>
+                            <li>delivered rapid problem-solving to ensure high application standards</li>
                         </ul>
                     </div>
                 {/if}
@@ -128,12 +128,12 @@
                 </header>
                 {#if expanded.has('additio')}
                     <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quadOut }}>
-                        <p class="mb-1 text-slate-500 italic">Educational technology platform</p>
+                        <p class="mb-1 text-slate-500 italic">educational technology platform</p>
                         <ul class="ml-8 list-disc">
-                            <li>Designed architecture for multiple React applications within the Additio App</li>
-                            <li>Built and maintained internal React component libraries, design system and other internal tools</li>
-                            <li>Led application redesign from designing to implementation</li>
-                            <li>Mentored junior students in React development</li>
+                            <li>designed architecture for multiple React applications within the Additio App</li>
+                            <li>built and maintained internal React component libraries, design system and other internal tools</li>
+                            <li>led application redesign from designing to implementation</li>
+                            <li>mentored junior students in React development</li>
                         </ul>
                     </div>
                 {/if}
