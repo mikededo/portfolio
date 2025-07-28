@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@config '../tailwind.config.ts';
-
 * {
   scrollbar-width: thin;
   scrollbar-color: hsl(var(--overlay0)) transparent;
@@ -15,4 +13,8 @@ html {
 @theme {
   --font-sans: 'JetBrains Mono', ui-monospace;
   --font-mono: 'JetBrains Mono', ui-monospace;
+}
+
+h2 {
+  @apply mt-6 mb-2 text-xl font-semibold md:text-2xl;
 }

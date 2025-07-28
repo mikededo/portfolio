@@ -6,6 +6,7 @@
     "@sveltejs/adapter-vercel": "5.8.1",
     "@sveltejs/kit": "2.26.1",
     "@sveltejs/vite-plugin-svelte": "6.1.0",
+    "@tailwindcss/postcss": "4.1.11",
     "@tailwindcss/vite": "4.1.11",
     "eslint": "9.32.0",
     "eslint-plugin-format": "1.0.1",
@@ -31,5 +32,9 @@
     "lint:fix": "eslint . --fix",
     "preview": "vite preview"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "neverthrow": "^8.2.0",
+    "valibot": "^1.1.0"
+  }
 }
