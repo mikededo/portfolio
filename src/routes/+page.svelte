@@ -150,7 +150,7 @@
         </li>
         <li>
             <p>
-                {@render link('https://github.com/mikededo/eslint-plugin-svelte-tailwindcss', 'advent of code')}
+                {@render link('https://github.com/mikededo/eslint-plugin-svelte-tailwindcss', 'eslint plugin svelte tailwindcss')}
                 &centerdot;
                 <span class="text-slate-500 italic">typescript</span>
             </p>
