@@ -8,6 +8,7 @@
 html {
   color: #333;
   font-family: 'JetBrains Mono', monospace;
+  scrollbar-gutter: stable;
 }
 
 @theme {

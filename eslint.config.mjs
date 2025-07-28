@@ -90,7 +90,7 @@ export default antfu(
     plugins: { 'svelte-tailwindcss': svelteTailwindcss },
     rules: {
       'svelte-tailwindcss/sort-classes': ['error', {
-        callees: ['twMerge'],
+        callees: ['tv'],
         config: './src/app.css',
         removeDuplicates: true
       }]

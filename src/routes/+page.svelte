@@ -3,7 +3,7 @@
 
     import type { PageData } from './$types';
 
-    import { quadOut } from 'svelte/easing';
+    import { quintOut } from 'svelte/easing';
     import { SvelteSet } from 'svelte/reactivity';
     import { slide as baseSlide } from 'svelte/transition';
 
@@ -55,7 +55,7 @@
     <title>Miquel de Domingo</title>
 </svelte:head>
 
-<main class="mx-auto w-full md:w-3/4">
+<main class="mx-auto w-full md:w-5/6">
     <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
     <div class="flex gap-1 text-sm">
         {#each URLS as { href, name }, i}
@@ -84,6 +84,79 @@
         <li>
             helping other friends and athletes achieve their fitness goals, as a side hustle
         </li>
+        <li>cat owner</li>
+    </ul>
+
+    <h2>projects</h2>
+    <ul class="ml-8 list-disc space-y-2 text-sm">
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/portfolio', 'this')}
+                &centerdot;
+                <span class="text-slate-500 italic">svelte, sveltekit, vercel</span>
+            </p>
+            <p>codebase of the portfolio</p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/dart-barrel-file-generator', 'dart barrel file generator')}
+                &centerdot;
+                <span class="text-slate-500 italic">typescript, bun</span>
+            </p>
+            <p>
+                vscode extension to generate
+                {@render link('https://dart.dev', 'dart')}
+                barrel files. it's also a cli tool to use outside vscode
+            </p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/advent', 'advent of code')}
+                &centerdot;
+                <span class="text-slate-500 italic">rust</span>
+            </p>
+            <p>
+                some of the advent of code solutions, for some
+                years, done in rust in order to code in different languages and
+                paradigms
+            </p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/advent', 'advent of code ui')}
+                &centerdot;
+                <span class="text-slate-500 italic">svelte, sveltekit, vercel</span>
+            </p>
+            <p>visualitsations to some of the previous aoc solution algorithms</p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/eslint-plugin-svelte-tailwindcss', 'advent of code')}
+                &centerdot;
+                <span class="text-slate-500 italic">typescript</span>
+            </p>
+            <p>
+                i prefer eslint over prettier, and i created this port of
+                {@render link('https://github.com/tailwindlabs/prettier-plugin-tailwindcss', 'prettier-plugin-tailwindcss')}
+                for eslint and svelte </p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/.dotfiles', '.dotfiles')}
+                &centerdot;
+                <span class="text-slate-500 italic">lua, sh</span>
+            </p>
+            <p>personal dotfiles, in case you are interested</p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo?tab=repositories', 'other repos')}
+            </p>
+            <p>
+                here you can find other projects i've done in my spare time. i
+                also enjoy contributing to os projects whenever i can
+            </p>
+        </li>
     </ul>
 
     <h2>experience</h2>
@@ -100,7 +173,7 @@
                     </button>
                 </header>
                 {#if expanded.has('xing')}
-                    <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quadOut }}>
+                    <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quintOut }}>
                         <p class="mb-1 text-slate-500 italic">
                             jobs marketplace platform, serving millions of users
                         </p>
@@ -127,7 +200,7 @@
                     </button>
                 </header>
                 {#if expanded.has('additio')}
-                    <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quadOut }}>
+                    <div class="text-sm" transition:fadeSlide={{ duration: 100, easing: quintOut }}>
                         <p class="mb-1 text-slate-500 italic">educational technology platform</p>
                         <ul class="ml-8 list-disc">
                             <li>designed architecture for multiple React applications within the Additio App</li>
