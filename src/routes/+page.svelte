@@ -123,11 +123,30 @@
         </li>
         <li>
             <p>
-                {@render link('https://github.com/mikededo/advent', 'advent of code ui')}
+                {@render link('https://github.com/mikededo/advent-ui', 'advent of code ui')}
+                &centerdot;
+                {@render link('https://advent-visuals.vercel.app', 'site')}
                 &centerdot;
                 <span class="text-slate-500 italic">svelte, sveltekit, vercel</span>
             </p>
             <p>visualitsations to some of the previous aoc solution algorithms</p>
+        </li>
+        <li>
+            <p>
+                {@render link('https://github.com/mikededo/squared-ci', 'squared-ci')}
+                &centerdot;
+                {@render link('https://squared-ci.vercel.app', 'site')}
+                &centerdot;
+                <span class="text-slate-500 italic">typescript, react, nextjs, vercel</span>
+            </p>
+            <p>
+                a project that i started with the goal of simplifying the
+                learning curve of GitHub Actions. the app helps devs build from
+                simple to complex workflows, through an intuitive ui. i also
+                tried to get out of my comfort zone by removing any external
+                library that would simplify the task, so, for instance, i had
+                to work on a draggable interface, which was great challenge
+            </p>
         </li>
         <li>
             <p>
