@@ -55,7 +55,7 @@
     <title>Miquel de Domingo</title>
 </svelte:head>
 
-<main class="w-full md:w-3/4">
+<main class="mx-auto w-full md:w-3/4">
     <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
     <div class="flex gap-1 text-sm">
         {#each URLS as { href, name }, i}
