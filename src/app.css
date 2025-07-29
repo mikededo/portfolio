@@ -5,6 +5,11 @@
   scrollbar-color: hsl(var(--overlay0)) transparent;
 }
 
+a:focus-visible,
+button:focus-visible {
+  @apply bg-blue-200 outline-none;
+}
+
 html {
   color: #333;
   font-family: 'JetBrains Mono', monospace;

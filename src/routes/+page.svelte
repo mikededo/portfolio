@@ -44,14 +44,14 @@
 
 <main class="mx-auto w-full lg:w-3/4">
     <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
-    <div class="flex gap-1 text-sm">
+    <div class="flex gap-1 text-sm" role="list">
         {#each URLS as { href, name }, i}
-            <Link href={href}>{name}</Link>
+            <Link href={href} role="listitem">{name}</Link>
             {#if i < URLS.length - 1}&centerdot;{/if}
         {/each}
     </div>
 
-    <h2>me</h2>
+    {@render h2('me')}
     <ul class="ml-8 list-disc text-sm">
         <li>graduated in CS and master's in SW design & architecture</li>
         <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
@@ -74,7 +74,7 @@
         <li>cat owner</li>
     </ul>
 
-    <h2>projects</h2>
+    {@render h2('projects')}
     <ul class="ml-8 list-disc space-y-1 text-sm">
         <Project
             repo="this"
@@ -151,7 +151,7 @@
         </Project>
     </ul>
 
-    <h2>experience</h2>
+    {@render h2('experience')}
     <ul class="space-y-2">
         <li>
             <Experience
@@ -187,3 +187,9 @@
     </ul>
 </main>
 
+{#snippet h2(name: string)}
+    <h2 class="relative">
+        {name}
+        <span class="absolute -top-4 -left-4 font-thin text-slate-600" aria-hidden="true">+</span>
+    </h2>
+{/snippet}
