@@ -38,10 +38,6 @@
     const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits);
 </script>
 
-<svelte:head>
-    <title>Miquel de Domingo</title>
-</svelte:head>
-
 <main class="mx-auto w-full lg:w-3/4">
     <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
     <div class="flex gap-1 text-sm" role="list">
