@@ -4,11 +4,11 @@
     export const DENY_ANALYTICS = 'deny-analytics';
 
     const buttonStyles = tv({
-        base: 'cursor-pointer px-4 py-1.5 transition-colors',
+        base: 'cursor-pointer px-4 py-1.5 font-medium transition-colors',
         defaultVariants: { type: 'secondary' },
         variants: {
             type: {
-                primary: 'bg-slate-300 hover:bg-slate-200',
+                primary: 'bg-slate-300 hover:bg-slate-400',
                 secondary: 'bg-slate-100 hover:bg-slate-200'
             }
         }
