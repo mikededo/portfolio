@@ -2,7 +2,8 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--overlay0)) transparent;
+  scrollbar-gutter: stable;
+  scrollbar-color: #333 transparent;
 }
 
 a:focus-visible,
@@ -13,7 +14,6 @@ button:focus-visible {
 html {
   color: #333;
   font-family: 'JetBrains Mono', monospace;
-  scrollbar-gutter: stable;
 }
 
 @theme {
