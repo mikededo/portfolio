@@ -40,6 +40,7 @@
 
 <main class="mx-auto w-full lg:w-3/4">
     <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
+    <p class="mb-2 text-sm">Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!</p>
     <div class="flex gap-1 text-sm" role="list">
         {#each URLS as { href, name }, i}
             <Link href={href} role="listitem">{name}</Link>
