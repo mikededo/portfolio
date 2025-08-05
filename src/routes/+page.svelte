@@ -71,6 +71,31 @@
         <li>cat owner</li>
     </ul>
 
+    {@render h2('how i work')}
+    <ul class="ml-8 list-disc text-sm">
+        <li>
+            <strong>ship fast, iterate faster.</strong> plans are great, but sometimes you just need to get things done
+        </li>
+        <li>
+            <strong>user-first.</strong> tech decisions are important and should consider end-user impact
+        </li>
+        <li>
+            <strong>learn in public.</strong> contribute to os and share within the community
+        </li>
+        <li>
+            <strong>knowledge sharing.</strong> i strongly believe in mentoring and contributing team growth
+        </li>
+        <li>
+            <strong>code quality matters.</strong> write code that you don&apos;t mind reading in 6 months
+        </li>
+        <li>
+            <strong>automate the boring stuff.</strong> if i can spend 30m working on a script to automate a repetitive task, i will
+        </li>
+        <li>
+            <strong>stay curious.</strong> explore, try, learn, repeat
+        </li>
+    </ul>
+
     {@render h2('projects')}
     <ul class="ml-8 list-disc space-y-1 text-sm">
         <Project
