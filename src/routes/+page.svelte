@@ -49,7 +49,7 @@
     </div>
 
     {@render h2('me')}
-    <ul class="ml-8 list-disc text-sm">
+    <ul class="ml-8 list-disc space-y-1 text-sm">
         <li>graduated in CS and master's in SW design & architecture</li>
         <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
         <li>love building things, specially whenever I can try other tools and languages</li>
@@ -72,7 +72,7 @@
     </ul>
 
     {@render h2('how i work')}
-    <ul class="ml-8 list-disc text-sm">
+    <ul class="ml-8 list-disc space-y-1 text-sm">
         <li>
             <strong>ship fast, iterate faster.</strong> plans are great, but sometimes you just need to get things done
         </li>
