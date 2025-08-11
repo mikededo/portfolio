@@ -56,7 +56,7 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
   }
 
   const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 5);
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
   const params = new URLSearchParams({
     start: oneWeekAgo.toISOString().split('T')[0]
   }).toString();
