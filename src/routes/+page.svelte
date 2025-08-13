@@ -103,33 +103,6 @@
     {@render h2('projects')}
     <ul class="ml-8 list-disc space-y-1 text-sm">
         <Project
-            repo="dart barrel file generator"
-            repoHref="https://github.com/mikededo/dart-barrel-file-generator"
-            topics={['typescript', 'bun']}
-        >
-            vscode extension to generate
-            <Link href="https://dart.dev">dart</Link>
-            barrel files. it's also a cli tool to use outside vscode
-        </Project>
-        <Project
-            repo="advent of code"
-            repoHref="https://github.com/mikededo/advent"
-            topics={['rust', 'algorithms']}
-        >
-            some of the advent of code solutions, for some
-            years, done in rust in order to code in different languages and
-            paradigms
-        </Project>
-        <Project
-            repo="advent ui"
-            repoHref="https://github.com/mikededo/advent-ui"
-            site="site"
-            siteHref="https://advent-visuals.vercel.app"
-            topics={['svelte', 'sveltekit', 'vercel']}
-        >
-            visualitsations to some of the previous aoc solution algorithms
-        </Project>
-        <Project
             repo="squared-ci"
             repoHref="https://github.com/mikededo/squared-ci"
             site="site"
@@ -142,6 +115,33 @@
             tried to get out of my comfort zone by removing any external
             library that would simplify the task, so, for instance, i had
             to work on a draggable interface, which was great challenge
+        </Project>
+        <Project
+            repo="advent ui"
+            repoHref="https://github.com/mikededo/advent-ui"
+            site="site"
+            siteHref="https://advent-visuals.vercel.app"
+            topics={['svelte', 'sveltekit', 'vercel']}
+        >
+            visualitsations to some of the previous aoc solution algorithms
+        </Project>
+        <Project
+            repo="advent of code"
+            repoHref="https://github.com/mikededo/advent"
+            topics={['rust', 'algorithms']}
+        >
+            some of the advent of code solutions, for some
+            years, done in rust in order to code in different languages and
+            paradigms
+        </Project>
+        <Project
+            repo="dart barrel file generator"
+            repoHref="https://github.com/mikededo/dart-barrel-file-generator"
+            topics={['typescript', 'bun']}
+        >
+            vscode extension to generate
+            <Link href="https://dart.dev">dart</Link>
+            barrel files. it's also a cli tool to use outside vscode
         </Project>
         <Project
             repo="eslint plugin svelte tailwindcss"
