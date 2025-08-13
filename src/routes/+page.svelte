@@ -54,6 +54,7 @@
         <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
         <li>love building things, specially whenever I can try other tools and languages</li>
         <li>fast problem solver, ship fast</li>
+        <li>desing oriented</li>
         <li>obsessed in providing best user experience, while ensuring best developer experience</li>
         <li>active sports person, mostly cycling</li>
         <li>
@@ -80,6 +81,9 @@
             <strong>user-first.</strong> tech decisions are important and should consider end-user impact
         </li>
         <li>
+            <strong>design driven.</strong> consistent design adds as much value as new features
+        </li>
+        <li>
             <strong>learn in public.</strong> contribute to os and share within the community
         </li>
         <li>
@@ -98,13 +102,6 @@
 
     {@render h2('projects')}
     <ul class="ml-8 list-disc space-y-1 text-sm">
-        <Project
-            repo="this"
-            repoHref="https://github.com/mikededo/portfolio"
-            topics={['svelte', 'sveltekit', 'vercel']}
-        >
-            codebase of this portfolio
-        </Project>
         <Project
             repo="dart barrel file generator"
             repoHref="https://github.com/mikededo/dart-barrel-file-generator"
