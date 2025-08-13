@@ -54,7 +54,7 @@
         <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
         <li>love building things, specially whenever I can try other tools and languages</li>
         <li>fast problem solver, ship fast</li>
-        <li>desing oriented</li>
+        <li>design oriented</li>
         <li>obsessed in providing best user experience, while ensuring best developer experience</li>
         <li>active sports person, mostly cycling</li>
         <li>
