@@ -28,3 +28,7 @@ h2:after {
   content: '+';
   @apply absolute -top-4 -left-4 font-thin text-slate-600;
 }
+
+a {
+  @apply text-blue-500 hover:underline;
+}
