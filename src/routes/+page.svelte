@@ -183,6 +183,7 @@
             >
                 <li>part of the search and recommendations team</li>
                 <li>facilitated cross-functional collaboration between product, design and engineering team</li>
+                <li>when possible, collaborated with design system and platform teams</li>
                 <li>mentored a junior developer through a company program, providing technical guidance, teaching and review</li>
                 <li>architected and defined migration for old codebase deprecation</li>
                 <li>delivered rapid problem-solving to ensure high application standards</li>
