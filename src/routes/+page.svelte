@@ -120,10 +120,10 @@
             repo="advent ui"
             repoHref="https://github.com/mikededo/advent-ui"
             site="site"
-            siteHref="https://advent-visuals.vercel.app"
+            siteHref="https://advent-ui.mikededo.com"
             topics={['svelte', 'sveltekit', 'vercel']}
         >
-            visualitsations to some of the previous aoc solution algorithms
+            visualizations to some of the previous aoc solution algorithms
         </Project>
         <Project
             repo="advent of code"
