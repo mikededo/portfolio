@@ -182,11 +182,25 @@
                 onExpand={onToggleExpand('xing')}
             >
                 <li>part of the search and recommendations team</li>
-                <li>facilitated cross-functional collaboration between product, design and engineering team</li>
-                <li>when possible, collaborated with design system and platform teams</li>
-                <li>mentored a junior developer through a company program, providing technical guidance, teaching and review</li>
-                <li>architected and defined migration for old codebase deprecation</li>
-                <li>delivered rapid problem-solving to ensure high application standards</li>
+                <li>
+                    facilitated cross-functional collaboration between product,
+                    design and engineering teams
+                </li>
+                <li>
+                    collaborated with design system and platform teams, to
+                    align ui specs and infrastructure needs
+                </li>
+                <li>
+                    mentored a junior developer through a company program,
+                    providing technical guidance, design feedback, and reviews
+                </li>
+                <li>
+                    architected and defined migration for old codebase
+                    deprecation, reducing technical debt
+                </li>
+                <li>
+                    delivered rapid problem-solving to ensure high application standards
+                </li>
             </Experience>
         </li>
         <li>
@@ -198,9 +212,17 @@
                 title="frontend engineer"
                 onExpand={onToggleExpand('additio')}
             >
-                <li>designed architecture for multiple React applications within the Additio App</li>
-                <li>built and maintained internal React component libraries, design system and other internal tools</li>
-                <li>led application redesign from designing to implementation</li>
+                <li>
+                    designed architecture for multiple React applications
+                    within the Additio App
+                </li>
+                <li>
+                    built and maintained internal React component libraries,
+                    design system and other internal tools
+                </li>
+                <li>
+                    led application redesign from ideation and wireframing to implementation
+                </li>
                 <li>mentored junior students in React development</li>
             </Experience>
         </li>
