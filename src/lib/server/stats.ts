@@ -5,7 +5,7 @@ import { err, ok, ResultAsync } from 'neverthrow';
 import * as v from 'valibot';
 
 import { dev } from '$app/environment';
-import { env } from '$env/dynamic/private';
+import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private';
 
 /**
  * Type definition from schema in:
@@ -52,6 +52,7 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
 
   const now = new Date();
   if (cachedSummary && (now.getTime() - cachedSummary.lastFetched.getTime() < 6 * 60 * 60 * 1000)) {
+    console.log('Returning cached summary');
     return ok(cachedSummary);
   }
 
@@ -61,13 +62,13 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
     start: oneWeekAgo.toISOString().split('T')[0]
   }).toString();
 
-  const url = `https://intervals.icu/api/v1/athlete/${env.INTERVALS_ID}/athlete-summary?${params}`;
+  const url = `https://intervals.icu/api/v1/athlete/${INTERVALS_ID}/athlete-summary?${params}`;
 
   const fetchResult = await ResultAsync.fromPromise(
     fetch(url, {
       headers: {
         Accept: '*/*',
-        Authorization: `Basic ${btoa(`API_KEY:${env.INTERVALS_API_KEY}`)}`
+        Authorization: `Basic ${btoa(`API_KEY:${INTERVALS_API_KEY}`)}`
       }
     }),
     () => new Error('Failed to fetch activities')
@@ -96,7 +97,7 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
 
   const athletes = parsed.output;
   const summary: ActivitySummary = athletes
-    .filter(({ athlete_id }) => athlete_id === env.INTERVALS_ID)
+    .filter(({ athlete_id }) => athlete_id === INTERVALS_ID)
     .reduce<ActivitySummary>((acc, { byCategory: categories }) => {
       categories.forEach((activity) => {
         const { category, distance, moving_time, total_elevation_gain: elevation } = activity;
