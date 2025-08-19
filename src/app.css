@@ -61,7 +61,7 @@ html {
 
 a:focus-visible,
 button:focus-visible {
-  @apply bg-blue-200 outline-none;
+  @apply text-blue-700 bg-blue-200 outline-none;
 }
 
 h2 {
