@@ -49,7 +49,7 @@
     </div>
 
     {@render h2('me')}
-    <ul class="ml-8 list-disc space-y-1 text-sm">
+    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
         <li>graduated in CS and master's in SW design & architecture</li>
         <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
         <li>love building things, specially whenever I can try other tools and languages</li>
@@ -73,7 +73,7 @@
     </ul>
 
     {@render h2('how i work')}
-    <ul class="ml-8 list-disc space-y-1 text-sm">
+    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
         <li>
             <strong>ship fast, iterate faster.</strong> plans are great, but sometimes you just need to get things done
         </li>
@@ -101,7 +101,7 @@
     </ul>
 
     {@render h2('projects')}
-    <ul class="ml-8 list-disc space-y-1 text-sm">
+    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
         <Project
             repo="squared-ci"
             repoHref="https://github.com/mikededo/squared-ci"

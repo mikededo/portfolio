@@ -52,7 +52,6 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
 
   const now = new Date();
   if (cachedSummary && (now.getTime() - cachedSummary.lastFetched.getTime() < 6 * 60 * 60 * 1000)) {
-    console.log('Returning cached summary');
     return ok(cachedSummary);
   }
 
