@@ -8,7 +8,8 @@
     const URLS = [
         { href: 'mailto:miquelddg@gmail.com', name: 'email' },
         { href: 'https://github.com/mikededo', name: 'github' },
-        { href: 'https://www.linkedin.com/in/mikededo', name: 'linkedin' }
+        { href: 'https://www.linkedin.com/in/mikededo', name: 'linkedin' },
+        { href: 'https://github.com/mikededo/portfolio', name: 'code' }
     ];
 
     type Props = { data: PageData };
