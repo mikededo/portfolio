@@ -9,7 +9,7 @@
 <a
     {...restProps}
     href={href}
-    rel="noopener noreferrer"
+    rel="noopener"
     target="_blank"
 >
     {@render children()}
