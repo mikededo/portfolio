@@ -62,9 +62,10 @@
         {#if knowMore}
             <p
                 class="mb-4 origin-bottom"
-                transition:slide={{ duration: 250, easing: quintOut }}
+                style="scrollbar-gutter: auto"
+                transition:slide={{ easing: quintOut }}
             >
-                The site does not track any personal information nor any sensitive data! It tracks page visits, and other things that can help me provide a better experience to the site! Since I'm using Vercel's integrated tracking, check:
+                The site does not track any personal information nor any sensitive data! It tracks <strong>page visits</strong>, and other things that can help me provide a better experience to the site! Since I'm using Vercel's integrated tracking, check:
                 <a href="https://vercel.com/docs/analytics/privacy-policy#privacy-and-compliance">Vercel's conditions</a>
                 You can completely opt out of analytics without being able to use the site at it's 100%!
             </p>
