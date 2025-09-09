@@ -104,6 +104,15 @@
     {@render h2('projects')}
     <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
         <Project
+            repo="advent ui"
+            repoHref="https://github.com/mikededo/advent-ui"
+            site="site"
+            siteHref="https://advent-ui.mikededo.com"
+            topics={['svelte', 'sveltekit', 'vercel']}
+        >
+            visualizations to some of the previous aoc solution algorithms
+        </Project>
+        <Project
             repo="squared-ci"
             repoHref="https://github.com/mikededo/squared-ci"
             site="site"
@@ -116,15 +125,6 @@
             tried to get out of my comfort zone by removing any external
             library that would simplify the task, so, for instance, i had
             to work on a draggable interface, which was great challenge
-        </Project>
-        <Project
-            repo="advent ui"
-            repoHref="https://github.com/mikededo/advent-ui"
-            site="site"
-            siteHref="https://advent-ui.mikededo.com"
-            topics={['svelte', 'sveltekit', 'vercel']}
-        >
-            visualizations to some of the previous aoc solution algorithms
         </Project>
         <Project
             repo="advent of code"
