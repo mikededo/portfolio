@@ -15,7 +15,7 @@
     type Props = { data: PageData };
     const { data }: Props = $props();
 
-    const expanded = new SvelteSet<string>(['xing']);
+    const expanded = new SvelteSet<string>(['stackai']);
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
@@ -197,6 +197,18 @@
 
     {@render h2('experience')}
     <ul class="space-y-2">
+        <li>
+            <Experience
+                company="Stack AI"
+                companyHref="https://www.stack-ai.com"
+                expanded={expanded.has('stackai')}
+                subtitle="ai toolkit for enterprises"
+                title="frontend engineer"
+                onExpand={onToggleExpand('stackai')}
+            >
+                <li>main frontend engineer</li>
+            </Experience>
+        </li>
         <li>
             <Experience
                 company="XING"
