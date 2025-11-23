@@ -67,9 +67,19 @@
 }
 
 html {
-  @apply bg-white text-[#333] dark:bg-neutral-900 dark:text-neutral-200;
+  @apply bg-white text-[#333] dark:bg-slate-900 dark:text-neutral-200;
 
   font-family: 'JetBrains Mono', monospace;
+}
+
+@theme inline {
+  --color-background: var(--color-white);
+}
+
+root.dark {
+  @theme inline {
+    --color-background: var(--color-slate-900);
+  }
 }
 
 a:focus-visible,

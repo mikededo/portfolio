@@ -8,8 +8,8 @@
         defaultVariants: { type: 'secondary' },
         variants: {
             type: {
-                primary: 'bg-slate-300 hover:bg-slate-400',
-                secondary: 'bg-slate-100 hover:bg-slate-200'
+                primary: 'bg-slate-300 hover:bg-slate-400 dark:bg-slate-700 dark:hover:bg-slate-600',
+                secondary: 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700'
             }
         }
     });
@@ -53,7 +53,7 @@
 
 {#if show}
     <div
-        class="fixed right-2 bottom-2 left-2 z-50 border border-slate-300 bg-white p-3 text-sm sm:right-0 sm:left-auto sm:max-w-sm"
+        class="fixed right-2 bottom-2 left-2 z-50 border border-slate-300 bg-background p-3 text-sm sm:right-0 sm:left-auto sm:max-w-sm dark:border-slate-700"
         transition:fly={{ easing: quintOut, y: 28 }}
     >
         <p class="mb-2">
