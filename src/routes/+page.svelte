@@ -57,16 +57,20 @@
     </p>
     <div class="flex gap-1 text-sm" role="list">
         {#each URLS as { href, name }, i}
-            <Link role="listitem" {href}>{name}</Link>
+            <div role="listitem">
+                <Link {href}>{name}</Link>
+            </div>
             {#if i < URLS.length - 1}&centerdot;{/if}
         {/each}
-        <button
-            class="ml-auto cursor-pointer hover:underline"
-            type="button"
-            onclick={onThemeChange}
-        >
-            {theme === Theme.Light ? 'dark' : 'light'}
-        </button>
+        <div class="ml-auto" role="listitem">
+            <button
+                class="ml-auto cursor-pointer hover:underline"
+                type="button"
+                onclick={onThemeChange}
+            >
+                {theme === Theme.Light ? 'dark' : 'light'}
+            </button>
+        </div>
     </div>
 
     {@render h2('me')}
