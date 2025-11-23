@@ -2,19 +2,35 @@
     import type { Snippet } from 'svelte';
 
     import Link from './link.svelte';
+    import PreviewPopover from './preview-popover.svelte';
 
     type Props = {
         children: Snippet;
         repo: string;
         repoHref: string;
+        previewSlug?: string;
         topics?: string[];
     } & ({ site: string; siteHref: string } | { site?: never; siteHref?: never });
-    const { children, repo, repoHref, site, siteHref, topics }: Props = $props();
+    const {
+        children,
+        previewSlug,
+        repo,
+        repoHref,
+        site,
+        siteHref,
+        topics
+    }: Props = $props();
 </script>
 
 <li>
     <p>
-        <Link href={repoHref}>{repo}</Link>
+        {#if previewSlug}
+            <PreviewPopover label={repo} slug={previewSlug}>
+                <Link href={repoHref}>{repo}</Link>
+            </PreviewPopover>
+        {:else}
+            <Link href={repoHref}>{repo}</Link>
+        {/if}
         {#if site}
             &centerdot;
             <Link href={siteHref}>{site}</Link>

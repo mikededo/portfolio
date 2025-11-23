@@ -145,6 +145,7 @@
     {@render h2('projects')}
     <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
         <Project
+            previewSlug="advent-ui"
             repo="advent ui"
             repoHref="https://github.com/mikededo/advent-ui"
             site="site"
@@ -154,6 +155,7 @@
             visualizations to some of the previous aoc solution algorithms
         </Project>
         <Project
+            previewSlug="squared-ci"
             repo="squared-ci"
             repoHref="https://github.com/mikededo/squared-ci"
             site="site"
