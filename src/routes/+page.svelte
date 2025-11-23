@@ -4,6 +4,7 @@
     import { SvelteSet } from 'svelte/reactivity';
 
     import { AnimatedNumber, Experience, Link, Project } from '$lib/components';
+    import { setTheme, Theme, themeChangeAnimation } from '$lib/utils/theme';
 
     const URLS = [
         { href: 'mailto:miquelddg@gmail.com', name: 'email' },
@@ -16,6 +17,7 @@
     const { data }: Props = $props();
 
     const expanded = new SvelteSet<string>(['stackai']);
+    let theme = $state(data.theme);
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
@@ -23,6 +25,14 @@
         } else {
             expanded.add(id);
         }
+    };
+
+    const onThemeChange = () => {
+        const newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;
+
+        theme = newTheme;
+        setTheme(newTheme);
+        themeChangeAnimation(theme);
     };
 
     const formatTime = (hours: number): string => {
@@ -36,10 +46,8 @@
         return `${wholeHours}h${minutes.toString().padStart(2, '0')}m`;
     };
 
-    const formatNumber =
-        (digits: number = 2) =>
-            (value: number): string =>
-                value.toFixed(digits);
+    const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits);
+
 </script>
 
 <main class="mx-auto w-full lg:w-3/4">
@@ -52,6 +60,13 @@
             <Link role="listitem" {href}>{name}</Link>
             {#if i < URLS.length - 1}&centerdot;{/if}
         {/each}
+        <button
+            class="ml-auto cursor-pointer hover:underline"
+            type="button"
+            onclick={onThemeChange}
+        >
+            {theme === Theme.Light ? 'dark' : 'light'}
+        </button>
     </div>
 
     {@render h2('me')}

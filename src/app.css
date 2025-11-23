@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-display: swap;
   font-family: 'JetBrains Mono';
@@ -48,30 +50,55 @@
   --font-mono: 'JetBrains Mono', ui-monospace;
 }
 
+:root {
+  --scrollbar-thumb: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --scrollbar-thumb: #a3a3a3;
+  }
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-gutter: stable;
-  scrollbar-color: #333 transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 html {
-  color: #333;
+  @apply bg-white text-[#333] dark:bg-neutral-900 dark:text-neutral-200;
+
   font-family: 'JetBrains Mono', monospace;
 }
 
 a:focus-visible,
 button:focus-visible {
-  @apply text-blue-700 bg-blue-200 outline-none;
+  @apply text-blue-700 bg-blue-200 outline-none dark:text-blue-200 dark:bg-blue-900/80;
 }
 
 h2 {
   @apply mt-8 mb-2 text-xl font-bold md:text-2xl relative;
 }
+
 h2:after {
   content: '+';
-  @apply absolute -top-4 -left-4 font-thin text-slate-600;
+  @apply absolute -top-4 -left-4 font-thin text-slate-600 dark:text-slate-500;
 }
 
 a {
-  @apply text-blue-500 hover:underline;
+  @apply text-blue-500 hover:underline dark:text-blue-400;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+/* Accessibility: Disable strictly for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: auto;
+  }
 }
