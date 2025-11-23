@@ -22,24 +22,26 @@
     }: Props = $props();
 </script>
 
+{#snippet site_content()}
+    &centerdot;
+    <Link href={siteHref!}>{site}</Link>
+{/snippet}
+
 <li>
-    <p>
+    <Link href={repoHref}>{repo}</Link>
+    {#if site}
         {#if previewSlug}
             <PreviewPopover label={repo} slug={previewSlug}>
-                <Link href={repoHref}>{repo}</Link>
+                <p>{@render site_content()}</p>
             </PreviewPopover>
         {:else}
-            <Link href={repoHref}>{repo}</Link>
+            <p>{@render site_content()}</p>
         {/if}
-        {#if site}
-            &centerdot;
-            <Link href={siteHref}>{site}</Link>
-        {/if}
-        {#if topics}
-            &centerdot;
-            <span class="text-slate-500 italic">{topics.join(', ')}</span>
-        {/if}
-    </p>
+    {/if}
+    {#if topics}
+        &centerdot;
+        <span class="text-slate-500 italic">{topics.join(', ')}</span>
+    {/if}
     <p>{@render children()}</p>
 </li>
 
