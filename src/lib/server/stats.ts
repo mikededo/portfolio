@@ -1,11 +1,18 @@
 import type { Result } from 'neverthrow';
-import type { InferOutput } from 'valibot';
 
 import { err, ok, ResultAsync } from 'neverthrow';
 import * as v from 'valibot';
 
 import { dev } from '$app/environment';
 import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private';
+
+const BASE_URL = 'https://intervals.icu/api/v1';
+
+const getDateRangeSchema = (min: Date, max: Date) => v.pipe(
+  v.date(),
+  v.minValue(min),
+  v.maxValue(max)
+);
 
 /**
  * Type definition from schema in:
@@ -25,44 +32,41 @@ const ByCategoryItemSchema = v.object({
   total_elevation_gain: v.nullable(v.number(), 0),
   training_load: v.nullable(v.number())
 });
-
 // Partial definition of the response
 const ActivityDataSchema = v.object({
   athlete_id: v.string(),
   byCategory: v.array(ByCategoryItemSchema)
 });
+const ActivityDataArraySchema = v.array(ActivityDataSchema);
 
-export const ActivityDataArraySchema = v.array(ActivityDataSchema);
-export type ActivityData = InferOutput<typeof ActivityDataSchema>;
-export type ActivityDataArray = InferOutput<typeof ActivityDataArraySchema>;
-export type ActivitySummary = {
+type ActivitySummary = {
   distance: number;
   lastFetched: Date;
   time: number;
   elevation: number;
 };
 
+const EventSchema = v.object({
+  end_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date()),
+  name: v.string(),
+  start_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date())
+});
+const EventDataArraySchema = v.array(EventSchema);
+
 // Home-made cache so that we do not fetch the data on every request
 let cachedSummary: ActivitySummary | null = null;
+let cachedRecoveryPeriod: { lastFetched: Date; value: boolean } | null = null;
 
-export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary, Error>> => {
-  if (dev) {
-    return ok({ distance: 650.50, elevation: 8750, lastFetched: new Date(), time: 23.86 });
-  }
-
-  const now = new Date();
-  if (cachedSummary && (now.getTime() - cachedSummary.lastFetched.getTime() < 6 * 60 * 60 * 1000)) {
-    return ok(cachedSummary);
-  }
-
+const getOneWeekAgoDate = () => {
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
-  const params = new URLSearchParams({
-    start: oneWeekAgo.toISOString().split('T')[0]
-  }).toString();
+  return oneWeekAgo.toISOString().split('T')[0];
+};
 
-  const url = `https://intervals.icu/api/v1/athlete/${INTERVALS_ID}/athlete-summary?${params}`;
-
+const parseResponse = async <T extends v.GenericSchema>(
+  schema: T,
+  url: string
+): Promise<Result<v.InferOutput<T>, Error>> => {
   const fetchResult = await ResultAsync.fromPromise(
     fetch(url, {
       headers: {
@@ -89,30 +93,122 @@ export const getWeeklyActivitySummary = async (): Promise<Result<ActivitySummary
     return err(json.error);
   }
 
-  const parsed = v.safeParse(ActivityDataArraySchema, json.value);
+  const parsed = v.safeParse(schema, json.value);
   if (!parsed.success) {
     return err(new Error('Validation failed for activity data'));
   }
 
-  const athletes = parsed.output;
-  const summary: ActivitySummary = athletes
-    .filter(({ athlete_id }) => athlete_id === INTERVALS_ID)
-    .reduce<ActivitySummary>((acc, { byCategory: categories }) => {
-      categories.forEach((activity) => {
-        const { category, distance, moving_time, total_elevation_gain: elevation } = activity;
-        if (category !== 'Ride') {
-          return;
+  return ok(parsed.output);
+};
+
+const fetchAthletesSummary = async () => {
+  const params = new URLSearchParams({
+    start: getOneWeekAgoDate()
+  }).toString();
+  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/athlete-summary?${params}`;
+
+  return parseResponse(ActivityDataArraySchema, url);
+};
+
+const fetchEvents = () => {
+  const params = new URLSearchParams({
+    category: 'NOTE',
+    oldest: getOneWeekAgoDate()
+  }).toString();
+  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/events?${params}`;
+
+  return parseResponse(EventDataArraySchema, url);
+};
+
+const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) => () => {
+  if (dev) {
+    return ok(value);
+  }
+
+  return cb();
+};
+
+const getFromCache = <T extends { lastFetched: Date }>(cache: null | T): null | T => {
+  const now = new Date();
+  if (cache && (now.getTime() - cache.lastFetched.getTime() < 60 * 60 * 1000)) {
+    return cache;
+  }
+
+  return null;
+};
+
+export const getIsRecoveryPeriod = withDevDefaultValue(
+  async (): Promise<Result<boolean, Error>> => {
+    const cached = getFromCache(cachedRecoveryPeriod);
+    if (cached !== null) {
+      return ok(cached.value);
+    }
+
+    const maybeEvents = await fetchEvents();
+    if (maybeEvents.isErr()) {
+      console.error(maybeEvents.error);
+      return err(maybeEvents.error);
+    }
+
+    const now = new Date();
+    const isRecoveryPeriod = maybeEvents.value
+      .some((event) => {
+        if (!event.name.toLowerCase().includes('recovery')) {
+          return false;
         }
 
-        acc.distance += distance / 1000;
-        acc.elevation += elevation;
-        acc.time += moving_time / 3600;
+        return v.safeParse(
+          getDateRangeSchema(event.start_date_local, event.end_date_local),
+          now
+        ).success;
       });
 
-      return acc;
-    }, { distance: 0, elevation: 0, lastFetched: now, time: 0 });
+    cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod };
+    return ok(isRecoveryPeriod);
+  },
+  false
+);
 
-  cachedSummary = summary;
+export const getWeeklyActivitySummary = withDevDefaultValue(
+  async (): Promise<Result<ActivitySummary, Error>> => {
+    const cached = getFromCache(cachedSummary);
+    if (cached) {
+      return ok(cached);
+    }
 
-  return ok(summary);
-};
+    const maybeAthletes = await fetchAthletesSummary();
+    if (maybeAthletes.isErr()) {
+      console.error(maybeAthletes.error);
+      return err(maybeAthletes.error);
+    }
+
+    const summary: ActivitySummary = maybeAthletes.value
+      .reduce<ActivitySummary>((acc, { athlete_id: athleteId, byCategory: categories }) => {
+        if (athleteId !== INTERVALS_ID) {
+          return acc;
+        }
+
+        categories.forEach((activity) => {
+          const {
+            category,
+            distance,
+            moving_time,
+            total_elevation_gain: elevation
+          } = activity;
+          if (category !== 'Ride') {
+            return;
+          }
+
+          acc.distance += distance / 1000;
+          acc.elevation += elevation;
+          acc.time += moving_time / 3600;
+        });
+
+        return acc;
+      }, { distance: 0, elevation: 0, lastFetched: new Date(), time: 0 });
+
+    cachedSummary = summary;
+    return ok(summary);
+  },
+  { distance: 650.50, elevation: 8750, lastFetched: new Date(), time: 23.86 }
+);
