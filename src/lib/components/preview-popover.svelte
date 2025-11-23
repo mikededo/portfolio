@@ -33,12 +33,12 @@
     {@render children()}
 
     <div
-        class="pointer-events-none absolute -top-1 z-10 aspect-3/2 h-50 -translate-y-full overflow-hidden border border-gray-200 bg-white p-1 shadow-md dark:border-slate-600 dark:bg-slate-800"
+        class="pointer-events-none absolute -top-1 z-10 aspect-3/2 h-50 -translate-y-full overflow-hidden border border-slate-200 bg-white p-1 dark:border-slate-600 dark:bg-slate-900"
         style="opacity: {coords.current.opacity}; scale: {coords.current.scale}; scrollbar-gutter: auto"
         aria-hidden="true"
     >
         <img
-            class="w-full"
+            class="h-full w-full object-cover"
             alt="Preview of {label}"
             src="/previews/{slug}.jpg"
         />

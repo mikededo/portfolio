@@ -53,7 +53,7 @@
 
 {#if show}
     <div
-        class="fixed right-2 bottom-2 left-2 z-50 border border-slate-300 bg-background p-3 text-sm sm:right-0 sm:left-auto sm:max-w-sm dark:border-slate-700"
+        class="fixed right-2 bottom-2 left-2 z-50 border border-slate-300 bg-white p-3 text-sm sm:right-0 sm:left-auto sm:max-w-sm dark:border-slate-700 dark:bg-slate-900"
         transition:fly={{ easing: quintOut, y: 28 }}
     >
         <p class="mb-2">
