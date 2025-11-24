@@ -38,6 +38,7 @@
   "type": "module",
   "dependencies": {
     "@vercel/analytics": "1.5.0",
+    "dayjs": "1.11.19",
     "neverthrow": "8.2.0",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2",

@@ -1,5 +1,6 @@
 import type { Result } from 'neverthrow';
 
+import dayjs from 'dayjs';
 import { err, ok, ResultAsync } from 'neverthrow';
 import * as v from 'valibot';
 
@@ -57,12 +58,6 @@ const EventDataArraySchema = v.array(EventSchema);
 let cachedSummary: ActivitySummary | null = null;
 let cachedRecoveryPeriod: { lastFetched: Date; value: boolean } | null = null;
 
-const getOneWeekAgoDate = () => {
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
-  return oneWeekAgo.toISOString().split('T')[0];
-};
-
 const parseResponse = async <T extends v.GenericSchema>(
   schema: T,
   url: string
@@ -103,7 +98,7 @@ const parseResponse = async <T extends v.GenericSchema>(
 
 const fetchAthletesSummary = async () => {
   const params = new URLSearchParams({
-    start: getOneWeekAgoDate()
+    start: dayjs().subtract(7, 'day').format('YYYY-MM-DD')
   }).toString();
   const url = `${BASE_URL}/athlete/${INTERVALS_ID}/athlete-summary?${params}`;
 
@@ -113,7 +108,8 @@ const fetchAthletesSummary = async () => {
 const fetchEvents = () => {
   const params = new URLSearchParams({
     category: 'NOTE',
-    oldest: getOneWeekAgoDate()
+    newest: dayjs().format('YYYY-MM-DD'),
+    oldest: dayjs().subtract(2, 'month').format('YYYY-MM-DD')
   }).toString();
   const url = `${BASE_URL}/athlete/${INTERVALS_ID}/events?${params}`;
 
@@ -121,7 +117,7 @@ const fetchEvents = () => {
 };
 
 const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) => () => {
-  if (dev) {
+  if (!dev) {
     return ok(value);
   }
 
