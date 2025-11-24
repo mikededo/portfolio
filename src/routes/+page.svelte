@@ -230,7 +230,7 @@
                 title="frontend engineer"
                 onExpand={onToggleExpand('stackai')}
             >
-                <li>y-combinator startup, joined on while in a series</li>
+                <li>y-combinator startup, joined after a-series</li>
                 <li>main frontend engineer</li>
                 <li>streamlining the design system</li>
             </Experience>
