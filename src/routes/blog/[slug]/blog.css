@@ -1,0 +1,41 @@
+@import '../../../app.css';
+
+article {
+  @apply space-y-2;
+
+  h2 {
+    @apply text-xl font-bold text-foreground mt-12 mb-4 tracking-tight scroll-mt-28;
+  }
+
+  h3 {
+    @apply text-lg font-semibold text-foreground mt-8 mb-2 scroll-mt-28;
+  }
+
+  h4 {
+    @apply font-medium text-foreground mt-8 mb-1 scroll-mt-28;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    a {
+      @apply text-foreground;
+    }
+  }
+
+  p {
+    @apply text-sm text-foreground-muted leading-relaxed my-4;
+  }
+
+  ul,
+  ol {
+    @apply space-y-1;
+  }
+
+  li {
+    @apply ml-4 list-disc text-sm leading-relaxed;
+  }
+}

@@ -21,7 +21,7 @@
             <span class="text-foreground-muted/75">/</span>
             <span class="text-foreground">{page.params.slug}</span>
         {:else}
-            <span class="text-foreground">blogs</span>
+            <span class="text-foreground">blog</span>
         {/if}
     </nav>
 
