@@ -48,57 +48,63 @@
 @theme {
   --font-sans: 'JetBrains Mono', ui-monospace;
   --font-mono: 'JetBrains Mono', ui-monospace;
+  --color-foreground: #333;
+  --color-foreground-muted: oklch(0.4 0 0);
 }
 
-:root {
-  --scrollbar-thumb: #333;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --scrollbar-thumb: #a3a3a3;
+    --scrollbar-thumb: #333;
   }
-}
 
-* {
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
-  scrollbar-color: var(--scrollbar-thumb) transparent;
-}
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --scrollbar-thumb: #a3a3a3;
+      --color-foreground: @apply text-neutral-200;
+      --color-foreground-muted: oklch(0.6 0.01 250);
+    }
+  }
 
-html {
-  @apply bg-white text-[#333] dark:bg-slate-900 dark:text-neutral-200;
+  * {
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
 
-  font-family: 'JetBrains Mono', monospace;
-}
+  html {
+    @apply bg-white text-[#333] dark:bg-slate-900 dark:text-neutral-200;
 
-a:focus-visible,
-button:focus-visible {
-  @apply text-blue-700 bg-blue-200 outline-none dark:text-blue-200 dark:bg-blue-900/80;
-}
+    font-family: 'JetBrains Mono', monospace;
+  }
 
-h2 {
-  @apply mt-8 mb-2 text-xl font-bold md:text-2xl relative;
-}
+  a:focus-visible,
+  button:focus-visible {
+    @apply text-blue-700 bg-blue-200 outline-none dark:text-blue-200 dark:bg-blue-900/80;
+  }
 
-h2:after {
-  content: '+';
-  @apply absolute -top-4 -left-4 font-thin text-slate-600 dark:text-slate-500;
-}
+  h2 {
+    @apply mt-8 mb-2 text-xl font-bold md:text-2xl relative;
+  }
 
-a {
-  @apply text-blue-500 hover:underline dark:text-blue-400;
-}
+  h2:after {
+    content: '+';
+    @apply absolute -top-4 -left-4 font-thin text-slate-600 dark:text-slate-500;
+  }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-/* Accessibility: Disable strictly for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
+  a {
+    @apply text-blue-500 hover:underline dark:text-blue-400;
+  }
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation: auto;
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  /* Accessibility: Disable strictly for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: auto;
+    }
   }
 }

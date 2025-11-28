@@ -4,6 +4,7 @@
     import { SvelteSet } from 'svelte/reactivity';
 
     import { AnimatedNumber, Experience, Link, Project } from '$lib/components';
+    import Header from '$lib/components/layout/header.svelte';
     import { setTheme, Theme, themeChangeAnimation } from '$lib/utils/theme';
 
     const URLS = [
@@ -51,11 +52,14 @@
 </script>
 
 <main class="mx-auto w-full lg:w-3/4">
-    <h1 class="mb-2 text-2xl font-bold">mikededo</h1>
-    <p class="mb-2 text-sm">
-        Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!
-    </p>
-    <div class="flex gap-1 text-sm" role="list">
+    <Header
+        description="Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!"
+        title="mikededo"
+    />
+
+    <nav class="flex gap-1 text-sm" role="list">
+        <a href="/blog">blog</a>
+        <span>|</span>
         {#each URLS as { href, name }, i}
             <div role="listitem">
                 <Link {href}>{name}</Link>
@@ -71,7 +75,7 @@
                 {theme === Theme.Light ? 'dark' : 'light'}
             </button>
         </div>
-    </div>
+    </nav>
 
     {@render h2('me')}
     <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">

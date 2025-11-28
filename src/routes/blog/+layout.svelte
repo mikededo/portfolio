@@ -1,0 +1,29 @@
+<script lang="ts">
+    import type { Snippet } from 'svelte';
+
+    import { page } from '$app/state';
+
+    type Props = { children: Snippet };
+    const { children }: Props = $props();
+
+    const isNested = $derived(Object.keys(page.params).length > 0);
+</script>
+
+<main class="mx-auto w-full lg:w-3/4">
+    <nav class="mb-4 flex gap-1 text-sm " role="list">
+        <a class="group relative flex items-center gap-0.5 text-foreground-muted/75 transition-colors hover:text-foreground" href="/">
+            ~
+        </a>
+        <span class="text-foreground-muted/75">/</span>
+
+        {#if isNested}
+            <a class="text-foreground-muted/75 transition-colors hover:text-foreground" href="/blog">blog</a>
+            <span class="text-foreground-muted/75">/</span>
+            <span class="text-foreground">{page.params.slug}</span>
+        {:else}
+            <span class="text-foreground">blogs</span>
+        {/if}
+    </nav>
+
+    {@render children()}
+</main>
