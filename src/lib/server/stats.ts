@@ -117,7 +117,7 @@ const fetchEvents = () => {
 };
 
 const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) => () => {
-  if (!dev) {
+  if (dev) {
     return ok(value);
   }
 
