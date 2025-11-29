@@ -6,16 +6,18 @@
 
     type Props = {
         value: number;
+        easing?: (t: number) => number;
         duration?: number;
         format?: (value: number) => number | string;
     };
 
     const {
         duration = 1000,
+        easing = quadOut,
         format = (value) => Math.round(value),
         value = 0
     }: Props = $props();
-    const animatedValue = new Tween(0, { duration, easing: quadOut });
+    const animatedValue = new Tween(0, { duration, easing });
 
     $effect(() => {
         if (browser) {

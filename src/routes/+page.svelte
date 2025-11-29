@@ -56,9 +56,7 @@
             </div>
             {#if i < URLS.length - 1}&centerdot;{/if}
         {/each}
-        <div class="ml-auto" role="listitem">
-            <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher class="ml-auto" role="listitem" />
     </nav>
 
     {@render h2('me')}

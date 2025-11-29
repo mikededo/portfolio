@@ -24,7 +24,7 @@
                     <span>{post.title}</span>
                     <MoveRight class="size-4 -translate-x-2 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
                 </p>
-                <p class="flex justify-between text-xs text-slate-600">
+                <p class="flex justify-between text-xs text-muted-foreground">
                     <span class="line-clamp-2 max-w-3/4 flex-1">{post.description}</span>
                     <span class="shrink-0">{formatDate(post.date)}</span>
                 </p>

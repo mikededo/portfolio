@@ -49,6 +49,7 @@
   --scrollbar-thumb: #333;
   --foreground: #333;
   --background: #fff;
+  --muted: oklch(0.9 0 0);
   --muted-foreground: oklch(0.4 0 0);
 }
 
@@ -56,6 +57,7 @@
   --scrollbar-thumb: #555;
   --foreground: #e5e5e5;
   --background: #0a0a0a;
+  --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.8 0.01 250);
 }
 
@@ -64,6 +66,7 @@
   --font-mono: 'JetBrains Mono', ui-monospace;
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 }
 

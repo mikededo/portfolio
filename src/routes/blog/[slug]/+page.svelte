@@ -18,7 +18,7 @@
                 #{tag}
             </span>
         {/each}
-        <p class="ml-auto text-xs text-foreground-muted">{formatDate(post.date)}</p>
+        <p class="ml-auto text-xs text-muted-foreground">{formatDate(post.date)}</p>
     </div>
 </header>
 

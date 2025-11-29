@@ -1,5 +1,5 @@
-// See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
+import type { ClassValue } from 'svelte/elements';
+
 declare global {
   namespace App {
     // interface Error {}
@@ -8,6 +8,10 @@ declare global {
     // interface PageState {}
     // interface Platform {}
   }
+}
+
+declare module 'tailwind-merge' {
+  type ClassNameValue = ClassValue;
 }
 
 export {};

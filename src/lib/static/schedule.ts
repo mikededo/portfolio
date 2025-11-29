@@ -8,7 +8,7 @@ export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
     width: 150
   },
   {
-    color: '#EC7D10',
+    color: '#FF850D',
     content: { left: '07:00', right: '07:30' },
     label: 'Wake up',
     width: 100
@@ -26,7 +26,7 @@ export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
     width: 400
   },
   {
-    color: '#EC7D10',
+    color: '#FF850D',
     content: { left: '15:00', right: '16:00' },
     label: 'Lunch',
     width: 100
@@ -38,7 +38,7 @@ export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
     width: 500
   },
   {
-    color: '#EC7D10',
+    color: '#2498f6',
     content: { left: '21:00', right: '22:30' },
     label: 'Cool down',
     width: 150

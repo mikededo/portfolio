@@ -35,7 +35,7 @@
 <div class="relative flex h-26 gap-1 overflow-x-auto" style="margin-top: 1rem; scrollbar-gutter: stable">
     {#each events as event, index (index)}
         <div
-            class="group relative w-(--event-width) shrink-0 transition-all outline-none"
+            class="group relative w-(--event-width) shrink-0 transition-all duration-200 outline-none"
             id="event-{index}"
             role="button"
             style:--event-width="{event.width}px"

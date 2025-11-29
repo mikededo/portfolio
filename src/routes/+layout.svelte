@@ -3,7 +3,7 @@
 
     import type { LayoutProps } from './$types';
 
-    import { CookieConsent } from '$lib/components';
+    import { CookieConsent, TailwindIndicator } from '$lib/components';
     import { initThemeContext } from '$lib/context/theme.svelte';
 
     const { children, data }: LayoutProps = $props();
@@ -13,4 +13,5 @@
 
 {@render children()}
 
+<TailwindIndicator />
 <CookieConsent />

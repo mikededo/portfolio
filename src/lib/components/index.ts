@@ -3,4 +3,5 @@ export { default as CookieConsent, DENY_ANALYTICS } from './cookie-consent.svelt
 export { default as Experience } from './experience.svelte';
 export { default as Link } from './link.svelte';
 export { default as Project } from './project.svelte';
+export { default as TailwindIndicator } from './tw-indicator.svelte';
 
