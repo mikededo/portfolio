@@ -79,7 +79,9 @@
     };
 </script>
 
-<aside class="3xl:translate-x-0 fixed top-64 left-8 hidden w-full max-w-72 transition-none xl:inline-block 2xl:left-1/5 2xl:max-w-80 2xl:-translate-x-1/2">
+<aside
+    class="3xl:translate-x-0 fixed top-64 left-3/4 hidden w-full max-w-64 transition-none xl:inline-block xl:translate-x-16 2xl:max-w-80 2xl:translate-x-0"
+>
     <div class="absolute top-1 bottom-1 -left-4 w-0.75 overflow-hidden rounded-full bg-muted">
         <div
             class="w-0.75 rounded-full bg-blue-500 transition-all duration-150 ease-out"
@@ -88,7 +90,7 @@
     </div>
 
     <div class="space-y-4">
-        <p class="font-mono text-xs font-medium tracking-widest text-muted-foreground/60 uppercase">
+        <p class="font-mono text-xs font-medium tracking-widest text-muted-foreground/75 uppercase">
             On this page
         </p>
 
@@ -101,7 +103,7 @@
                         <button
                             class={cn(
                                 'text-left cursor-pointer text-sm leading-snug transition-all duration-100 hover:text-foreground line-clamp-1',
-                                isActive ? 'text-accent font-medium' : 'text-muted-foreground/50'
+                                isActive ? 'text-accent font-medium' : 'text-muted-foreground/75'
                             )}
                             style:padding-left="calc(var(--spacing) * 2 * {heading.level})"
                             title={heading.text}
@@ -116,7 +118,7 @@
 
         <p class="font-mono text-xs text-muted-foreground/50">
             <AnimatedNumber
-                duration={300}
+                duration={500}
                 easing={sineOut}
                 format={(v) => Math.floor(v)}
                 value={scrollProgress}

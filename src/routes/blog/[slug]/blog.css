@@ -27,7 +27,7 @@ article {
   }
 
   p {
-    @apply text-sm text-muted-foreground leading-relaxed my-4;
+    @apply text-sm text-foreground/85 leading-relaxed my-4;
   }
 
   ul,

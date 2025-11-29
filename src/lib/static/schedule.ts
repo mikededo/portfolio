@@ -38,7 +38,7 @@ export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
     width: 500
   },
   {
-    color: '#2498f6',
+    color: '#385bdb',
     content: { left: '21:00', right: '22:30' },
     label: 'Cool down',
     width: 150

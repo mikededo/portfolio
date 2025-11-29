@@ -14,7 +14,7 @@
     <Header description={post.description} title={post.title} />
     <div class="flex items-center gap-1">
         {#each post.tags as tag}
-            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+            <span class="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                 #{tag}
             </span>
         {/each}
@@ -22,7 +22,7 @@
     </div>
 </header>
 
-<hr class="-my-2 text-slate-300 dark:text-slate-800" />
+<hr class="-my-2 text-muted" />
 
 <article>
     {#if data.Content}
