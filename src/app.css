@@ -45,26 +45,29 @@
   src: url('/fonts/jetbrains-mono/jetbrains-mono-700.woff2') format('woff2');
 }
 
+:root {
+  --scrollbar-thumb: #333;
+  --foreground: #333;
+  --background: #fff;
+  --muted-foreground: oklch(0.4 0 0);
+}
+
+:root.dark {
+  --scrollbar-thumb: #555;
+  --foreground: #e5e5e5;
+  --background: #0a0a0a;
+  --muted-foreground: oklch(0.8 0.01 250);
+}
+
 @theme {
   --font-sans: 'JetBrains Mono', ui-monospace;
   --font-mono: 'JetBrains Mono', ui-monospace;
-  --color-foreground: #333;
-  --color-foreground-muted: oklch(0.4 0 0);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-muted-foreground: var(--muted-foreground);
 }
 
 @layer base {
-  :root {
-    --scrollbar-thumb: #333;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --scrollbar-thumb: #a3a3a3;
-      --color-foreground: @apply text-neutral-200;
-      --color-foreground-muted: oklch(0.6 0.01 250);
-    }
-  }
-
   * {
     scrollbar-width: thin;
     scrollbar-gutter: stable;
@@ -72,7 +75,7 @@
   }
 
   html {
-    @apply bg-white text-[#333] dark:bg-slate-900 dark:text-neutral-200;
+    @apply bg-white text-foreground dark:bg-background dark:text-neutral-200;
 
     font-family: 'JetBrains Mono', monospace;
   }
@@ -88,7 +91,7 @@
 
   h2:after {
     content: '+';
-    @apply absolute -top-4 -left-4 font-thin text-slate-600 dark:text-slate-500;
+    @apply absolute -top-4 -left-4 font-thin text-muted-foreground;
   }
 
   a {

@@ -1,8 +1,14 @@
-<script>
-    import { CookieConsent } from '$lib/components';
+<script lang="ts">
     import '../app.css';
 
-    const { children } = $props();
+    import type { LayoutProps } from './$types';
+
+    import { CookieConsent } from '$lib/components';
+    import { initThemeContext } from '$lib/context/theme.svelte';
+
+    const { children, data }: LayoutProps = $props();
+
+    initThemeContext(data.theme);
 </script>
 
 {@render children()}
