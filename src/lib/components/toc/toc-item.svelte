@@ -18,7 +18,7 @@
 <li>
     <button
         class={cn(
-            'text-left cursor-pointer text-sm leading-snug transition-all duration-100 hover:text-foreground line-clamp-1',
+            'text-left cursor-pointer text-sm leading-snug transition-all duration-100 hover:text-foreground truncate w-full',
             isActive ? 'text-accent font-medium' : 'text-muted-foreground/75'
         )}
         style:padding-left="calc(var(--spacing) * 2 * {heading.level})"
