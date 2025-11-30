@@ -46,7 +46,7 @@
         >
             <div class="relative">
                 <div
-                    class="sticky top-0 left-0 z-10 inline-block px-3 py-1 text-[11px] font-medium tracking-wide text-white"
+                    class="sticky top-0 left-0 inline-block px-3 py-1 text-[11px] font-medium tracking-wide text-white"
                     style:background-color={event.color}
                     data-slot="event-title"
                 >

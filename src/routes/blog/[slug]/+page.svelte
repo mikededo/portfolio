@@ -12,9 +12,10 @@
 
 <header class="mb-12 space-y-2">
     <Header description={post.description} title={post.title} />
+
     <div class="flex items-center gap-1">
         {#each post.tags as tag}
-            <span class="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+            <span class="hidden rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground sm:inline-block">
                 #{tag}
             </span>
         {/each}
@@ -26,7 +27,6 @@
 
 <article>
     {#if data.Content}
-        <!-- // @ts-expect-error Need to fix the types  -->
         <data.Content.default />
     {/if}
 </article>

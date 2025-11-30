@@ -22,7 +22,9 @@
             <a class="flex flex-col hover:no-underline" href={post.relativeURL}>
                 <p class="flex justify-between text-blue-500 group-hover:underline">
                     <span>{post.title}</span>
-                    <MoveRight class="size-4 -translate-x-2 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
+                    <MoveRight
+                        class="size-4 -translate-x-2 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100"
+                    />
                 </p>
                 <p class="flex justify-between text-xs text-muted-foreground">
                     <span class="line-clamp-2 max-w-3/4 flex-1">{post.description}</span>

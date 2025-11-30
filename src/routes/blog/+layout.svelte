@@ -13,7 +13,7 @@
 <main
     class="mx-auto w-full lg:w-3/4"
 >
-    <nav class="mb-4 flex gap-1 text-sm " role="list">
+    <nav class="mb-4 flex gap-1 text-xs md:text-sm " role="list">
         <a class="group relative flex items-center gap-0.5 text-muted-foreground/75 transition-colors hover:text-foreground" href="/">
             ~
         </a>
@@ -22,7 +22,7 @@
         {#if isNested}
             <a class="text-muted-foreground/75 transition-colors hover:text-foreground" href="/blog">blog</a>
             <span class="text-muted-foreground/75">/</span>
-            <span class="text-foreground">{page.params.slug}</span>
+            <span class="line-clamp-1 text-foreground">{page.params.slug}</span>
         {:else}
             <span class="text-foreground">blog</span>
         {/if}

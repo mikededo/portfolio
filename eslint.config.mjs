@@ -160,6 +160,7 @@ export default antfu(
     }
   })
   .override('antfu/svelte/rules', {
+    ignores: ['**/*.svelte.ts'],
     rules: {
       'style/indent-binary-ops': ['error', 4],
       'svelte/html-closing-bracket-new-line': ['error'],
