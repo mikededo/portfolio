@@ -64,11 +64,11 @@
 {/if}
 
 <div
-    class="fixed right-0 left-0 z-10 h-0.75 overflow-hidden bg-muted transition-all duration-300 ease-out"
+    class="fixed right-0 left-0 z-10 h-0.5 overflow-hidden bg-muted transition-all duration-300 ease-out"
     style="bottom: {position}px"
 >
     <div
-        class="h-0.75 rounded-r-full bg-blue-500 transition-all duration-150 ease-out"
+        class="h-0.5 rounded-r-full bg-blue-500 transition-all duration-150 ease-out"
         style:width="{tocState.progress}%"
     ></div>
 </div>

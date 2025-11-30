@@ -11,9 +11,9 @@
 <aside
     class="3xl:translate-x-0 fixed top-64 left-3/4 hidden w-full max-w-64 transition-none xl:inline-block xl:translate-x-16 2xl:max-w-80 2xl:translate-x-0"
 >
-    <div class="absolute top-1 bottom-1 -left-4 w-0.75 overflow-hidden rounded-full bg-muted">
+    <div class="absolute top-1 bottom-1 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
         <div
-            class="w-0.75 rounded-full bg-blue-500 transition-all duration-150 ease-out"
+            class="w-0.5 rounded-full bg-blue-500 transition-all duration-150 ease-out"
             style:height="{tocState.progress}%"
         ></div>
     </div>
