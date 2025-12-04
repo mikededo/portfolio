@@ -17,13 +17,19 @@
 
 <footer class="mx-auto flex flex-col items-center justify-between text-xs md:max-w-3/4 lg:h-16">
     <div class="flex w-full justify-between">
-        <button class="group flex items-center gap-2 px-2 py-1 transition-colors duration-150 hover:bg-muted/75">
+        <button
+            class="group flex items-center gap-2 px-2 py-1 transition-colors duration-150 hover:bg-muted/75"
+            aria-label="Previous post"
+        >
             <MoveLeftIcon
                 class="size-3 translate-x-0.5 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100"
             />
             <span>next post</span>
         </button>
-        <button class="group flex items-center gap-2 px-2 py-1 transition-colors duration-150 hover:bg-muted/75">
+        <button
+            class="group flex items-center gap-2 px-2 py-1 transition-colors duration-150 hover:bg-muted/75"
+            aria-label="Next post"
+        >
             <span>prev post</span>
             <MoveRightIcon class="size-3 -translate-x-0.5 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
         </button>

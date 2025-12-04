@@ -47,16 +47,20 @@
         title="mikededo"
     />
 
-    <nav class="flex gap-1 text-sm" role="list">
-        <a href="/blog">blog</a>
-        <span>|</span>
-        {#each URLS as { href, name }, i}
-            <div role="listitem">
-                <Link {href}>{name}</Link>
-            </div>
-            {#if i < URLS.length - 1}&centerdot;{/if}
-        {/each}
-        <ThemeSwitcher class="ml-auto" role="listitem" />
+    <nav aria-label="Breadcrumbs">
+        <ol class="flex gap-1 text-sm">
+            <li class="flex items-center gap-1">
+                <a href="/blog">blog</a>
+                <span class="mx-2">|</span>
+            </li>
+            {#each URLS as { href, name }, i}
+                <li class="flex items-center gap-1" role="listitem">
+                    <Link {href}>{name}</Link>
+                    {#if i < URLS.length - 1}<span>&centerdot;</span>{/if}
+                </li>
+            {/each}
+            <ThemeSwitcher class="ml-auto" role="listitem" />
+        </ol>
     </nav>
 
     {@render h2('me')}

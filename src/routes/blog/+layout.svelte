@@ -13,21 +13,31 @@
 <main
     class="mx-auto w-full lg:w-3/4"
 >
-    <nav class="mb-4 flex gap-1 text-xs md:text-sm " role="list">
-        <a class="group relative flex items-center gap-0.5 text-muted-foreground/75 transition-colors hover:text-foreground" href="/">
-            ~
-        </a>
-        <span class="text-muted-foreground/75">/</span>
+    <nav aria-label="Breadcrumbs">
+        <ol class="mb-4 flex gap-1 text-xs md:text-sm ">
+            <li class="flex gap-1">
+                <a class="group relative flex items-center gap-0.5 text-muted-foreground/75 transition-colors hover:text-foreground" href="/">
+                    ~
+                </a>
+                <span class="text-muted-foreground/75" aria-hidden="true">/</span>
+            </li>
 
-        {#if isNested}
-            <a class="text-muted-foreground/75 transition-colors hover:text-foreground" href="/blog">blog</a>
-            <span class="text-muted-foreground/75">/</span>
-            <span class="line-clamp-1 text-foreground">{page.params.slug}</span>
-        {:else}
-            <span class="text-foreground">blog</span>
-        {/if}
+            {#if isNested}
+                <li class="flex gap-1">
+                    <a class="text-muted-foreground transition-colors hover:text-foreground" href="/blog">blog</a>
+                    <span class="text-muted-foreground/75" aria-hidden="true">/</span>
+                </li>
+                <li>
+                    <span class="line-clamp-1 text-foreground">{page.params.slug}</span>
+                </li>
+            {:else}
+                <li>
+                    <span class="text-foreground">blog</span>
+                </li>
+            {/if}
 
-        <ThemeSwitcher class="ml-auto" />
+            <ThemeSwitcher class="ml-auto" />
+        </ol>
     </nav>
 
     {@render children()}
