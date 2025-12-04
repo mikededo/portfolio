@@ -17,10 +17,20 @@
     <meta name="twitter:description" content="Miquel de Domingo's portfolio" />
     <meta name="twitter:image" content="https://mikededo/og.png" />
 
+    %sveltekit.head%
+
     <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
     <link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    %sveltekit.head%
+
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono/jetbrains-mono-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/fonts/jetbrains-mono/jetbrains-mono-700.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body data-sveltekit-preload-data="hover" class="p-8 max-w-5xl mx-auto">
     <div style="display: contents">%sveltekit.body%</div>
