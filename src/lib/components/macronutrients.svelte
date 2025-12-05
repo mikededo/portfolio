@@ -10,7 +10,7 @@
     const CARBS_COLOR = '#FF850D';
     const FATS_COLOR = '#8338EC';
     const PROTEIN_COLOR = '#10b981';
-    const TOTAL_COLOR = '#717486';
+    const TOTAL_COLOR = '#334155';
 </script>
 
 <figure>
@@ -25,7 +25,7 @@
 
         <div
             class="min-w-180 p-2"
-            style:background-color="color-mix(in oklch, {TOTAL_COLOR} 15%, transparent)"
+            style:background-color="color-mix(in oklch, {TOTAL_COLOR} 10%, transparent)"
             style:color={TOTAL_COLOR}
         >
 
@@ -41,7 +41,7 @@
 
                     <div
                         class="flex h-10 p-2 text-xs"
-                        style:background-color="color-mix(in oklch, {CARBS_COLOR} 50%, white)"
+                        style:background-color="color-mix(in oklch, {CARBS_COLOR} 50%, var(--color-background))"
                         style:color={CARBS_COLOR}
                     ></div>
                 </div>
@@ -57,7 +57,7 @@
 
                     <div
                         class="flex h-10 justify-between p-2"
-                        style:background-color="color-mix(in oklch, {PROTEIN_COLOR} 40%, white)"
+                        style:background-color="color-mix(in oklch, {PROTEIN_COLOR} 40%, var(--color-background))"
                         style:color={PROTEIN_COLOR}
                     ></div>
                 </div>
@@ -73,7 +73,7 @@
 
                     <div
                         class="flex h-10 justify-between p-2"
-                        style:background-color="color-mix(in oklch, {FATS_COLOR} 40%, white)"
+                        style:background-color="color-mix(in oklch, {FATS_COLOR} 40%, var(--color-background))"
                         style:color={FATS_COLOR}
                     ></div>
                 </div>
