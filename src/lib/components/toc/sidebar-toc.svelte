@@ -23,7 +23,7 @@
             On this page
         </p>
 
-        <nav class="max-h-[calc(100vh - calc(var(--spacing) * 24))] overflow-auto pr-0 text-xs">
+        <nav class="max-h-[calc(100vh-calc(var(--spacing)*24))] overflow-auto pr-0 text-xs">
             <ul class="w-full space-y-2">
                 {#each tocState.headings as heading}
                     {@const isActive = tocState.active.id === heading.id}

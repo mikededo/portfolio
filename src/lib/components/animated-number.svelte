@@ -17,6 +17,7 @@
         format = (value) => Math.round(value),
         value = 0
     }: Props = $props();
+    // svelte-ignore state_referenced_locally
     const animatedValue = new Tween(0, { duration, easing });
 
     $effect(() => {
