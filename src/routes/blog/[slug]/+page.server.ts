@@ -1,5 +1,3 @@
-// src/routes/blog/[slug]/+page.server.ts
-
 import type { PageServerLoad } from './$types';
 
 import { error } from '@sveltejs/kit';
@@ -14,5 +12,10 @@ export const load: PageServerLoad = async ({ params }) => {
   }
 
   const { data } = matter(raw as string);
-  return { metadata: getMetadataFromMatter(params.slug, data), slug: params.slug };
+  const metadata = getMetadataFromMatter(params.slug, data);
+  if (!metadata) {
+    error(404);
+  }
+
+  return { metadata, slug: params.slug };
 };

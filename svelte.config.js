@@ -5,6 +5,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
+import blockquote from './remark/blockquote.ts';
+
 const mdsvexConfig = defineMDSveXConfig({
   extensions: ['.mdx'],
   rehypePlugins: [
@@ -17,9 +19,10 @@ const mdsvexConfig = defineMDSveXConfig({
       }
     ]
   ],
-  remarkPlugins: [remarkGfm],
+  remarkPlugins: [blockquote, remarkGfm],
   smartypants: {
-    dashes: 'oldschool'
+    dashes: 'oldschool',
+    quotes: true
   }
 });
 

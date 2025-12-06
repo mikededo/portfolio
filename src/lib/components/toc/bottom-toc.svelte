@@ -1,5 +1,4 @@
 <script lang="ts">
-
     import { MoveLeftIcon, MoveRightIcon } from '@lucide/svelte';
     import { onMount } from 'svelte';
     import { sineInOut } from 'svelte/easing';
@@ -36,6 +35,11 @@
         document.body.dataset.scrollLocked = String(open);
     };
 
+    const onItemClick = (id: string) => {
+        open = false;
+        tocState.actions.gotoId(id);
+    };
+
     onMount(() => {
         const onClickOutside = (e: PointerEvent) => {
             if (!open || !sheetRef) {
@@ -52,7 +56,6 @@
             document.body.addEventListener('pointerdown', onClickOutside);
         };
     });
-
 </script>
 
 {#if open}
@@ -110,7 +113,7 @@
     >
         {#each tocState.headings as heading}
             {@const isActive = tocState.active.id === heading.id}
-            <TocItem {heading} {isActive} onclick={tocState.actions.gotoId} />
+            <TocItem {heading} {isActive} onclick={onItemClick} />
         {/each}
     </ul>
 </div>

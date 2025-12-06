@@ -39,5 +39,33 @@
     li {
       @apply ml-4 list-disc text-sm leading-relaxed;
     }
+
+    blockquote {
+      @apply bg-muted border-l-2 border-muted-foreground px-4 py-2 [&>p]:text-inherit [&>p]:text-xs mb-2;
+
+      p {
+        @apply leading-snug m-0;
+      }
+    }
+
+    blockquote.info {
+      @apply border-l-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-200;
+    }
+
+    blockquote.tip {
+      @apply border-l-violet-500 bg-violet-100 text-violet-600 dark:bg-violet-950/30 dark:text-violet-200;
+    }
+
+    blockquote.success {
+      @apply border-l-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-200;
+    }
+
+    blockquote.warning {
+      @apply border-l-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-200;
+    }
+
+    blockquote.caution {
+      @apply border-l-red-500 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-200;
+    }
   }
 }

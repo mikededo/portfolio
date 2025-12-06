@@ -7,6 +7,10 @@ import { dev } from '$app/environment';
 
 const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com';
 
+const getModulePathFromSlug = (slug: string) => `/src/blog/${slug}.mdx`;
+
+const getPostUrl = (id: string) => `/blog/${id}`;
+
 const rawBlogPosts = import.meta.glob('/src/blog/*.mdx', {
   eager: true,
   import: 'default',
@@ -34,46 +38,52 @@ export type PostMeta = {
   canonicalURL: string;
 } & v.InferOutput<typeof PostMetaSchema>;
 
-export const getPostsMetadata = () => {
-  const posts = Object.entries(rawBlogPosts)
-    .reduce((agg: PostMeta[], [filePath, rawContent]) => {
-      const parsed = v.safeParse(v.string(), rawContent);
-      if (!parsed.success) {
-        return agg;
+export const getPostsMetadata = () => Object.entries(rawBlogPosts)
+  .reduce((agg: PostMeta[], [filePath, rawContent]) => {
+    const parsed = v.safeParse(v.string(), rawContent);
+    if (!parsed.success) {
+      return agg;
+    }
+
+    const { data } = matter(parsed.output);
+    const id = filePath
+      .split('/')
+      .pop()
+      ?.replace(/\.mdx$/, '') as string;
+
+    const post = v.parse(PostMetaSchema, { id, ...data });
+
+    return [
+      ...agg,
+      {
+        ...post,
+        canonicalURL: new URL(`/blog/${post.id}`, getBaseUrl()).toString(),
+        relativeURL: `/blog/${post.id}`
       }
-
-      const { data } = matter(parsed.output);
-      const id = filePath
-        .split('/')
-        .pop()
-        ?.replace(/\.mdx$/, '') as string;
-
-      const post = v.parse(PostMetaSchema, { id, ...data });
-
-      return [
-        ...agg,
-        {
-          ...post,
-          canonicalURL: new URL(`/blog/${post.id}`, getBaseUrl()).toString(),
-          relativeURL: `/blog/${post.id}`
-        }
-      ];
-    }, [])
-    .sort((a, b) => b.date.valueOf() - a.date.valueOf());
-
-  return posts;
-};
+    ];
+  }, [])
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
 export const getMetadataFromMatter = (
   id: string,
   data: { [key: string]: unknown }
 ) => {
-  const post = v.parse(PostMetaSchema, { id, ...data });
-  return { ...post, canonicalURL: new URL(`/blog/${post.id}`, getBaseUrl()).toString(), relativeURL: `/blog/${post.id}` };
+  const result = v.safeParse(PostMetaSchema, { id, ...data });
+  if (!result.success) {
+    console.error(`Unable to parse metadata for ${id}`);
+    return null;
+  }
+
+  const post = result.output;
+  return {
+    ...post,
+    canonicalURL: new URL(getPostUrl(post.id), getBaseUrl()).toString(),
+    relativeURL: getPostUrl(post.id)
+  };
 };
 
 export const getBlogPostFromSlug = (slug: string) => {
-  const post = rawBlogPosts[`/src/blog/${slug}.mdx`];
+  const post = rawBlogPosts[getModulePathFromSlug(slug)];
   if (!post) {
     return undefined;
   }
@@ -82,7 +92,7 @@ export const getBlogPostFromSlug = (slug: string) => {
 };
 
 export const getBlogModuleFromSlug = async (slug: string) => {
-  const post = mdxModules[`/src/blog/${slug}.mdx`];
+  const post = mdxModules[getModulePathFromSlug(slug)];
   if (!post) {
     return undefined;
   }
