@@ -1,35 +1,35 @@
 <script lang="ts" module>
     export type ScheduleEvent = {
-        label: string;
-        width: number;
-        color: string;
-        content: { left: string; right: string } | string;
-    };
+        label: string
+        width: number
+        color: string
+        content: { left: string, right: string } | string
+    }
 </script>
 
 <script lang="ts">
-    import type { MouseEventHandler } from 'svelte/elements';
+    import type { MouseEventHandler } from 'svelte/elements'
 
-    type Props = { events: ScheduleEvent[] };
-    const { events }: Props = $props();
+    type Props = { events: ScheduleEvent[] }
+    const { events }: Props = $props()
 
     const handleOnClick = ({ width: original }: ScheduleEvent): MouseEventHandler<HTMLDivElement> => (e) => {
-        const element = e.currentTarget;
-        const title = element.querySelector('[data-slot=event-title]');
+        const element = e.currentTarget
+        const title = element.querySelector('[data-slot=event-title]')
         if (!title) {
-            return;
+            return
         }
 
         if (element.dataset.collapsed === 'true') {
-            element.dataset.collapsed = 'false';
-            element.style.setProperty('--event-width', `${original}px`);
-            return;
+            element.dataset.collapsed = 'false'
+            element.style.setProperty('--event-width', `${original}px`)
+            return
         }
 
-        const width = title.getBoundingClientRect().width;
-        element.dataset.collapsed = 'true';
-        element.style.setProperty('--event-width', `${width}px`);
-    };
+        const width = title.getBoundingClientRect().width
+        element.dataset.collapsed = 'true'
+        element.style.setProperty('--event-width', `${width}px`)
+    }
 </script>
 
 <div class="relative flex h-26 gap-1 overflow-x-auto" style="margin-top: 1rem; scrollbar-gutter: stable">

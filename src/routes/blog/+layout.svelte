@@ -1,13 +1,13 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
+    import type { Snippet } from 'svelte'
 
-    import { page } from '$app/state';
-    import ThemeSwitcher from '$lib/components/theme-switcher.svelte';
+    import { page } from '$app/state'
+    import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
 
-    type Props = { children: Snippet };
-    const { children }: Props = $props();
+    type Props = { children: Snippet }
+    const { children }: Props = $props()
 
-    const isNested = $derived(Object.keys(page.params).length > 0);
+    const isNested = $derived(Object.keys(page.params).length > 0)
 </script>
 
 <main

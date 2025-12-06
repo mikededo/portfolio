@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { sineOut } from 'svelte/easing';
+    import { sineOut } from 'svelte/easing'
 
-    import AnimatedNumber from '../animated-number.svelte';
-    import TocItem from './toc-item.svelte';
-    import { useHeadingsState } from './use-headings.svelte';
+    import AnimatedNumber from '../animated-number.svelte'
+    import TocItem from './toc-item.svelte'
+    import { useHeadingsState } from './use-headings.svelte'
 
-    const tocState = useHeadingsState();
+    const tocState = useHeadingsState()
 </script>
 
 <aside

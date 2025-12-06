@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { TOCItem } from './use-headings.svelte';
+    import type { TOCItem } from './use-headings.svelte'
 
-    import { tv } from 'tailwind-variants';
+    import { tv } from 'tailwind-variants'
 
     type Props = {
-        heading: TOCItem;
-        onclick: (id: string) => void;
-        isActive?: boolean;
-    };
-    const { heading, isActive, onclick }: Props = $props();
+        heading: TOCItem
+        onclick: (id: string) => void
+        isActive?: boolean
+    }
+    const { heading, isActive, onclick }: Props = $props()
 
     const classes = tv(
         {
@@ -23,11 +23,11 @@
                 }
             }
         }
-    );
+    )
 
     const onClick = () => {
-        onclick(heading.id);
-    };
+        onclick(heading.id)
+    }
 </script>
 
 <li>

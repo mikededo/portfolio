@@ -1,4 +1,4 @@
-import type { ScheduleEvent } from '$lib/components/schedule.svelte';
+import type { ScheduleEvent } from '$lib/components/schedule.svelte'
 
 export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
   {
@@ -49,4 +49,4 @@ export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
     label: 'Sleep',
     width: 150
   }
-];
+]

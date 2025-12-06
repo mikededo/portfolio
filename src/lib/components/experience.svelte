@@ -1,30 +1,30 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
-    import type { SlideParams, TransitionConfig } from 'svelte/transition';
+    import type { Snippet } from 'svelte'
+    import type { SlideParams, TransitionConfig } from 'svelte/transition'
 
-    import { circOut } from 'svelte/easing';
-    import { slide as baseSlide } from 'svelte/transition';
+    import { circOut } from 'svelte/easing'
+    import { slide as baseSlide } from 'svelte/transition'
 
-    import Link from './link.svelte';
+    import Link from './link.svelte'
 
     const fadeSlide = (node: Element, options: SlideParams): TransitionConfig => {
-        const slide = baseSlide(node, options);
+        const slide = baseSlide(node, options)
 
         return {
             ...options,
             css: (t, u) => `${slide.css!(t, u)}; opacity: ${t}`
-        };
-    };
+        }
+    }
 
     type Props = {
-        children: Snippet;
-        expanded: boolean;
-        subtitle: string;
-        title: string;
-        company: string;
-        companyHref: string;
-        onExpand: () => void;
-    };
+        children: Snippet
+        expanded: boolean
+        subtitle: string
+        title: string
+        company: string
+        companyHref: string
+        onExpand: () => void
+    }
     const {
         children,
         company,
@@ -33,7 +33,7 @@
         onExpand,
         subtitle,
         title
-    }: Props = $props();
+    }: Props = $props()
 </script>
 
 <article>

@@ -1,19 +1,19 @@
-import type { Result } from 'neverthrow';
+import type { Result } from 'neverthrow'
 
-import dayjs from 'dayjs';
-import { err, ok, ResultAsync } from 'neverthrow';
-import * as v from 'valibot';
+import dayjs from 'dayjs'
+import { err, ok, ResultAsync } from 'neverthrow'
+import * as v from 'valibot'
 
-import { dev } from '$app/environment';
-import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private';
+import { dev } from '$app/environment'
+import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private'
 
-const BASE_URL = 'https://intervals.icu/api/v1';
+const BASE_URL = 'https://intervals.icu/api/v1'
 
 const getDateRangeSchema = (min: Date, max: Date) => v.pipe(
   v.date(),
   v.minValue(min),
   v.maxValue(max)
-);
+)
 
 /**
  * Type definition from schema in:
@@ -32,31 +32,31 @@ const ByCategoryItemSchema = v.object({
   time: v.nullable(v.number()),
   total_elevation_gain: v.nullable(v.number(), 0),
   training_load: v.nullable(v.number())
-});
+})
 // Partial definition of the response
 const ActivityDataSchema = v.object({
   athlete_id: v.string(),
   byCategory: v.array(ByCategoryItemSchema)
-});
-const ActivityDataArraySchema = v.array(ActivityDataSchema);
+})
+const ActivityDataArraySchema = v.array(ActivityDataSchema)
 
 type ActivitySummary = {
-  distance: number;
-  lastFetched: Date;
-  time: number;
-  elevation: number;
-};
+  distance: number
+  lastFetched: Date
+  time: number
+  elevation: number
+}
 
 const EventSchema = v.object({
   end_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date()),
   name: v.string(),
   start_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date())
-});
-const EventDataArraySchema = v.array(EventSchema);
+})
+const EventDataArraySchema = v.array(EventSchema)
 
 // Home-made cache so that we do not fetch the data on every request
-let cachedSummary: ActivitySummary | null = null;
-let cachedRecoveryPeriod: { lastFetched: Date; value: boolean } | null = null;
+let cachedSummary: ActivitySummary | null = null
+let cachedRecoveryPeriod: { lastFetched: Date, value: boolean } | null = null
 
 const parseResponse = async <T extends v.GenericSchema>(
   schema: T,
@@ -70,118 +70,118 @@ const parseResponse = async <T extends v.GenericSchema>(
       }
     }),
     () => new Error('Failed to fetch activities')
-  );
+  )
   if (!fetchResult.isOk()) {
-    return err(fetchResult.error);
+    return err(fetchResult.error)
   }
 
-  const response = fetchResult.value;
+  const response = fetchResult.value
   if (!response.ok) {
-    return err(new Error(`Fetch failed: ${response.statusText}`));
+    return err(new Error(`Fetch failed: ${response.statusText}`))
   }
 
   const json = await ResultAsync.fromPromise(
     response.json(),
     () => new Error('Invalid JSON response')
-  );
+  )
   if (json.isErr()) {
-    return err(json.error);
+    return err(json.error)
   }
 
-  const parsed = v.safeParse(schema, json.value);
+  const parsed = v.safeParse(schema, json.value)
   if (!parsed.success) {
-    return err(new Error('Validation failed for activity data'));
+    return err(new Error('Validation failed for activity data'))
   }
 
-  return ok(parsed.output);
-};
+  return ok(parsed.output)
+}
 
 const fetchAthletesSummary = async () => {
   const params = new URLSearchParams({
     start: dayjs().subtract(7, 'day').format('YYYY-MM-DD')
-  }).toString();
-  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/athlete-summary?${params}`;
+  }).toString()
+  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/athlete-summary?${params}`
 
-  return parseResponse(ActivityDataArraySchema, url);
-};
+  return parseResponse(ActivityDataArraySchema, url)
+}
 
 const fetchEvents = () => {
   const params = new URLSearchParams({
     category: 'NOTE',
     newest: dayjs().format('YYYY-MM-DD'),
     oldest: dayjs().subtract(2, 'month').format('YYYY-MM-DD')
-  }).toString();
-  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/events?${params}`;
+  }).toString()
+  const url = `${BASE_URL}/athlete/${INTERVALS_ID}/events?${params}`
 
-  return parseResponse(EventDataArraySchema, url);
-};
+  return parseResponse(EventDataArraySchema, url)
+}
 
 const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) => () => {
   if (dev) {
-    return ok(value);
+    return ok(value)
   }
 
-  return cb();
-};
+  return cb()
+}
 
 const getFromCache = <T extends { lastFetched: Date }>(cache: null | T): null | T => {
-  const now = new Date();
+  const now = new Date()
   if (cache && (now.getTime() - cache.lastFetched.getTime() < 60 * 60 * 1000)) {
-    return cache;
+    return cache
   }
 
-  return null;
-};
+  return null
+}
 
 export const getIsRecoveryPeriod = withDevDefaultValue(
   async (): Promise<Result<boolean, Error>> => {
-    const cached = getFromCache(cachedRecoveryPeriod);
+    const cached = getFromCache(cachedRecoveryPeriod)
     if (cached !== null) {
-      return ok(cached.value);
+      return ok(cached.value)
     }
 
-    const maybeEvents = await fetchEvents();
+    const maybeEvents = await fetchEvents()
     if (maybeEvents.isErr()) {
-      console.error(maybeEvents.error);
-      return err(maybeEvents.error);
+      console.error(maybeEvents.error)
+      return err(maybeEvents.error)
     }
 
-    const now = new Date();
+    const now = new Date()
     const isRecoveryPeriod = maybeEvents.value
       .some((event) => {
         if (!event.name.toLowerCase().includes('recovery')) {
-          return false;
+          return false
         }
 
         return v.safeParse(
           getDateRangeSchema(event.start_date_local, event.end_date_local),
           now
-        ).success;
-      });
+        ).success
+      })
 
-    cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod };
-    return ok(isRecoveryPeriod);
+    cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod }
+    return ok(isRecoveryPeriod)
   },
   false
-);
+)
 
 export const getWeeklyActivitySummary = withDevDefaultValue(
   async (): Promise<Result<ActivitySummary, Error>> => {
-    const cached = getFromCache(cachedSummary);
+    const cached = getFromCache(cachedSummary)
     if (cached) {
-      return ok(cached);
+      return ok(cached)
     }
 
-    const maybeAthletes = await fetchAthletesSummary();
+    const maybeAthletes = await fetchAthletesSummary()
     if (maybeAthletes.isErr()) {
-      console.error(maybeAthletes.error);
-      return err(maybeAthletes.error);
+      console.error(maybeAthletes.error)
+      return err(maybeAthletes.error)
     }
 
     const summary: ActivitySummary = maybeAthletes.value
       .reduce<ActivitySummary>((acc, { athlete_id: athleteId, byCategory: categories }) => {
         if (athleteId !== INTERVALS_ID) {
-          return acc;
+          return acc
         }
 
         categories.forEach((activity) => {
@@ -190,21 +190,21 @@ export const getWeeklyActivitySummary = withDevDefaultValue(
             distance,
             moving_time,
             total_elevation_gain: elevation
-          } = activity;
+          } = activity
           if (category !== 'Ride') {
-            return;
+            return
           }
 
-          acc.distance += distance / 1000;
-          acc.elevation += elevation;
-          acc.time += moving_time / 3600;
-        });
+          acc.distance += distance / 1000
+          acc.elevation += elevation
+          acc.time += moving_time / 3600
+        })
 
-        return acc;
-      }, { distance: 0, elevation: 0, lastFetched: new Date(), time: 0 });
+        return acc
+      }, { distance: 0, elevation: 0, lastFetched: new Date(), time: 0 })
 
-    cachedSummary = summary;
-    return ok(summary);
+    cachedSummary = summary
+    return ok(summary)
   },
   { distance: 650.50, elevation: 8750, lastFetched: new Date(), time: 23.86 }
-);
+)

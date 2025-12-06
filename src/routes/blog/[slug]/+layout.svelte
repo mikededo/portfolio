@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { LayoutProps } from './$types';
+    import type { LayoutProps } from './$types'
 
-    import { MoveLeftIcon, MoveRightIcon } from '@lucide/svelte';
+    import { MoveLeftIcon, MoveRightIcon } from '@lucide/svelte'
 
-    import { TableOfContents } from '$lib/components';
-    import Link from '$lib/components/link.svelte';
+    import { TableOfContents } from '$lib/components'
+    import Link from '$lib/components/link.svelte'
 
-    const { children }: LayoutProps = $props();
+    const { children }: LayoutProps = $props()
 </script>
 
 <TableOfContents />

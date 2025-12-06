@@ -1,18 +1,18 @@
 <script lang="ts">
-    import type { HTMLButtonAttributes } from 'svelte/elements';
+    import type { HTMLButtonAttributes } from 'svelte/elements'
 
-    import { cn } from 'tailwind-variants';
+    import { cn } from 'tailwind-variants'
 
-    import { getThemeContext, toggleTheme } from '$lib/context/theme.svelte';
-    import { Theme } from '$lib/utils/theme';
+    import { getThemeContext, toggleTheme } from '$lib/context/theme.svelte'
+    import { Theme } from '$lib/utils/theme'
 
-    const { ...props }: HTMLButtonAttributes = $props();
+    const { ...props }: HTMLButtonAttributes = $props()
 
-    const theme = getThemeContext();
+    const theme = getThemeContext()
 
     const onThemeChange = () => {
-        toggleTheme();
-    };
+        toggleTheme()
+    }
 </script>
 
 <button

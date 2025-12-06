@@ -1,13 +1,13 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+    import type { PageData } from './$types'
 
-    import { MoveRight } from '@lucide/svelte';
+    import { MoveRight } from '@lucide/svelte'
 
-    import Header from '$lib/components/layout/header.svelte';
-    import { formatDate } from '$lib/utils/date';
+    import Header from '$lib/components/layout/header.svelte'
+    import { formatDate } from '$lib/utils/date'
 
-    type Props = { data: PageData };
-    const { data }: Props = $props();
+    type Props = { data: PageData }
+    const { data }: Props = $props()
 
 </script>
 

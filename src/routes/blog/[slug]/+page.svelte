@@ -1,13 +1,13 @@
 <script lang="ts">
-    import './blog.css';
+    import './blog.css'
 
-    import type { PageProps } from './$types';
+    import type { PageProps } from './$types'
 
-    import Header from '$lib/components/layout/header.svelte';
-    import { formatDate } from '$lib/utils/date';
+    import Header from '$lib/components/layout/header.svelte'
+    import { formatDate } from '$lib/utils/date'
 
-    const { data }: PageProps = $props();
-    const post = $derived(data.metadata);
+    const { data }: PageProps = $props()
+    const post = $derived(data.metadata)
 </script>
 
 <header class="mb-12 space-y-2">

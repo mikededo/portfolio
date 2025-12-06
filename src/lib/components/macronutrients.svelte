@@ -1,16 +1,16 @@
 <script lang="ts">
     type Props = {
-        carbs: number;
-        fats: number;
-        protein: number;
-        total: number;
-    };
-    const { carbs, fats, protein, total }: Props = $props();
+        carbs: number
+        fats: number
+        protein: number
+        total: number
+    }
+    const { carbs, fats, protein, total }: Props = $props()
 
-    const CARBS_COLOR = '#FF850D';
-    const FATS_COLOR = '#8338EC';
-    const PROTEIN_COLOR = '#10b981';
-    const TOTAL_COLOR = '#334155';
+    const CARBS_COLOR = '#FF850D'
+    const FATS_COLOR = '#8338EC'
+    const PROTEIN_COLOR = '#10b981'
+    const TOTAL_COLOR = '#334155'
 </script>
 
 <figure>

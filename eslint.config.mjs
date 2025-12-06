@@ -1,7 +1,7 @@
-import antfu from '@antfu/eslint-config';
-import perfectionist from 'eslint-plugin-perfectionist';
-import svelteSortAttributes from 'eslint-plugin-svelte-sort-attributes';
-import svelteTailwindcss from 'eslint-plugin-svelte-tailwindcss';
+import antfu from '@antfu/eslint-config'
+import perfectionist from 'eslint-plugin-perfectionist'
+import svelteSortAttributes from 'eslint-plugin-svelte-sort-attributes'
+import svelteTailwindcss from 'eslint-plugin-svelte-tailwindcss'
 
 export default antfu(
   {
@@ -35,7 +35,7 @@ export default antfu(
     stylistic: {
       indent: 2,
       quotes: 'single',
-      semi: true
+      semi: false
     },
     svelte: true,
     toml: false,
@@ -229,4 +229,4 @@ export default antfu(
         }
       ]
     }
-  });
+  })

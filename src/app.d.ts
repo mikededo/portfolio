@@ -1,4 +1,4 @@
-import type { ClassValue } from 'svelte/elements';
+import type { ClassValue } from 'svelte/elements'
 
 declare global {
   namespace App {
@@ -11,7 +11,7 @@ declare global {
 }
 
 declare module 'tailwind-merge' {
-  type ClassNameValue = ClassValue;
+  type ClassNameValue = ClassValue
 }
 
-export {};
+export {}

@@ -1,6 +1,6 @@
 <script>
-    import BottomToc from './bottom-toc.svelte';
-    import SidebarToc from './sidebar-toc.svelte';
+    import BottomToc from './bottom-toc.svelte'
+    import SidebarToc from './sidebar-toc.svelte'
 
 </script>
 

@@ -1,16 +1,16 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
+    import type { Snippet } from 'svelte'
 
-    import Link from './link.svelte';
-    import PreviewPopover from './preview-popover.svelte';
+    import Link from './link.svelte'
+    import PreviewPopover from './preview-popover.svelte'
 
     type Props = {
-        children: Snippet;
-        repo: string;
-        repoHref: string;
-        previewSlug?: string;
-        topics?: string[];
-    } & ({ site: string; siteHref: string } | { site?: never; siteHref?: never });
+        children: Snippet
+        repo: string
+        repoHref: string
+        previewSlug?: string
+        topics?: string[]
+    } & ({ site: string, siteHref: string } | { site?: never, siteHref?: never })
     const {
         children,
         previewSlug,
@@ -19,7 +19,7 @@
         site,
         siteHref,
         topics
-    }: Props = $props();
+    }: Props = $props()
 </script>
 
 {#snippet site_content()}

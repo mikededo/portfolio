@@ -1,44 +1,44 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+    import type { PageData } from './$types'
 
-    import { SvelteSet } from 'svelte/reactivity';
+    import { SvelteSet } from 'svelte/reactivity'
 
-    import { AnimatedNumber, Experience, Link, Project } from '$lib/components';
-    import Header from '$lib/components/layout/header.svelte';
-    import ThemeSwitcher from '$lib/components/theme-switcher.svelte';
+    import { AnimatedNumber, Experience, Link, Project } from '$lib/components'
+    import Header from '$lib/components/layout/header.svelte'
+    import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
 
     const URLS = [
         { href: 'mailto:miquelddg@gmail.com', name: 'email' },
         { href: 'https://github.com/mikededo', name: 'github' },
         { href: 'https://www.linkedin.com/in/mikededo', name: 'linkedin' },
         { href: 'https://github.com/mikededo/portfolio', name: 'code' }
-    ];
+    ]
 
-    type Props = { data: PageData };
-    const { data }: Props = $props();
+    type Props = { data: PageData }
+    const { data }: Props = $props()
 
-    const expanded = new SvelteSet<string>(['stackai']);
+    const expanded = new SvelteSet<string>(['stackai'])
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
-            expanded.delete(id);
+            expanded.delete(id)
         } else {
-            expanded.add(id);
+            expanded.add(id)
         }
-    };
+    }
 
     const formatTime = (hours: number): string => {
-        const wholeHours = Math.floor(hours);
-        const minutes = Math.round((hours - wholeHours) * 60);
+        const wholeHours = Math.floor(hours)
+        const minutes = Math.round((hours - wholeHours) * 60)
 
         if (minutes === 60) {
-            return `${wholeHours + 1}h 00m`;
+            return `${wholeHours + 1}h 00m`
         }
 
-        return `${wholeHours}h${minutes.toString().padStart(2, '0')}m`;
-    };
+        return `${wholeHours}h${minutes.toString().padStart(2, '0')}m`
+    }
 
-    const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits);
+    const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits)
 </script>
 
 <main class="mx-auto w-full lg:w-3/4">

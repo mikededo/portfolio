@@ -1,22 +1,22 @@
-import type { Component } from '@lucide/svelte';
+import type { Component } from '@lucide/svelte'
 
-import matter from 'gray-matter';
-import * as v from 'valibot';
+import matter from 'gray-matter'
+import * as v from 'valibot'
 
-import { dev } from '$app/environment';
+import { dev } from '$app/environment'
 
-const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com';
+const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com'
 
-const getModulePathFromSlug = (slug: string) => `/src/blog/${slug}.mdx`;
+const getModulePathFromSlug = (slug: string) => `/src/blog/${slug}.mdx`
 
-const getPostUrl = (id: string) => `/blog/${id}`;
+const getPostUrl = (id: string) => `/blog/${id}`
 
 const rawBlogPosts = import.meta.glob('/src/blog/*.mdx', {
   eager: true,
   import: 'default',
   query: '?raw'
-});
-const mdxModules = import.meta.glob('/src/blog/*.mdx');
+})
+const mdxModules = import.meta.glob('/src/blog/*.mdx')
 
 export const PostMetaSchema = v.object({
   date: v.pipe(
@@ -32,26 +32,26 @@ export const PostMetaSchema = v.object({
     v.array(v.string())
   ),
   title: v.pipe(v.string(), v.trim())
-});
+})
 export type PostMeta = {
-  relativeURL: string;
-  canonicalURL: string;
-} & v.InferOutput<typeof PostMetaSchema>;
+  relativeURL: string
+  canonicalURL: string
+} & v.InferOutput<typeof PostMetaSchema>
 
 export const getPostsMetadata = () => Object.entries(rawBlogPosts)
   .reduce((agg: PostMeta[], [filePath, rawContent]) => {
-    const parsed = v.safeParse(v.string(), rawContent);
+    const parsed = v.safeParse(v.string(), rawContent)
     if (!parsed.success) {
-      return agg;
+      return agg
     }
 
-    const { data } = matter(parsed.output);
+    const { data } = matter(parsed.output)
     const id = filePath
       .split('/')
       .pop()
-      ?.replace(/\.mdx$/, '') as string;
+      ?.replace(/\.mdx$/, '') as string
 
-    const post = v.parse(PostMetaSchema, { id, ...data });
+    const post = v.parse(PostMetaSchema, { id, ...data })
 
     return [
       ...agg,
@@ -60,42 +60,42 @@ export const getPostsMetadata = () => Object.entries(rawBlogPosts)
         canonicalURL: new URL(`/blog/${post.id}`, getBaseUrl()).toString(),
         relativeURL: `/blog/${post.id}`
       }
-    ];
+    ]
   }, [])
-  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
 
 export const getMetadataFromMatter = (
   id: string,
   data: { [key: string]: unknown }
 ) => {
-  const result = v.safeParse(PostMetaSchema, { id, ...data });
+  const result = v.safeParse(PostMetaSchema, { id, ...data })
   if (!result.success) {
-    console.error(`Unable to parse metadata for ${id}`);
-    return null;
+    console.error(`Unable to parse metadata for ${id}`)
+    return null
   }
 
-  const post = result.output;
+  const post = result.output
   return {
     ...post,
     canonicalURL: new URL(getPostUrl(post.id), getBaseUrl()).toString(),
     relativeURL: getPostUrl(post.id)
-  };
-};
+  }
+}
 
 export const getBlogPostFromSlug = (slug: string) => {
-  const post = rawBlogPosts[getModulePathFromSlug(slug)];
+  const post = rawBlogPosts[getModulePathFromSlug(slug)]
   if (!post) {
-    return undefined;
+    return undefined
   }
 
-  return post;
-};
+  return post
+}
 
 export const getBlogModuleFromSlug = async (slug: string) => {
-  const post = mdxModules[getModulePathFromSlug(slug)];
+  const post = mdxModules[getModulePathFromSlug(slug)]
   if (!post) {
-    return undefined;
+    return undefined
   }
 
-  return await post() as Promise<{ default: typeof Component }>;
-};
+  return await post() as Promise<{ default: typeof Component }>
+}

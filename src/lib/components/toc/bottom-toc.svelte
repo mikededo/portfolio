@@ -1,61 +1,61 @@
 <script lang="ts">
-    import { MoveLeftIcon, MoveRightIcon } from '@lucide/svelte';
-    import { onMount } from 'svelte';
-    import { sineInOut } from 'svelte/easing';
-    import { fade } from 'svelte/transition';
+    import { MoveLeftIcon, MoveRightIcon } from '@lucide/svelte'
+    import { onMount } from 'svelte'
+    import { sineInOut } from 'svelte/easing'
+    import { fade } from 'svelte/transition'
 
-    import FocusGuard from '../focus-guard.svelte';
-    import TocItem from './toc-item.svelte';
-    import { useHeadingsState } from './use-headings.svelte';
+    import FocusGuard from '../focus-guard.svelte'
+    import TocItem from './toc-item.svelte'
+    import { useHeadingsState } from './use-headings.svelte'
 
-    const MAX_BOTTOM_SHEET_HEIGHT = 384;
-    const BOTTOM_BAR_HEIGHT = 40;
+    const MAX_BOTTOM_SHEET_HEIGHT = 384
+    const BOTTOM_BAR_HEIGHT = 40
 
-    const tocState = useHeadingsState();
+    const tocState = useHeadingsState()
 
-    let contentHeight = $state<number>(0);
-    let open = $state(false);
-    let sheetRef = $state<HTMLElement>();
+    let contentHeight = $state<number>(0)
+    let open = $state(false)
+    let sheetRef = $state<HTMLElement>()
 
-    const activeText = $derived(tocState.headings.find((h) => h.id === tocState.active.id));
+    const activeText = $derived(tocState.headings.find((h) => h.id === tocState.active.id))
     const position = $derived.by(() => {
         if (tocState.progress >= 100) {
-            return -BOTTOM_BAR_HEIGHT;
+            return -BOTTOM_BAR_HEIGHT
         }
 
         if (open) {
-            return Math.min(MAX_BOTTOM_SHEET_HEIGHT, contentHeight) + BOTTOM_BAR_HEIGHT - 1;
+            return Math.min(MAX_BOTTOM_SHEET_HEIGHT, contentHeight) + BOTTOM_BAR_HEIGHT - 1
         }
 
-        return BOTTOM_BAR_HEIGHT;
-    });
+        return BOTTOM_BAR_HEIGHT
+    })
 
     const onToggleToc = () => {
-        open = !open;
-        document.body.dataset.scrollLocked = String(open);
-    };
+        open = !open
+        document.body.dataset.scrollLocked = String(open)
+    }
 
     const onItemClick = (id: string) => {
-        open = false;
-        tocState.actions.gotoId(id);
-    };
+        open = false
+        tocState.actions.gotoId(id)
+    }
 
     onMount(() => {
         const onClickOutside = (e: PointerEvent) => {
             if (!open || !sheetRef) {
-                return;
+                return
             }
 
             if (e.target !== sheetRef && !sheetRef.contains(e.target as Node)) {
-                onToggleToc();
+                onToggleToc()
             }
-        };
+        }
 
-        document.body.addEventListener('pointerdown', onClickOutside);
+        document.body.addEventListener('pointerdown', onClickOutside)
         return () => {
-            document.body.addEventListener('pointerdown', onClickOutside);
-        };
-    });
+            document.body.addEventListener('pointerdown', onClickOutside)
+        }
+    })
 </script>
 
 {#if open}

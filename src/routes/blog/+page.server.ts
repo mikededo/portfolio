@@ -1,5 +1,5 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from './$types'
 
-import { getPostsMetadata } from '$lib/content';
+import { getPostsMetadata } from '$lib/content'
 
-export const load: PageServerLoad = () => ({ posts: getPostsMetadata() });
+export const load: PageServerLoad = () => ({ posts: getPostsMetadata() })

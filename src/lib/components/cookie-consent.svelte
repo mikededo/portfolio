@@ -1,7 +1,7 @@
 <script lang="ts" module>
-    import { tv } from 'tailwind-variants';
+    import { tv } from 'tailwind-variants'
 
-    export const DENY_ANALYTICS = 'deny-analytics';
+    export const DENY_ANALYTICS = 'deny-analytics'
 
     const buttonStyles = tv({
         base: 'cursor-pointer px-4 py-1.5 font-medium transition-colors',
@@ -12,43 +12,43 @@
                 secondary: 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700'
             }
         }
-    });
+    })
 </script>
 
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { quintOut } from 'svelte/easing';
-    import { fly, slide } from 'svelte/transition';
+    import { onMount } from 'svelte'
+    import { quintOut } from 'svelte/easing'
+    import { fly, slide } from 'svelte/transition'
 
-    let show = $state(false);
-    let knowMore = $state(false);
+    let show = $state(false)
+    let knowMore = $state(false)
 
     onMount(() => {
         if (!window.localStorage) {
-            return;
+            return
         }
 
-        show = window.localStorage.getItem(DENY_ANALYTICS) === null;
-    });
+        show = window.localStorage.getItem(DENY_ANALYTICS) === null
+    })
 
     const onDeny = () => {
         if (window.localStorage) {
-            window.localStorage.setItem(DENY_ANALYTICS, 'true');
+            window.localStorage.setItem(DENY_ANALYTICS, 'true')
         }
-        show = false;
-    };
+        show = false
+    }
 
     const onAccept = () => {
         if (window.localStorage) {
-            window.localStorage.setItem(DENY_ANALYTICS, 'false');
+            window.localStorage.setItem(DENY_ANALYTICS, 'false')
         }
 
-        show = false;
-    };
+        show = false
+    }
 
     const onKnowMore = () => {
-        knowMore = !knowMore;
-    };
+        knowMore = !knowMore
+    }
 </script>
 
 {#if show}

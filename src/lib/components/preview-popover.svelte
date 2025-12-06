@@ -1,27 +1,27 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
+    import type { Snippet } from 'svelte'
 
-    import { Spring } from 'svelte/motion';
+    import { Spring } from 'svelte/motion'
 
     type Props = {
-        children: Snippet;
-        label: string;
-        slug: string;
-    };
-    const { children, label, slug }: Props = $props();
+        children: Snippet
+        label: string
+        slug: string
+    }
+    const { children, label, slug }: Props = $props()
 
     const coords = new Spring(
         { opacity: 0, scale: 0.95 },
         { damping: 0.4, stiffness: 0.1 }
-    );
+    )
 
     const onMouseEnter = () => {
-        coords.set({ opacity: 1, scale: 1 });
-    };
+        coords.set({ opacity: 1, scale: 1 })
+    }
 
     const onMouseLeave = () => {
-        coords.set({ opacity: 0, scale: 0.95 });
-    };
+        coords.set({ opacity: 0, scale: 0.95 })
+    }
 </script>
 
 <div
