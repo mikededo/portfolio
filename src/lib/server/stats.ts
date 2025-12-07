@@ -127,6 +127,10 @@ const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) =
 const getFromCache = <T extends { lastFetched: Date }>(cache: null | T): null | T => {
   const now = new Date()
   if (cache && (now.getTime() - cache.lastFetched.getTime() < 60 * 60 * 1000)) {
+    // eslint-disable-next-line no-console
+    console.log('Using cached value:', cache)
+    // eslint-disable-next-line no-console
+    console.log('Last fetched at:', cache.lastFetched.toISOString())
     return cache
   }
 
