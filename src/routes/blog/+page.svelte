@@ -9,6 +9,46 @@
     type Props = { data: PageData }
     const { data }: Props = $props()
 
+    $effect(() => {
+        const elements = data.posts.reduce(
+            (elements: HTMLElement[], { id }) => {
+                const element = document.getElementById(id)
+                return element ? [...elements, element as HTMLElement] : elements
+            },
+            []
+        )
+
+        const controller = new AbortController()
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (elements.length === 0) {
+                return
+            }
+
+            const activeElement = document.activeElement
+            const currentIndex = elements.findIndex((post) => post === activeElement)
+
+            if (currentIndex === -1) {
+                elements[0].focus()
+                return
+            }
+
+            if (event.key === 'j' || event.key === 'ArrowDown') {
+                const nextIndex = (currentIndex + 1) % elements.length
+                elements[nextIndex]?.focus()
+                event.preventDefault()
+            } else if (event.key === 'k' || event.key === 'ArrowUp') {
+                const prevIndex = (currentIndex - 1 + elements.length) % elements.length
+                elements[prevIndex]?.focus()
+                event.preventDefault()
+            }
+        }
+
+        document.addEventListener('keydown', onKeyDown, { signal: controller.signal })
+
+        return () => {
+            controller.abort()
+        }
+    })
 </script>
 
 <Header
@@ -19,7 +59,7 @@
 <ul class="my-4 space-y-1 text-sm">
     {#each data.posts as post}
         <li class="group">
-            <a class="flex flex-col hover:no-underline" href={post.relativeURL}>
+            <a class="flex flex-col hover:no-underline" href={post.relativeURL} id={post.id}>
                 <p class="flex justify-between text-blue-500 group-hover:underline">
                     <span>{post.title}</span>
                     <MoveRight
