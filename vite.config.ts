@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
+import devtoolsJson from 'vite-plugin-devtools-json'
 
 export default defineConfig({
   plugins: [
@@ -11,11 +12,11 @@ export default defineConfig({
         if (file.includes('/blog/') && file.endsWith('.mdx')) {
           console.log(file)
           server.ws.send({ path: '*', type: 'full-reload' })
-
           return []
         }
       },
       name: 'update-mdx'
-    }
+    },
+    devtoolsJson()
   ]
 })
