@@ -5,11 +5,15 @@
 
     import Header from '$lib/components/layout/header.svelte'
     import { formatDate } from '$lib/utils/date'
+    import { registerGoBackKeybind } from '$lib/utils/shortcuts'
 
     type Props = { data: PageData }
     const { data }: Props = $props()
 
     $effect(() => {
+        const controller = new AbortController()
+
+        registerGoBackKeybind('/', { controller })
         const elements = data.posts.reduce(
             (elements: HTMLElement[], { id }) => {
                 const element = document.getElementById(id)
@@ -18,7 +22,6 @@
             []
         )
 
-        const controller = new AbortController()
         const onKeyDown = (event: KeyboardEvent) => {
             if (elements.length === 0) {
                 return

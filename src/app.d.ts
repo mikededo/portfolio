@@ -2,9 +2,9 @@ import type { ClassValue } from 'svelte/elements'
 
 import type { Pathname } from '$app/types'
 
-type NonApiRoutes = Exclude<Pathname, `/api${string}`>
-
 declare global {
+  type NonApiRoutes = Exclude<Pathname, `/api${string}`>
+
   namespace App {
     // interface Error {}
     // interface Locals {}

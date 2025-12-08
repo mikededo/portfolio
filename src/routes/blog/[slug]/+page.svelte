@@ -5,9 +5,12 @@
 
     import Header from '$lib/components/layout/header.svelte'
     import { formatDate } from '$lib/utils/date'
+    import { registerGoBackKeybind } from '$lib/utils/shortcuts'
 
     const { data }: PageProps = $props()
     const post = $derived(data.metadata)
+
+    $effect(() => registerGoBackKeybind('/blog'))
 </script>
 
 <header class="mb-12 space-y-2">
