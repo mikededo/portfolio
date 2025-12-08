@@ -8,6 +8,7 @@
 
     const { children, data }: LayoutProps = $props()
 
+    // svelte-ignore state_referenced_locally
     initThemeContext(data.theme)
 </script>
 
