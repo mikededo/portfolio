@@ -32,7 +32,7 @@
     }
 </script>
 
-<div class="relative flex h-26 gap-1 overflow-x-auto" style="margin-top: 1rem; scrollbar-gutter: stable">
+<div class="relative mt-6 flex h-22 gap-1 overflow-x-auto" style="scrollbar-gutter: stable">
     {#each events as event, index (index)}
         <div
             class="group relative w-(--event-width) shrink-0 transition-all duration-200 outline-none"
@@ -66,14 +66,14 @@
                     style:color={event.color}
                 >
                     {#if typeof event.content === 'string'}
-                        <span class="font-mono text-[11px]">
+                        <span class="text-[11px]">
                             {event.content}
                         </span>
                     {:else}
-                        <span class="font-mono text-[11px]">
+                        <span class="text-[11px]">
                             {event.content.left}
                         </span>
-                        <span class="font-mono text-[11px]">
+                        <span class="text-[11px]">
                             {event.content.right}
                         </span>
                     {/if}

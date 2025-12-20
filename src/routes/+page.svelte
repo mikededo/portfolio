@@ -51,7 +51,7 @@
     })
 </script>
 
-<main class="mx-auto w-full lg:w-3/4">
+<main class="mx-auto w-full md:w-3/4">
     <Header
         description="Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!"
         title="mikededo"
@@ -73,29 +73,29 @@
         </ol>
     </nav>
 
-    {@render h2('me')}
-    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
-        <li>graduated in CS and master's in SW design & architecture</li>
-        <li>frontend dev, experienced in multiple frameworks (svelte lover)</li>
+    {@render h2('Me')}
+    <ul class="ml-4 list-disc md:ml-8">
+        <li>Graduated in CS and master's in SW design & architecture</li>
+        <li>Frontend dev, experienced in multiple frameworks (svelte lover)</li>
         <li>
-            love building things, specially whenever I can try other tools and
+            Love building things, specially whenever I can try other tools and
             languages
         </li>
-        <li>fast problem solver, ship fast</li>
-        <li>design oriented</li>
+        <li>Fast problem solver, ship fast</li>
+        <li>Design oriented</li>
         <li>
-            obsessed in providing best user experience, while ensuring best
+            Obsessed in providing best user experience, while ensuring best
             developer experience
         </li>
-        <li>active sports person, mostly cycling</li>
+        <li>Active sports person, mostly cycling</li>
         <li>
             {#await data.recoveryPeriodPromise then response}
                 {#if response}
-                    currently in recovery period! -
+                    Currently in recovery period! -
                 {/if}
             {/await}
 
-            <Link href="https://www.strava.com/athletes/mikededo">ridden</Link>
+            <Link href="https://www.strava.com/athletes/mikededo">Ridden</Link>
             <AnimatedNumber
                 format={formatNumber()}
                 value={stats?.distance ?? 0}
@@ -108,14 +108,14 @@
             the last 7 days
         </li>
         <li>
-            helping other friends and athletes achieve their fitness goals, as a
+            Helping other friends and athletes achieve their fitness goals, as a
             side hustle
         </li>
-        <li>cat owner</li>
+        <li>Cat owner</li>
     </ul>
 
-    {@render h2('how i work')}
-    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
+    {@render h2('How I work')}
+    <ul class="ml-4 list-disc md:ml-8">
         <li>
             <strong>ship fast, iterate faster.</strong> plans are great, but sometimes
             you just need to get things done
@@ -149,8 +149,8 @@
         </li>
     </ul>
 
-    {@render h2('projects')}
-    <ul class="ml-4 list-disc space-y-1 text-sm md:ml-8">
+    {@render h2('Projects')}
+    <ul class="ml-4 list-disc md:ml-8">
         <Project
             previewSlug="advent-ui"
             repo="advent ui"
@@ -159,7 +159,7 @@
             siteHref="https://advent-ui.mikededo.com"
             topics={['svelte', 'sveltekit', 'vercel']}
         >
-            visualizations to some of the previous aoc solution algorithms
+            Visualizations to some of the previous aoc solution algorithms
         </Project>
         <Project
             previewSlug="squared-ci"
@@ -169,11 +169,11 @@
             siteHref="https://squared-ci.vercel.app"
             topics={['typescript', 'react', 'nextjs', 'vercel']}
         >
-            a project that i started with the goal of simplifying the learning
-            curve of GitHub Actions. the app helps devs build from simple to
-            complex workflows, through an intuitive ui. i also tried to get out
+            A project that i started with the goal of simplifying the learning
+            curve of GitHub Actions. The app helps devs build from simple to
+            complex workflows, through an intuitive ui. I also tried to get out
             of my comfort zone by removing any external library that would
-            simplify the task, so, for instance, i had to work on a draggable
+            simplify the task, so, for instance, I had to work on a draggable
             interface, which was great challenge
         </Project>
         <Project
@@ -181,7 +181,7 @@
             repoHref="https://github.com/mikededo/advent"
             topics={['rust', 'algorithms']}
         >
-            some of the advent of code solutions, for some years, done in rust
+            Some of the advent of code solutions, for some years, done in rust
             in order to code in different languages and paradigms
         </Project>
         <Project
@@ -189,17 +189,18 @@
             repoHref="https://github.com/mikededo/dart-barrel-file-generator"
             topics={['typescript', 'bun']}
         >
-            vscode extension to generate
+            VSCode extension to generate
             <Link href="https://dart.dev">dart</Link>
-            barrel files. it's also a cli tool to use outside vscode
+            barrel files. It's also a cli tool to use outside vscode
         </Project>
         <Project
             repo="eslint plugin svelte tailwindcss"
             repoHref="https://github.com/mikededo/eslint-plugin-svelte-tailwindcss"
             topics={['typescript', 'eslint']}
         >
-            i prefer eslint over prettier, and i created this port of
+            I prefer eslint over prettier, and i created this port of
             <Link
+                class="font-mono"
                 href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss"
             >
                 prettier-plugin-tailwindcss
@@ -211,31 +212,31 @@
             repoHref="https://github.com/mikededo/.dotfiles"
             topics={['lua', 'sh']}
         >
-            personal dotfiles, in case you are interested
+            Personal dotfiles, in case you are interested
         </Project>
         <Project
             repo="other repos"
             repoHref="https://github.com/mikededo?tab=repositories"
         >
-            here you can find other projects i've done in my spare time. i also
-            enjoy contributing to os projects whenever i can
+            Here you can find other projects I've done in my spare time. I also
+            enjoy contributing to os projects whenever I can
         </Project>
     </ul>
 
-    {@render h2('experience')}
+    {@render h2('Experience')}
     <ul class="space-y-2">
         <li>
             <Experience
                 company="Stack AI"
                 companyHref="https://www.stack-ai.com"
                 expanded={expanded.has('stackai')}
-                subtitle="ai toolkit for enterprises"
-                title="frontend engineer"
+                subtitle="AI toolkit for enterprises"
+                title="Frontend engineer"
                 onExpand={onToggleExpand('stackai')}
             >
-                <li>y-combinator startup, joined after a-series</li>
-                <li>main frontend engineer</li>
-                <li>streamlining the design system</li>
+                <li>Y-combinator startup, joined after a-series</li>
+                <li>Main frontend engineer</li>
+                <li>Streamlining the design system</li>
             </Experience>
         </li>
         <li>
@@ -243,29 +244,29 @@
                 company="XING"
                 companyHref="https://www.xing.com"
                 expanded={expanded.has('xing')}
-                subtitle="jobs marketplace platform, serving millions of users"
-                title="frontend engineer"
+                subtitle="Jobs marketplace platform, serving millions of users"
+                title="Frontend engineer"
                 onExpand={onToggleExpand('xing')}
             >
-                <li>part of the search and recommendations team</li>
+                <li>Part of the search and recommendations team</li>
                 <li>
-                    facilitated cross-functional collaboration between product,
+                    Facilitated cross-functional collaboration between product,
                     design and engineering teams
                 </li>
                 <li>
-                    collaborated with design system and platform teams, to align
+                    Collaborated with design system and platform teams, to align
                     ui specs and infrastructure needs
                 </li>
                 <li>
-                    mentored a junior developer through a company program,
+                    Mentored a junior developer through a company program,
                     providing technical guidance, design feedback, and reviews
                 </li>
                 <li>
-                    architected and defined migration for old codebase
+                    Architected and defined migration for old codebase
                     deprecation, reducing technical debt
                 </li>
                 <li>
-                    delivered rapid problem-solving to ensure high application
+                    Delivered rapid problem-solving to ensure high application
                     standards
                 </li>
             </Experience>
@@ -275,30 +276,30 @@
                 company="Additio"
                 companyHref="https://additioapp.com"
                 expanded={expanded.has('additio')}
-                subtitle="educational technology platform"
-                title="frontend engineer"
+                subtitle="Educational technology platform"
+                title="Frontend engineer"
                 onExpand={onToggleExpand('additio')}
             >
                 <li>
-                    designed architecture for multiple React applications within
+                    Designed architecture for multiple React applications within
                     the Additio App
                 </li>
                 <li>
-                    built and maintained internal React component libraries,
+                    Built and maintained internal React component libraries,
                     design system and other internal tools
                 </li>
                 <li>
-                    led application redesign from ideation and wireframing to
+                    Led application redesign from ideation and wireframing to
                     implementation
                 </li>
-                <li>mentored junior students in React development</li>
+                <li>Mentored junior students in React development</li>
             </Experience>
         </li>
     </ul>
 </main>
 
 {#snippet h2(name: string)}
-    <h2 class="relative">
+    <h2 class="relative font-semibold">
         {name}
         <span
             class="absolute -top-4 -left-4 font-thin text-slate-600"

@@ -10,9 +10,9 @@
     const isNested = $derived(Object.keys(page.params).length > 0)
 </script>
 
-<main class="mx-auto w-full lg:w-3/4">
+<main class="mx-auto w-full md:w-3/4">
     <nav aria-label="Breadcrumbs">
-        <ol class="mb-4 flex gap-1 text-xs md:text-sm ">
+        <ol class="mb-4 flex gap-1 text-sm md:text-sm ">
             <li class="flex gap-1">
                 <a class="group relative flex items-center gap-0.5 text-muted-foreground/75 transition-colors hover:text-foreground" href="/">
                     ~

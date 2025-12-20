@@ -7,6 +7,6 @@
 </script>
 
 <h1 class="mb-2 text-2xl font-bold">{title}</h1>
-<p class="mb-2 text-sm">
+<p class="mb-2">
     {description}
 </p>

@@ -1,71 +1,84 @@
 @import '../../../app.css';
 
-@layer base {
-  article {
-    @apply space-y-2;
+article.blog {
+  @apply space-y-2;
 
-    h2 {
-      @apply text-xl font-bold text-foreground mt-12 mb-4 tracking-tight scroll-mt-28;
-    }
+  h2 {
+    @apply text-2xl font-bold text-foreground mt-12 mb-4 tracking-tight scroll-mt-28;
+  }
 
-    h3 {
-      @apply text-lg font-semibold text-foreground mt-8 mb-2 scroll-mt-28;
-    }
+  h3 {
+    @apply text-xl font-semibold text-foreground mt-8 mb-2 scroll-mt-28;
+  }
 
-    h4 {
-      @apply font-medium text-foreground mt-8 mb-1 scroll-mt-28;
-    }
+  h4 {
+    @apply text-lg font-semibold text-foreground mt-8 mb-1 scroll-mt-28;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      a {
-        @apply text-foreground;
-      }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    a {
+      @apply text-foreground transition-colors ease-in-out duration-200;
     }
+  }
+
+  h1.active,
+  h2.active,
+  h3.active,
+  h4.active,
+  h5.active,
+  h6.active {
+    a {
+      @apply bg-blue-200 dark:bg-blue-900;
+    }
+  }
+
+  p {
+    @apply text-foreground leading-[160%] my-4;
+  }
+
+  ul,
+  ol {
+    @apply space-y-1;
+  }
+
+  li {
+    @apply ml-4 list-disc leading-relaxed;
+  }
+
+  strong {
+    @apply font-medium;
+  }
+
+  blockquote {
+    @apply bg-muted border-l-2 border-muted-foreground px-4 py-2 [&>p]:text-inherit [&>p]:text-sm mb-2;
 
     p {
-      @apply text-sm text-foreground/85 leading-relaxed my-4;
+      @apply leading-snug m-0;
     }
+  }
 
-    ul,
-    ol {
-      @apply space-y-1;
-    }
+  blockquote.info {
+    @apply border-l-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-200;
+  }
 
-    li {
-      @apply ml-4 list-disc text-sm leading-relaxed;
-    }
+  blockquote.tip {
+    @apply border-l-violet-500 bg-violet-100 text-violet-600 dark:bg-violet-950/30 dark:text-violet-200;
+  }
 
-    blockquote {
-      @apply bg-muted border-l-2 border-muted-foreground px-4 py-2 [&>p]:text-inherit [&>p]:text-xs mb-2;
+  blockquote.success {
+    @apply border-l-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-200;
+  }
 
-      p {
-        @apply leading-snug m-0;
-      }
-    }
+  blockquote.warning {
+    @apply border-l-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-200;
+  }
 
-    blockquote.info {
-      @apply border-l-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-200;
-    }
-
-    blockquote.tip {
-      @apply border-l-violet-500 bg-violet-100 text-violet-600 dark:bg-violet-950/30 dark:text-violet-200;
-    }
-
-    blockquote.success {
-      @apply border-l-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-200;
-    }
-
-    blockquote.warning {
-      @apply border-l-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-200;
-    }
-
-    blockquote.caution {
-      @apply border-l-red-500 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-200;
-    }
+  blockquote.caution {
+    @apply border-l-red-500 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-200;
   }
 }

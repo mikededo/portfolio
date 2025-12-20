@@ -40,7 +40,7 @@
                     </div>
 
                     <div
-                        class="flex h-10 p-2 text-xs"
+                        class="flex h-10"
                         style:background-color="color-mix(in oklch, {CARBS_COLOR} 50%, var(--color-background))"
                         style:color={CARBS_COLOR}
                     ></div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div
-                        class="flex h-10 justify-between p-2"
+                        class="flex h-10"
                         style:background-color="color-mix(in oklch, {PROTEIN_COLOR} 40%, var(--color-background))"
                         style:color={PROTEIN_COLOR}
                     ></div>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div
-                        class="flex h-10 justify-between p-2"
+                        class="flex h-10"
                         style:background-color="color-mix(in oklch, {FATS_COLOR} 40%, var(--color-background))"
                         style:color={FATS_COLOR}
                     ></div>
@@ -81,5 +81,7 @@
         </div>
     </div>
 
-    <figcaption class="text-xs text-muted-foreground">For this caption, I've used a total of {total}kcal, as it's the average consumed for these days</figcaption>
+    <figcaption class="text-xs text-muted-foreground">
+        For this caption, I've used a total of {total}kcal, as it's the average consumed for these days
+    </figcaption>
 </figure>

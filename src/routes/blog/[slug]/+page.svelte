@@ -22,13 +22,13 @@
                 #{tag}
             </span>
         {/each}
-        <p class="ml-auto text-xs text-muted-foreground">{formatDate(post.date)}</p>
+        <p class="ml-auto text-sm text-muted-foreground">{formatDate(post.date)}</p>
     </div>
 </header>
 
 <hr class="-my-2 text-muted" />
 
-<article>
+<article class="blog">
     {#if data.Content}
         <data.Content.default />
     {/if}

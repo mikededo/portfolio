@@ -25,6 +25,8 @@ export const useHeadingsState = () => {
     })
   })
 
+  $inspect(headings, active)
+
   $effect(() => {
     if (headings.length === 0) {
       return
@@ -79,6 +81,12 @@ export const useHeadingsState = () => {
       behavior: 'smooth',
       top: pos - offset
     })
+    requestAnimationFrame(() => {
+      element.classList.toggle('active')
+      setTimeout(() => {
+        element.classList.toggle('active')
+      }, 750)
+    })
   }
 
   const gotoPrev = () => {
@@ -87,8 +95,11 @@ export const useHeadingsState = () => {
       return
     }
 
-    const prevHeading = headings[currentIndex - 1]
-    document.getElementById(prevHeading.id)?.scrollIntoView({ behavior: 'smooth' })
+    const prev = headings[currentIndex - 1]
+    if (!prev) {
+      return
+    }
+    gotoId(prev.id)
   }
 
   const gotoNext = () => {
@@ -97,8 +108,11 @@ export const useHeadingsState = () => {
       return
     }
 
-    const prevHeading = headings[currentIndex + 1]
-    document.getElementById(prevHeading.id)?.scrollIntoView({ behavior: 'smooth' })
+    const next = headings[currentIndex + 1]
+    if (!next) {
+      return
+    }
+    gotoId(next.id)
   }
 
   return {

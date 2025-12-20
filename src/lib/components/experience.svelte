@@ -50,12 +50,11 @@
     </header>
     {#if expanded}
         <div
-            class="text-sm"
             style="scrollbar-gutter: auto"
             transition:fadeSlide={{ duration: 250, easing: circOut }}
         >
-            <p class="mb-1 text-slate-500 italic">{subtitle}</p>
-            <ul class="ml-8 list-disc space-y-1 [&>:first-child]:mt-2">
+            <p class="mb-1 text-sm text-slate-500 italic">{subtitle}</p>
+            <ul class="ml-8 list-disc *:first:mt-2">
                 {@render children()}
             </ul>
         </div>

@@ -7,6 +7,6 @@
 <div class="lg:hidden">
     <BottomToc />
 </div>
-<div class="hidden lg:inline-block">
+<div class="hidden xl:inline-block">
     <SidebarToc />
 </div>

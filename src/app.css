@@ -2,53 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 100;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-100.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-regular.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: italic;
-  font-weight: 400;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-italic.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-500.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-600.woff2') format('woff2');
-}
-@font-face {
-  font-display: swap;
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/jetbrains-mono/jetbrains-mono-700.woff2') format('woff2');
-}
-
 :root {
   --scrollbar-thumb: #333;
   --foreground: #333;
-  --background: #fff;
+  --background: #fdfdfd;
   --muted: oklch(0.95 0 0);
   --muted-foreground: oklch(0.6 0 0);
 }
@@ -70,8 +27,11 @@ body[data-scroll-locked='true'] {
 }
 
 @theme {
-  --font-sans: 'JetBrains Mono', ui-monospace;
-  --font-mono: 'JetBrains Mono', ui-monospace;
+  --font-sans:
+    Geist, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --color-foreground: var(--foreground);
   --color-background: var(--background);
   --color-muted: var(--muted);
@@ -86,18 +46,11 @@ body[data-scroll-locked='true'] {
   }
 
   html {
-    @apply bg-white text-foreground dark:bg-background dark:text-neutral-200;
-
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  a:focus-visible,
-  button:focus-visible {
-    @apply text-blue-700 bg-blue-200 outline-none dark:text-blue-200 dark:bg-blue-900/80;
+    @apply bg-background text-foreground dark:text-neutral-200;
   }
 
   h2 {
-    @apply mt-8 mb-2 text-xl font-bold md:text-2xl relative;
+    @apply mt-8 mb-2 text-xl font-bold relative;
   }
 
   h2:after {
@@ -107,6 +60,15 @@ body[data-scroll-locked='true'] {
 
   a {
     @apply text-blue-500 hover:underline dark:text-blue-400;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply text-blue-700 bg-blue-200 outline-none dark:text-blue-200 dark:bg-blue-900/80;
+  }
+
+  strong {
+    @apply font-semibold;
   }
 
   ::view-transition-old(root),

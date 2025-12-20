@@ -18,7 +18,7 @@
         ></div>
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-3">
         <p class="font-mono text-xs font-medium tracking-widest text-muted-foreground/75 uppercase">
             On this page
         </p>
