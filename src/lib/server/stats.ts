@@ -41,7 +41,7 @@ const ActivityDataSchema = v.object({
 })
 const ActivityDataArraySchema = v.array(ActivityDataSchema)
 
-type ActivitySummary = {
+export type ActivitySummary = {
   distance: number
   lastFetched: Date
   time: number

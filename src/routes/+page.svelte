@@ -1,9 +1,12 @@
 <script lang="ts">
+    import type { ActivitySummary } from '$lib/server'
+
     import type { PageData } from './$types'
 
     import { SvelteSet } from 'svelte/reactivity'
 
-    import { AnimatedNumber, Experience, Link, Project } from '$lib/components'
+    import { Experience, Link, Project } from '$lib/components'
+    import AnimatedNumber from '$lib/components/animated-number.svelte'
     import Header from '$lib/components/layout/header.svelte'
     import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
 
@@ -79,20 +82,27 @@
         </li>
         <li>active sports person, mostly cycling</li>
         <li>
-            {#if data.isRecoveryPeriod}
-                currently in recovery period! -
-            {/if}
+            {#await data.recoveryPeriodPromise then response}
+                {#if response}
+                    currently in recovery period! -
+                {/if}
+            {/await}
             <Link href="https://www.strava.com/athletes/mikededo">ridden</Link>
-            <AnimatedNumber
-                format={formatNumber()}
-                value={data.stats?.distance ?? 0}
-            />km and
-            <AnimatedNumber
-                format={formatNumber(0)}
-                value={data.stats?.elevation ?? 0}
-            />m in
-            <AnimatedNumber format={formatTime} value={data.stats?.time ?? 0} />
-            the last 7 days
+            {#await data.statsPromise then response}
+                {@const stats = response as ActivitySummary | null}
+                {#if stats}
+                    <AnimatedNumber
+                        format={formatNumber()}
+                        value={stats.distance ?? 0}
+                    />km and
+                    <AnimatedNumber
+                        format={formatNumber(0)}
+                        value={stats.elevation ?? 0}
+                    />m in
+                    <AnimatedNumber format={formatTime} value={stats.time ?? 0} />
+                    the last 7 days
+                {/if}
+            {/await}
         </li>
         <li>
             helping other friends and athletes achieve their fitness goals, as a
