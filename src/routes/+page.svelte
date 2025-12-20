@@ -90,18 +90,16 @@
             <Link href="https://www.strava.com/athletes/mikededo">ridden</Link>
             {#await data.statsPromise then response}
                 {@const stats = response as ActivitySummary | null}
-                {#if stats}
-                    <AnimatedNumber
-                        format={formatNumber()}
-                        value={stats.distance ?? 0}
-                    />km and
-                    <AnimatedNumber
-                        format={formatNumber(0)}
-                        value={stats.elevation ?? 0}
-                    />m in
-                    <AnimatedNumber format={formatTime} value={stats.time ?? 0} />
-                    the last 7 days
-                {/if}
+                <AnimatedNumber
+                    format={formatNumber()}
+                    value={stats?.distance ?? 0}
+                />km and
+                <AnimatedNumber
+                    format={formatNumber(0)}
+                    value={stats?.elevation ?? 0}
+                />m in
+                <AnimatedNumber format={formatTime} value={stats?.time ?? 0} />
+                the last 7 days
             {/await}
         </li>
         <li>
