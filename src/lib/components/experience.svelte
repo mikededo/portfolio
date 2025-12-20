@@ -37,14 +37,14 @@
 </script>
 
 <article>
-    <header class="flex items-center justify-between">
-        <h3 class="font-medium">{title} @ <Link href={companyHref}>{company}</Link></h3>
+    <header>
         <button
-            class="size-7 rounded-full text-lg"
+            class="flex w-full items-center justify-between"
             onclick={onExpand}
             aria-expanded={expanded}
             aria-label="Toggle expand"
         >
+            <h3 class="font-medium">{title} @ <Link href={companyHref}>{company}</Link></h3>
             <span aria-hidden="true">{expanded ? '-' : '+'}</span>
         </button>
     </header>
