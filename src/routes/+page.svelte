@@ -21,6 +21,7 @@
     const { data }: Props = $props()
 
     const expanded = new SvelteSet<string>(['stackai'])
+    let stats = $state<ActivitySummary | null>(null)
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
@@ -42,6 +43,12 @@
     }
 
     const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits)
+
+    $effect(() => {
+        data.statsPromise.then((data: ActivitySummary | null) => {
+            stats = data
+        })
+    })
 </script>
 
 <main class="mx-auto w-full lg:w-3/4">
@@ -87,20 +94,18 @@
                     currently in recovery period! -
                 {/if}
             {/await}
+
             <Link href="https://www.strava.com/athletes/mikededo">ridden</Link>
-            {#await data.statsPromise then response}
-                {@const stats = response as ActivitySummary | null}
-                <AnimatedNumber
-                    format={formatNumber()}
-                    value={stats?.distance ?? 0}
-                />km and
-                <AnimatedNumber
-                    format={formatNumber(0)}
-                    value={stats?.elevation ?? 0}
-                />m in
-                <AnimatedNumber format={formatTime} value={stats?.time ?? 0} />
-                the last 7 days
-            {/await}
+            <AnimatedNumber
+                format={formatNumber()}
+                value={stats?.distance ?? 0}
+            />km and
+            <AnimatedNumber
+                format={formatNumber(0)}
+                value={stats?.elevation ?? 0}
+            />m in
+            <AnimatedNumber format={formatTime} value={stats?.time ?? 0} />
+            the last 7 days
         </li>
         <li>
             helping other friends and athletes achieve their fitness goals, as a
