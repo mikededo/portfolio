@@ -80,7 +80,7 @@
         <li>active sports person, mostly cycling</li>
         <li>
             {#if data.isRecoveryPeriod}
-                curently in recovery period! -
+                currently in recovery period! -
             {/if}
             <Link href="https://www.strava.com/athletes/mikededo">ridden</Link>
             <AnimatedNumber

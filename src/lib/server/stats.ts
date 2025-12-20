@@ -8,6 +8,7 @@ import { dev } from '$app/environment'
 import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private'
 
 const BASE_URL = 'https://intervals.icu/api/v1'
+const RECOVERY_NOTE_NAME = 'Time off bike'
 
 const getDateRangeSchema = (min: Date, max: Date) => v.pipe(
   v.date(),
@@ -153,7 +154,7 @@ export const getIsRecoveryPeriod = withDevDefaultValue(
     const now = new Date()
     const isRecoveryPeriod = maybeEvents.value
       .some((event) => {
-        if (!event.name.toLowerCase().includes('recovery')) {
+        if (!event.name.toLowerCase().includes(RECOVERY_NOTE_NAME)) {
           return false
         }
 
