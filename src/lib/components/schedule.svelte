@@ -61,7 +61,7 @@
                 {/each}
 
                 <div
-                    class="flex h-16 justify-between p-2 transition-all duration-300 select-none group-data-[collapsed=true]:flex-col"
+                    class="flex h-12 justify-between p-2 transition-all duration-300 select-none group-data-[collapsed=true]:flex-col"
                     style:background-color="color-mix(in oklch, {event.color} 15%, transparent)"
                     style:color={event.color}
                 >
