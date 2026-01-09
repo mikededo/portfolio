@@ -40,7 +40,7 @@
     {/if}
     {#if topics}
         &centerdot;
-        <span class="font-mono text-sm text-muted-foreground italic">{topics.join(', ')}</span>
+        <span class="font-mono text-sm tracking-tight text-muted-foreground italic">{topics.join(', ')}</span>
     {/if}
     <p>{@render children()}</p>
 </li>
