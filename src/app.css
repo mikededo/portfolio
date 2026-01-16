@@ -8,6 +8,10 @@
   --background: #fdfdfd;
   --muted: oklch(0.95 0 0);
   --muted-foreground: oklch(0.6 0 0);
+
+  &::selection {
+    background: #00000022;
+  }
 }
 
 :root.dark {
@@ -16,6 +20,10 @@
   --background: #0a0a0a;
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.7 0 0);
+
+  &::selection {
+    background: #ffffff22;
+  }
 }
 
 body[data-scroll-locked='true'] {

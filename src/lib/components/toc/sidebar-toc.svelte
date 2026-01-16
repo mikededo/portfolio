@@ -36,7 +36,7 @@
             <AnimatedNumber
                 duration={500}
                 easing={sineOut}
-                format={(v) => Math.floor(v)}
+                format={(v) => Math.floor(Math.min(100, v))}
                 value={tocState.progress}
             />
             % read

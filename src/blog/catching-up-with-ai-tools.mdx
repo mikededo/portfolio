@@ -1,0 +1,229 @@
+---
+title: "Catching up: My late adoption of LLMs for swe"
+description: "I joined an AI company without having used LLM tools. Here's what I learned about the hype, the reality, and why adaptability matters more than early adoption."
+date: '2026-01-16'
+tags: ai, tools, productivity, career
+---
+
+<script>
+  import LlmEffectiveness from '../lib/components/llm-effectiveness.svelte';
+  import HiddenCosts from '../lib/components/hidden-costs.svelte';
+  import { LLM_EFFECTIVENESS, LLM_HIDDEN_COSTS } from '../lib/static/llm-adoption.ts';
+</script>
+
+## The irony of joining an AI company
+
+In September 2025, I joined Stack AI, a Y-Combinator startup building AI tooling
+for enterprises. There is an obvious irony here that I need to address upfront: I
+joined an AI company without having seriously used LLM tools in my daily work.
+
+I had tried ChatGPT a few times. I had seen the demos. I knew the capabilities
+existed. But I hadn't integrated any of it into my workflow. My editor was still
+my editor, my terminal was still my terminal, and my process for building
+software was largely the same as it had been for years. I was productive. I
+shipped fast. Why fix what wasn't broken?
+
+The first week at Stack AI made it clear that I was behind. Not in a dramatic,
+career-threatening way, but in a quieter, more uncomfortable way. Everyone around
+me used these tools as naturally as breathing. Copilot suggestions appearing mid-thought.
+Claude conversations open in browser tabs. Cursor commands flying across screens.
+And there I was, typing everything character by character, feeling like I had
+shown up to a Formula 1 race on a bicycle.
+
+## The skeptic's position
+
+I want to be clear: I wasn't resisting AI tools out of principle or fear. I
+wasn't worried about being replaced or philosophically opposed to the technology.
+My hesitation came from a different place entirely: I had seen hype cycles before.
+
+As a frontend engineer, I have lived through the rise and fall of countless
+"revolutionary" tools and frameworks. I have seen technologies that were supposed
+to change everything quietly fade into irrelevance. I have watched colleagues
+spend weeks learning tools that were abandoned six months later. The JavaScript
+ecosystem alone has taught me that not every shiny new thing deserves immediate
+adoption.
+
+My workflow worked. I had spent years refining it. I knew my editor's shortcuts
+by muscle memory. I understood my build tools deeply. I could debug problems
+efficiently because I understood the systems I was working with. There is real
+value in that kind of deep familiarity, and I was reluctant to disrupt it for
+something that might turn out to be another passing trend.
+
+There was also the time factor. I work 40 to 60 hours per week and train 15 to
+25 hours. My schedule is already optimized to the point where there is little
+room for experimentation. Learning a new tool isn't free; it costs focus and
+energy that I couldn't easily spare. So I watched from a distance, waiting to
+see if the hype would settle into something real.
+
+## The pressure builds
+
+But then I joined Stack AI, and watching from a distance was no longer an option.
+
+The pressure came from multiple directions. Twitter was full of threads about
+"10x engineers" who had unlocked superhuman productivity with AI assistants. My
+LinkedIn feed showed developers claiming they had shipped entire features in
+hours that would have taken days. Friends started asking me if I used Cursor,
+and the pause before my answer grew more uncomfortable each time.
+
+The worst part was the internal contradiction. I had built my professional
+identity around shipping fast and iterating faster. I valued efficiency. I
+automated repetitive tasks. I was supposed to be the person who embraced tools
+that made me more effective. And yet here I was, manually writing code while
+everyone around me had discovered what felt like a cheat code.
+
+The imposter syndrome was subtle but persistent. I started questioning whether
+my productivity was actually as good as I thought. Maybe I had been deluding
+myself. Maybe the developers claiming 10x improvements weren't exaggerating.
+Maybe I was falling behind in a way that would compound over time until I was
+no longer competitive.
+
+This is the part nobody talks about honestly: the FOMO is real. The pressure to
+adopt is real. And it is okay to admit that you feel it.
+
+## Learning to catch up
+
+So I decided to actually learn these tools, properly this time. Not just dabble,
+but integrate them into my daily workflow and see what happened.
+
+The first thing I discovered is that the learning curve is steeper than the hype
+suggests. The marketing makes it look effortless: just ask the AI what you want,
+and it appears. The reality is messier. You need to learn how to prompt
+effectively. You need to understand what the model is good at and what it
+struggles with. You need to develop intuition for when to trust its output and
+when to verify everything manually.
+
+I spent the first few weeks being frustrated more often than I was helped. The
+AI would generate code that looked correct but had subtle bugs. It would
+confidently provide outdated information. It would misunderstand my intent and
+produce something completely different from what I needed. I found myself
+spending significant time checking and correcting its output, which sometimes
+felt slower than just writing the code myself.
+
+But then, gradually, things started to click. I learned to use it for
+boilerplate code that I knew how to write but didn't want to type. I learned
+to use it as a rubber duck, explaining problems and letting it suggest angles
+I hadn't considered. I learned to use it for exploring unfamiliar codebases,
+asking it to explain what specific functions did rather than reading through
+everything myself.
+
+The breakthrough wasn't a single moment. It was a slow accumulation of small
+wins where the tool actually saved me time. Not the dramatic "10x productivity"
+that Twitter promised, but something more modest and real: maybe 20 to 30
+percent faster on certain tasks, with the time savings concentrated in
+specific areas.
+
+<LlmEffectiveness items={LLM_EFFECTIVENESS} />
+
+## Separating hype from reality
+
+After several months of daily use, I feel qualified to offer a critical but fair
+assessment of where we actually are with these tools.
+
+The hype gets a lot wrong. The "10x productivity" claims are, in my experience,
+wildly overstated. For most real-world development work, the gains are much more
+modest. You still need to understand what you're building. You still need to
+make architectural decisions. You still need to debug when things go wrong. The
+AI can help with some of this, but it cannot replace the fundamental work of
+thinking clearly about problems.
+
+There are also hidden costs that rarely get mentioned. Every piece of generated
+code needs verification, which takes time. Context-switching between writing code
+and reviewing AI output has its own cognitive overhead. Prompt engineering is a
+skill that requires development. And the models make mistakes confidently, which
+means you need to maintain a healthy skepticism even when the output looks correct.
+
+<HiddenCosts items={LLM_HIDDEN_COSTS} />
+
+But dismissing these tools entirely would also be wrong. They are genuinely
+useful for certain tasks. Generating boilerplate saves real time. Exploring
+unfamiliar APIs or libraries is faster when you can ask questions directly.
+Writing documentation and comments becomes less tedious. Rubber-ducking with an
+AI that can actually respond has real value for working through problems.
+
+The honest answer is that LLM tools are useful but not transformative, at least
+not yet. They are another tool in the toolbox, powerful for specific tasks and
+less useful for others. The developers who claim they have become 10x more
+productive are either working on unusually well-suited problems, measuring
+productivity in misleading ways, or simply exaggerating.
+
+## The shift to code reviewer
+
+One thing I did not anticipate is how much my role would change. I used to spend
+most of my time writing code. Now I spend a significant portion of it reviewing
+and validating code that someone else wrote, except that someone is an AI.
+
+This is a subtle but important shift. When I write code myself, I build mental
+context as I go. I understand every decision because I made it. I know where the
+edge cases are because I thought through them. The code exists in my head before
+it exists in the file.
+
+With LLM-generated code, that context doesn't exist. The AI produces something
+that looks reasonable, but I have no insight into why it made specific choices.
+Did it consider the edge case I care about? Is this pattern consistent with the
+rest of the codebase? Will this scale, or did it optimize for the happy path?
+These questions require careful review, and reviewing code you didn't write is
+cognitively different from writing it yourself.
+
+I have become a validator more than a creator. My job is to ensure that what the
+AI produces meets the standards I would have held myself to. This means reading
+every line, questioning every assumption, and testing every boundary. The irony
+is that this review process sometimes takes as long as writing the code would
+have taken in the first place.
+
+But there is a skill in this too. Learning to review AI output efficiently,
+knowing what to trust and what to scrutinize, understanding the patterns where
+it tends to fail. These are new competencies that didn't exist a few years ago.
+The engineers who thrive with these tools aren't the ones who blindly accept
+whatever the AI produces. They are the ones who have developed sharp instincts
+for validation.
+
+I still write code. The difference is that now I also spend time quality-checking
+code I didn't write, holding it to the same standards I hold my own work. Whether
+that makes me more productive is an open question. What I know for certain is
+that it has changed the texture of my daily work in ways I'm still adjusting to.
+
+## What actually matters
+
+Here is what I have learned from catching up as a late adopter, and it connects
+back to something I have always believed: tools don't make you fast. Mindset does.
+
+The developers I admire most are not the ones with the most sophisticated AI
+setups. They are the ones who think clearly about problems, break them down into
+manageable pieces, and execute systematically. They understand the systems they
+work with deeply. They communicate effectively with their teams. They know when
+to ship and when to polish. These fundamentals haven't changed because of LLMs,
+and I don't think they will change anytime soon.
+
+What has changed is that adaptability has become even more important. The ability
+to evaluate new tools honestly, learn them efficiently when they prove valuable,
+and integrate them without disrupting your existing effectiveness is a skill in
+itself. Being a late adopter isn't a failure; it's a valid strategy when you're
+waiting to see if something is worth the investment.
+
+I don't regret waiting. The tools are better now than they were a year ago. The
+ecosystem is more mature. The best practices are clearer. By catching up later,
+I avoided the early chaos and learned from a more stable foundation. There is
+value in letting others beta-test the revolution.
+
+## Moving forward
+
+I use AI tools daily now. They are part of my workflow in the same way that my
+editor and terminal are part of my workflow. I have found the specific use cases
+where they help me, and I avoid the use cases where they don't. I am no longer
+behind, but I am also not dependent. The tools serve me; I don't serve them.
+
+If you are reading this and feeling the same pressure I felt, let me offer some
+reassurance: you are not falling irreversibly behind. The fundamentals still
+matter more than the tools. Your ability to think clearly, break down problems,
+and ship working software is not obsolete because of ChatGPT. These tools can
+help, but they cannot replace the core skills that make someone an effective
+engineer.
+
+Catch up when you're ready. Learn at your own pace. Be critical of the hype but
+open to genuine value. And remember that shipping fast has always been about
+mindset, not about having the latest tools. The engineers who were effective
+before LLMs are still effective now. The ones who weren't are still struggling,
+just with fancier autocomplete.
+
+Adaptability is the real skill. And if you're adaptable, you're never really
+behind. You're just waiting for the right moment to catch up.

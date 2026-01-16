@@ -99,3 +99,25 @@ export const getBlogModuleFromSlug = async (slug: string) => {
 
   return await post() as Promise<{ default: typeof Component }>
 }
+
+export type AdjacentPost = { id: string, title: string, relativeURL: string }
+
+export const getAdjacentPosts = (slug: string): { prev: AdjacentPost | null, next: AdjacentPost | null } => {
+  const posts = getPostsMetadata()
+  const currentIndex = posts.findIndex((post) => post.id === slug)
+
+  if (currentIndex === -1) {
+    return { next: null, prev: null }
+  }
+
+  // Posts are sorted newest first, so:
+  // - "prev" (older) is the next item in the array (higher index)
+  // - "next" (newer) is the previous item in the array (lower index)
+  const prevPost = posts[currentIndex + 1]
+  const nextPost = posts[currentIndex - 1]
+
+  return {
+    next: nextPost ? { id: nextPost.id, relativeURL: nextPost.relativeURL, title: nextPost.title } : null,
+    prev: prevPost ? { id: prevPost.id, relativeURL: prevPost.relativeURL, title: prevPost.title } : null
+  }
+}
