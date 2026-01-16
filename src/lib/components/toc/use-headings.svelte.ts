@@ -25,8 +25,6 @@ export const useHeadingsState = () => {
     })
   })
 
-  $inspect(headings, active)
-
   $effect(() => {
     if (headings.length === 0) {
       return

@@ -4,53 +4,15 @@
     import { MoveRight } from '@lucide/svelte'
 
     import Header from '$lib/components/layout/header.svelte'
+    import { useBlogNavigation } from '$lib/hooks/use-blog-navigation.svelte'
     import { formatDate } from '$lib/utils/date'
-    import { registerGoBackKeybind } from '$lib/utils/shortcuts'
 
     type Props = { data: PageData }
     const { data }: Props = $props()
 
-    $effect(() => {
-        const controller = new AbortController()
-
-        registerGoBackKeybind('/', { controller })
-        const elements = data.posts.reduce(
-            (elements: HTMLElement[], { id }) => {
-                const element = document.getElementById(id)
-                return element ? [...elements, element as HTMLElement] : elements
-            },
-            []
-        )
-
-        const onKeyDown = (event: KeyboardEvent) => {
-            if (elements.length === 0) {
-                return
-            }
-
-            const activeElement = document.activeElement
-            const currentIndex = elements.findIndex((post) => post === activeElement)
-
-            if (currentIndex === -1) {
-                elements[0].focus()
-                return
-            }
-
-            if (event.key === 'j' || event.key === 'ArrowDown') {
-                const nextIndex = (currentIndex + 1) % elements.length
-                elements[nextIndex]?.focus()
-                event.preventDefault()
-            } else if (event.key === 'k' || event.key === 'ArrowUp') {
-                const prevIndex = (currentIndex - 1 + elements.length) % elements.length
-                elements[prevIndex]?.focus()
-                event.preventDefault()
-            }
-        }
-
-        document.addEventListener('keydown', onKeyDown, { signal: controller.signal })
-
-        return () => {
-            controller.abort()
-        }
+    useBlogNavigation({
+        backUrl: '/',
+        getElements: () => data.posts.map((post) => post.id)
     })
 </script>
 

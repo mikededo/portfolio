@@ -5,15 +5,25 @@
 
     import Header from '$lib/components/layout/header.svelte'
     import { getBaseUrl } from '$lib/content'
+    import { useBlogNavigation } from '$lib/hooks/use-blog-navigation.svelte'
     import { formatDate } from '$lib/utils/date'
-    import { registerGoBackKeybind } from '$lib/utils/shortcuts'
 
     const { data }: PageProps = $props()
     const post = $derived(data.metadata)
     const baseUrl = $derived(getBaseUrl())
     const ogImage = $derived(`${baseUrl}/og.png`)
 
-    $effect(() => registerGoBackKeybind('/blog'))
+    useBlogNavigation({
+        backUrl: '/blog',
+        behavior: 'scroll',
+        getElements: () => {
+            // having post here so it forces reactivity
+            // eslint-disable-next-line no-unused-expressions
+            post
+
+            return []
+        }
+    })
 </script>
 
 <svelte:head>
