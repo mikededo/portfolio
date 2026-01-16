@@ -1,6 +1,5 @@
-import type { ClassValue } from 'svelte/elements'
-
 import type { Pathname } from '$app/types'
+import type { ClassValue } from 'svelte/elements'
 
 declare global {
   type NonApiRoutes = Exclude<Pathname, `/api${string}`>

@@ -191,36 +191,21 @@ export default antfu(
           groups: [
             'style',
             'type',
-            'internal-type',
-            ['parent-type', 'sibling-type', 'index-type'],
-
             ['builtin', 'external'],
-            'internal',
             ['parent', 'sibling', 'index'],
-            'object',
+            'internal',
             'unknown'
           ],
           ignoreCase: true,
           internalPattern: ['\\$[^\\/]+\\/[^\\/]+'],
           maxLineLength: undefined,
-          newlinesBetween: 'always',
+          newlinesBetween: 1,
           order: 'asc',
           type: 'alphabetical'
         }
       ],
       'perfectionist/sort-modules': 'off',
-      'perfectionist/sort-object-types': [
-        'error',
-        {
-          customGroups: { callbacks: 'on*' },
-          groupKind: 'required-first',
-          groups: ['unknown', 'callbacks', 'multiline'],
-          ignoreCase: true,
-          order: 'asc',
-          partitionByNewLine: true,
-          type: 'alphabetical'
-        }
-      ],
+      'perfectionist/sort-object-types': 'off',
       'perfectionist/sort-objects': [
         'error',
         {

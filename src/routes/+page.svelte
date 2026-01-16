@@ -1,7 +1,6 @@
 <script lang="ts">
-    import type { ActivitySummary } from '$lib/server'
-
     import type { PageData } from './$types'
+    import type { ActivitySummary } from '$lib/server'
 
     import { SvelteSet } from 'svelte/reactivity'
 
