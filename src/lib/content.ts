@@ -5,7 +5,7 @@ import * as v from 'valibot'
 
 import { dev } from '$app/environment'
 
-const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com'
+export const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com'
 
 const getModulePathFromSlug = (slug: string) => `/src/blog/${slug}.mdx`
 

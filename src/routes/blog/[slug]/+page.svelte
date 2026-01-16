@@ -4,14 +4,40 @@
     import type { PageProps } from './$types'
 
     import Header from '$lib/components/layout/header.svelte'
+    import { getBaseUrl } from '$lib/content'
     import { formatDate } from '$lib/utils/date'
     import { registerGoBackKeybind } from '$lib/utils/shortcuts'
 
     const { data }: PageProps = $props()
     const post = $derived(data.metadata)
+    const baseUrl = $derived(getBaseUrl())
+    const ogImage = $derived(`${baseUrl}/og.png`)
 
     $effect(() => registerGoBackKeybind('/blog'))
 </script>
+
+<svelte:head>
+    <title>{post.title}</title>
+    <meta content={post.description} name="description" />
+
+    <meta content="article" property="og:type" />
+    <meta content={post.canonicalURL} property="og:url" />
+    <meta content={post.title} property="og:title" />
+    <meta content={post.description} property="og:description" />
+    <meta content={ogImage} property="og:image" />
+
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="mikededo.com" property="twitter:domain" />
+    <meta content={post.canonicalURL} property="twitter:url" />
+    <meta content={post.title} name="twitter:title" />
+    <meta content={post.description} name="twitter:description" />
+    <meta content={ogImage} name="twitter:image" />
+
+    <meta content={post.date.toISOString()} property="article:published_time" />
+    {#each post.tags as tag}
+        <meta content={tag} property="article:tag" />
+    {/each}
+</svelte:head>
 
 <header class="mb-12 space-y-2">
     <Header description={post.description} title={post.title} />
