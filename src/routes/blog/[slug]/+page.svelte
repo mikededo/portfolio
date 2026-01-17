@@ -52,9 +52,9 @@
 <header class="mb-12 space-y-2">
     <Header description={post.description} title={post.title} />
 
-    <div class="flex items-center gap-1">
+    <div class="flex items-center gap-1.5">
         {#each post.tags as tag}
-            <span class="hidden rounded-full bg-muted px-2 py-0.5 font-mono text-xs tracking-tight text-muted-foreground sm:inline-block">
+            <span class="hidden rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground sm:inline-block">
                 #{tag}
             </span>
         {/each}

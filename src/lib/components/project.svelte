@@ -39,8 +39,11 @@
         {/if}
     {/if}
     {#if topics}
-        &centerdot;
-        <span class="font-mono text-sm tracking-tight text-muted-foreground italic">{topics.join(', ')}</span>
+        <span class="ml-1 inline-flex flex-wrap gap-1">
+            {#each topics as topic}
+                <span class="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">{topic}</span>
+            {/each}
+        </span>
     {/if}
     <p>{@render children()}</p>
 </li>
