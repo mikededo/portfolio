@@ -20,6 +20,8 @@
 
     <div class="absolute inset-y-6 left-0 w-px bg-muted" aria-hidden="true"></div>
     <div class="absolute inset-y-6 right-0 w-px bg-muted" aria-hidden="true"></div>
+    <div class="absolute inset-x-6 top-0 h-px bg-muted" aria-hidden="true"></div>
+    <div class="absolute inset-x-6 bottom-0 h-px bg-muted" aria-hidden="true"></div>
 
     <nav class="pt-6" aria-label="Breadcrumbs">
         <ol class="mb-4 flex gap-1 text-sm md:text-sm ">
