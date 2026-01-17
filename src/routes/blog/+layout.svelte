@@ -11,7 +11,10 @@
     const isNested = $derived(Object.keys(page.params).length > 0)
 </script>
 
-<main class="relative mx-auto w-full overflow-hidden bg-background/75 px-6 md:w-3/4 md:px-8" id="main-content">
+<main
+    class="relative mx-auto flex h-dvh w-full flex-col overflow-hidden bg-background/75 px-6 md:h-[calc(100dvh-var(--spacing)*8)] md:w-3/4 md:px-8"
+    id="main-content"
+>
     <CornerMarkers showCoordinates />
     <CenterMarker />
 

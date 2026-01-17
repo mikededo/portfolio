@@ -23,8 +23,14 @@
 
     {@render children()}
 
-    <div class="absolute -top-5.5 bottom-3 -left-6 bg-muted-foreground/20 group-last:bottom-5.5 md:-left-8 md:w-px" aria-hidden="true"></div>
-    <div class="absolute -top-5.5 -right-8 bottom-3 bg-muted-foreground/20 group-last:bottom-5.5 md:w-px" aria-hidden="true"></div>
+    <div
+        class="absolute -top-5.5 bottom-3 -left-6 bg-muted group-last:bottom-5.5 md:-left-8 md:w-px"
+        aria-hidden="true"
+    ></div>
+    <div
+        class="absolute -top-5.5 -right-8 bottom-3 bg-muted group-last:bottom-5.5 md:w-px"
+        aria-hidden="true"
+    ></div>
 
     <BottomSectionMarker />
 </section>

@@ -13,19 +13,19 @@
 
 <div class={cn('pointer-events-none absolute inset-0', restProps.class)} aria-hidden="true">
     <div
-        class="absolute top-0 left-0 h-4 w-4 border-t border-l border-muted-foreground/20"
+        class="absolute top-0 left-0 h-4 w-4 border-t border-l border-muted"
         data-corner="top-left"
     ></div>
     <div
-        class="absolute top-0 right-0 h-4 w-4 border-t border-r border-muted-foreground/20"
+        class="absolute top-0 right-0 h-4 w-4 border-t border-r border-muted"
         data-corner="top-right"
     ></div>
     <div
-        class="absolute bottom-0 left-0 h-4 w-4 border-b border-l border-muted-foreground/20"
+        class="absolute bottom-0 left-0 h-4 w-4 border-b border-l border-muted"
         data-corner="bottom-left"
     ></div>
     <div
-        class="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-muted-foreground/20"
+        class="absolute right-0 bottom-0 h-4 w-4 border-r border-b border-muted"
         data-corner="bottom-right"
     ></div>
 
