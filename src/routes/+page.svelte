@@ -6,23 +6,14 @@
 
     import {
         AnimatedNumber,
-        BottomSectionMarker,
         CenterMarker,
         CornerMarkers,
         Experience,
+        HomeHeader,
         Link,
         Project,
         Section
     } from '$lib/components'
-    import Header from '$lib/components/layout/header.svelte'
-    import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
-
-    const URLS = [
-        { href: 'mailto:miquelddg@gmail.com', name: 'email' },
-        { href: 'https://github.com/mikededo', name: 'github' },
-        { href: 'https://www.linkedin.com/in/mikededo', name: 'linkedin' },
-        { href: 'https://github.com/mikededo/portfolio', name: 'code' }
-    ]
 
     type Props = { data: PageData }
     const { data }: Props = $props()
@@ -62,32 +53,7 @@
     <CornerMarkers showCoordinates />
     <CenterMarker />
 
-    <header class="pt-6">
-        <Header
-            description="Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!"
-            title="mikededo"
-        />
-
-        <nav aria-label="Breadcrumbs">
-            <ol class="flex gap-1 text-sm">
-                <li class="flex items-center gap-1">
-                    <a href="/blog">blog</a>
-                    <span class="mx-2">|</span>
-                </li>
-                {#each URLS as { href, name }, i}
-                    <li class="flex items-center gap-1" role="listitem">
-                        <Link {href}>{name}</Link>
-                        {#if i < URLS.length - 1}<span>&centerdot;</span>{/if}
-                    </li>
-                {/each}
-                <li class="ml-auto">
-                    <ThemeSwitcher />
-                </li>
-            </ol>
-        </nav>
-
-        <BottomSectionMarker />
-    </header>
+    <HomeHeader />
 
     <Section number={1} title="Me">
         <ul class="ml-4 list-disc md:ml-8">
