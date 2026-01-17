@@ -4,10 +4,16 @@
 
     import { SvelteSet } from 'svelte/reactivity'
 
-    import { CornerMarkers, Experience, Link, Project, Section } from '$lib/components'
-    import AnimatedNumber from '$lib/components/animated-number.svelte'
-    import BottomSectionMarker from '$lib/components/bottom-section-marker.svelte'
-    import CenterMarker from '$lib/components/center-marker.svelte'
+    import {
+        AnimatedNumber,
+        BottomSectionMarker,
+        CenterMarker,
+        CornerMarkers,
+        Experience,
+        Link,
+        Project,
+        Section
+    } from '$lib/components'
     import Header from '$lib/components/layout/header.svelte'
     import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
 

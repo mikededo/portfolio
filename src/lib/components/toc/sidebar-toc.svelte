@@ -2,6 +2,7 @@
     import { sineOut } from 'svelte/easing'
 
     import AnimatedNumber from '../animated-number.svelte'
+    import CornerMarkers from '../corner-markers.svelte'
     import TocItem from './toc-item.svelte'
     import { useHeadingsState } from './use-headings.svelte'
 
@@ -9,16 +10,20 @@
 </script>
 
 <aside
-    class="3xl:translate-x-0 fixed top-64 left-3/4 hidden w-full max-w-64 transition-none xl:inline-block xl:translate-x-16 2xl:max-w-80 2xl:translate-x-0"
+    class="3xl:translate-x-0 fixed top-64 left-3/4 hidden w-full max-w-64 bg-background/75 transition-none xl:inline-block xl:translate-x-16 2xl:max-w-80 2xl:translate-x-0"
 >
-    <div class="absolute top-7 bottom-0.5 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
+    <CornerMarkers
+        class="**:data-[corner=bottom-left]:hidden **:data-[corner=top-left]:-left-3"
+    />
+
+    <div class="absolute top-7 bottom-2 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
         <div
             class="w-0.5 rounded-full bg-blue-500 transition-all duration-150 ease-out"
             style:height="{tocState.progress}%"
         ></div>
     </div>
 
-    <div class="space-y-3">
+    <div class="space-y-3 p-2">
         <p class="font-mono text-[11px] -tracking-widest text-muted-foreground/75">
             &uarr; j / k &darr;
         </p>
