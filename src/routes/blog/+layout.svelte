@@ -2,7 +2,7 @@
     import type { Snippet } from 'svelte'
 
     import { page } from '$app/state'
-    import { CenterMarker, CornerMarkers } from '$lib/components'
+    import { CornerMarkers } from '$lib/components'
     import ThemeSwitcher from '$lib/components/theme-switcher.svelte'
 
     type Props = { children: Snippet }
@@ -16,7 +16,6 @@
     id="main-content"
 >
     <CornerMarkers showCoordinates />
-    <CenterMarker />
 
     <div class="absolute inset-y-6 left-0 w-px bg-muted" aria-hidden="true"></div>
     <div class="absolute inset-y-6 right-0 w-px bg-muted" aria-hidden="true"></div>
