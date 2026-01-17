@@ -8,6 +8,7 @@
   --background: #fdfdfd;
   --muted: oklch(0.95 0 0);
   --muted-foreground: oklch(0.6 0 0);
+  --grid-color: oklch(0.8 0 0);
 
   &::selection {
     background: #00000022;
@@ -20,6 +21,7 @@
   --background: #0a0a0a;
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.7 0 0);
+  --grid-color: oklch(0.25 0 0);
 
   &::selection {
     background: #ffffff22;
@@ -49,21 +51,17 @@ body[data-scroll-locked='true'] {
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-gutter: stable;
     scrollbar-color: var(--scrollbar-thumb) transparent;
   }
 
   html {
     @apply bg-background text-foreground dark:text-neutral-200;
+    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
   h2 {
-    @apply mt-8 mb-2 text-xl font-bold relative;
-  }
-
-  h2:after {
-    content: '+';
-    @apply absolute -top-4 -left-4 font-thin text-muted-foreground;
+    @apply mt-8 mb-2 text-xl font-semibold relative;
   }
 
   a {

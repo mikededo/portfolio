@@ -1,0 +1,32 @@
+<div
+    class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-muted-foreground/20"
+    aria-hidden="true"
+>
+    <svg
+        fill="none"
+        height="24"
+        stroke="currentColor"
+        stroke-width="1"
+        viewBox="0 0 24 24"
+        width="24"
+    >
+        <line
+            x1="12"
+            x2="12"
+            y1="0"
+            y2="24"
+        />
+        <line
+            x1="0"
+            x2="24"
+            y1="12"
+            y2="12"
+        />
+        <circle
+            cx="12"
+            cy="12"
+            fill="none"
+            r="4"
+        />
+    </svg>
+</div>
