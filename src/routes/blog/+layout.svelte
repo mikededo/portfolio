@@ -12,7 +12,7 @@
 </script>
 
 <main
-    class="relative mx-auto flex h-dvh w-full flex-col overflow-hidden bg-background/75 px-6 md:h-[calc(100dvh-var(--spacing)*8)] md:w-3/4 md:px-8"
+    class="relative mx-auto flex min-h-dvh w-full flex-col overflow-hidden bg-background/75 px-6 md:min-h-[calc(100dvh-var(--spacing)*8)] md:w-3/4 md:px-8"
     id="main-content"
 >
     <CornerMarkers showCoordinates />

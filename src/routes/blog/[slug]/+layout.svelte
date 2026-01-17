@@ -15,7 +15,7 @@
 
 <hr class="mt-10 mb-4 text-muted" />
 
-<footer class="mx-auto flex flex-col items-center justify-between gap-2 text-sm lg:h-16">
+<footer class="mx-auto flex w-full flex-col items-center justify-between gap-2 text-sm lg:h-16">
     <div class="flex w-full items-center justify-between">
         {#if data.prev}
             <a
