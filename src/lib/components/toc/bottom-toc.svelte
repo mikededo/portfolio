@@ -85,6 +85,7 @@
             class="px-4 transition-colors duration-100 disabled:text-muted-foreground/50"
             disabled={tocState.active.index === 0}
             onclick={tocState.actions.gotoPrev}
+            aria-label="Go to previous heading"
         >
             <MoveLeftIcon class="size-4" />
         </button>
@@ -101,6 +102,7 @@
             class="px-4 transition-colors duration-100 disabled:text-muted-foreground/50"
             disabled={tocState.active.index === tocState.headings.length - 1}
             onclick={tocState.actions.gotoNext}
+            aria-label="Go to next heading"
         >
             <MoveRightIcon class="size-4" />
         </button>

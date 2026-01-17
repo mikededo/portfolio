@@ -199,7 +199,7 @@
         >
             I prefer eslint over prettier, and i created this port of
             <Link
-                class="font-mono"
+                class="font-mono text-sm"
                 href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss"
             >
                 prettier-plugin-tailwindcss
@@ -230,11 +230,10 @@
                 companyHref="https://www.stack-ai.com"
                 expanded={expanded.has('stackai')}
                 subtitle="AI toolkit for enterprises"
-                title="Frontend engineer"
+                title="Lead software engineer"
                 onExpand={onToggleExpand('stackai')}
             >
                 <li>Y-combinator startup, joined after a-series</li>
-                <li>Main frontend engineer</li>
                 <li>Streamlining the design system</li>
             </Experience>
         </li>

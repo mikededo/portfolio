@@ -1,4 +1,6 @@
 <script lang="ts" module>
+    import type { EventHandler } from 'svelte/elements'
+
     export type ScheduleEvent = {
         label: string
         width: number
@@ -8,12 +10,10 @@
 </script>
 
 <script lang="ts">
-    import type { MouseEventHandler } from 'svelte/elements'
-
     type Props = { events: ScheduleEvent[] }
     const { events }: Props = $props()
 
-    const handleOnClick = ({ width: original }: ScheduleEvent): MouseEventHandler<HTMLDivElement> => (e) => {
+    const handleOnClick = (event: ScheduleEvent): EventHandler<UIEvent, HTMLDivElement> => (e) => {
         const element = e.currentTarget
         const title = element.querySelector('[data-slot=event-title]')
         if (!title) {
@@ -22,7 +22,7 @@
 
         if (element.dataset.collapsed === 'true') {
             element.dataset.collapsed = 'false'
-            element.style.setProperty('--event-width', `${original}px`)
+            element.style.setProperty('--event-width', `${event.width}px`)
             return
         }
 
@@ -30,18 +30,26 @@
         element.dataset.collapsed = 'true'
         element.style.setProperty('--event-width', `${width}px`)
     }
+
+    const handleKeyDown = (event: ScheduleEvent): EventHandler<KeyboardEvent, HTMLDivElement> => (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            handleOnClick(event)(e)
+        }
+    }
 </script>
 
 <div class="relative mt-6 flex h-22 gap-1 overflow-x-auto" style="scrollbar-gutter: stable">
     {#each events as event, index (index)}
         <div
-            class="group relative w-(--event-width) shrink-0 transition-all duration-200 outline-none"
+            class="group relative w-(--event-width) shrink-0 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             id="event-{index}"
             role="button"
             style:--event-width="{event.width}px"
-            tabindex="-1"
+            tabindex="0"
             onclick={handleOnClick(event)}
-            onkeydown={() => {}}
+            onkeydown={handleKeyDown(event)}
+            aria-label="{event.label} - press Enter to collapse or expand"
             data-collapsed={false}
         >
             <div class="relative">
