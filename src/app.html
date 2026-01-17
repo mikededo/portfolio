@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="%theme%">
+<html lang="en" class="%theme%" style="color-scheme: %colorScheme%">
   <head>
     <meta charset="utf-8" />
     <title>Miquel de Domingo</title>
@@ -27,10 +27,16 @@
     <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
     <link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="%themeColor%" />
 
     %sveltekit.head%
   </head>
   <body data-sveltekit-preload-data="hover" class="px-8 py-4 md:p-8 max-w-5xl mx-auto">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-background focus:text-foreground"
+      >Skip to main content</a
+    >
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

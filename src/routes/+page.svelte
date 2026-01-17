@@ -50,7 +50,7 @@
     })
 </script>
 
-<main class="mx-auto w-full md:w-3/4">
+<main class="mx-auto w-full md:w-3/4" id="main-content">
     <Header
         description="Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!"
         title="mikededo"
@@ -68,7 +68,9 @@
                     {#if i < URLS.length - 1}<span>&centerdot;</span>{/if}
                 </li>
             {/each}
-            <ThemeSwitcher class="ml-auto" role="listitem" />
+            <li class="ml-auto">
+                <ThemeSwitcher />
+            </li>
         </ol>
     </nav>
 

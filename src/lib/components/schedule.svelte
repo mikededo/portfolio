@@ -63,7 +63,7 @@
 
                 {#each { length: event.width <= 50 ? 0 : event.width / 50 - 1 } as _, i}
                     <div
-                        class="absolute bottom-0 h-4 w-px transition-all group-data-[collapsed=true]:h-0"
+                        class="absolute bottom-0 h-4 w-px transition-[height] group-data-[collapsed=true]:h-0"
                         style="background-color: {event.color}; left: {(i + 1) * 50}px"
                     ></div>
                 {/each}

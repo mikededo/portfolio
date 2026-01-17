@@ -15,23 +15,26 @@
 
 <hr class="mt-10 mb-4 text-muted" />
 
-<footer class="mx-auto flex flex-col items-center justify-between gap-2 text-sm md:max-w-3/4 lg:h-16">
+<footer class="mx-auto flex flex-col items-center justify-between gap-2 text-sm lg:h-16">
     <div class="flex w-full items-center justify-between">
         {#if data.prev}
             <a
-                class="group flex items-center gap-2 px-2 py-1 no-underline transition-colors duration-150 hover:bg-muted/75"
+                class="group flex items-start gap-2 px-2 py-1 no-underline transition-colors duration-150 hover:bg-muted/75"
                 href={data.prev.relativeURL}
                 aria-label="Previous post: {data.prev.title}"
             >
-                <MoveLeftIcon class="size-3 translate-x-0.5 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100" />
+                <MoveLeftIcon
+                    class="mt-1 size-3 translate-x-0.5 text-foreground opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100"
+                    aria-hidden="true"
+                />
                 <span class="flex flex-col items-start">
                     <span class="text-muted-foreground">Prev post</span>
-                    <span class="line-clamp-1 max-w-32 sm:max-w-48">{data.prev.title}</span>
+                    <span class="line-clamp-1 max-w-32 text-xs text-foreground sm:max-w-48">{data.prev.title}</span>
                 </span>
             </a>
         {:else}
             <span class="flex items-center gap-2 px-2 py-1 text-muted-foreground/50">
-                <MoveLeftIcon class="size-3" />
+                <MoveLeftIcon class="size-3" aria-hidden="true" />
                 <span>Prev post</span>
             </span>
         {/if}
@@ -44,16 +47,17 @@
             >
                 <span class="flex flex-col items-end">
                     <span class="text-muted-foreground">Next post</span>
-                    <span class="line-clamp-1 max-w-32 sm:max-w-48">{data.next.title}</span>
+                    <span class="line-clamp-1 max-w-32 truncate text-right text-xs text-foreground sm:max-w-48" style="scrollbar-gutter: auto">{data.next.title}</span>
                 </span>
                 <MoveRightIcon
-                    class="size-3 -translate-x-0.5 opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100"
+                    class="mt-1 size-3 -translate-x-0.5 text-foreground opacity-0 transition-all duration-150 ease-in-out group-hover:translate-x-0 group-hover:opacity-100"
+                    aria-hidden="true"
                 />
             </a>
         {:else}
             <span class="flex items-center gap-2 px-2 py-1 text-muted-foreground/50">
                 <span>Next post</span>
-                <MoveRightIcon class="size-3" />
+                <MoveRightIcon class="size-3" aria-hidden="true" />
             </span>
         {/if}
     </div>

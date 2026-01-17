@@ -20,10 +20,15 @@
     import { quintOut } from 'svelte/easing'
     import { fly, slide } from 'svelte/transition'
 
+    import { prefersReducedMotion } from '$lib/utils/reduced-motion'
+
     let show = $state(false)
+    let reducedMotion = $state(false)
     let knowMore = $state(false)
 
     onMount(() => {
+        reducedMotion = prefersReducedMotion()
+
         if (!window.localStorage) {
             return
         }
@@ -54,7 +59,7 @@
 {#if show}
     <div
         class="fixed right-2 bottom-2 left-2 z-50 border border-slate-300 bg-white p-3 text-sm sm:right-0 sm:left-auto sm:max-w-sm dark:border-slate-700 dark:bg-slate-900"
-        transition:fly={{ easing: quintOut, y: 28 }}
+        transition:fly={{ duration: reducedMotion ? 0 : 300, easing: quintOut, y: 28 }}
     >
         <p class="mb-2">
             This site uses tracking technologies. You may opt in or opt out of the use of these technologies.
@@ -63,7 +68,7 @@
             <p
                 class="mb-4 origin-bottom"
                 style="scrollbar-gutter: auto"
-                transition:slide={{ easing: quintOut }}
+                transition:slide={{ duration: reducedMotion ? 0 : 300, easing: quintOut }}
             >
                 The site does not track any personal information nor any sensitive data! It tracks <strong>page visits</strong>, and other things that can help me provide a better experience to the site! Since I'm using Vercel's integrated tracking, check:
                 <a href="https://vercel.com/docs/analytics/privacy-policy#privacy-and-compliance">Vercel's conditions</a>

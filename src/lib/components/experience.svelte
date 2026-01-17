@@ -7,7 +7,13 @@
 
     import Link from './link.svelte'
 
+    import { prefersReducedMotion } from '$lib/utils/reduced-motion'
+
     const fadeSlide = (node: Element, options: SlideParams): TransitionConfig => {
+        if (prefersReducedMotion()) {
+            return { duration: 0 }
+        }
+
         const slide = baseSlide(node, options)
 
         return {

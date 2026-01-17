@@ -40,7 +40,9 @@
         <img
             class="h-full w-full object-cover"
             alt="Preview of {label}"
+            height="200"
             src="/previews/{slug}.jpg"
+            width="300"
         />
     </div>
 </div>

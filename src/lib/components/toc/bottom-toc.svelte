@@ -8,6 +8,8 @@
     import TocItem from './toc-item.svelte'
     import { useHeadingsState } from './use-headings.svelte'
 
+    import { prefersReducedMotion } from '$lib/utils/reduced-motion'
+
     const MAX_BOTTOM_SHEET_HEIGHT = 384
     const BOTTOM_BAR_HEIGHT = 40
 
@@ -16,6 +18,7 @@
     let contentHeight = $state<number>(0)
     let open = $state(false)
     let sheetRef = $state<HTMLElement>()
+    let reducedMotion = $state(false)
 
     const activeText = $derived(tocState.headings.find((h) => h.id === tocState.active.id))
     const position = $derived.by(() => {
@@ -41,6 +44,8 @@
     }
 
     onMount(() => {
+        reducedMotion = prefersReducedMotion()
+
         const onClickOutside = (e: PointerEvent) => {
             if (!open || !sheetRef) {
                 return
@@ -62,7 +67,7 @@
     <FocusGuard />
     <div
         class="fixed inset-0 z-10 bg-black/75"
-        transition:fade={{ duration: 150, easing: sineInOut }}
+        transition:fade={{ duration: reducedMotion ? 0 : 150, easing: sineInOut }}
     ></div>
 {/if}
 
@@ -89,12 +94,17 @@
         >
             <MoveLeftIcon class="size-4" />
         </button>
-        <button class="flex w-full flex-1 items-center px-2 py-2 text-left text-xs" onclick={onToggleToc}>
+        <button
+            class="flex w-full flex-1 items-center px-2 py-2 text-left text-xs"
+            onclick={onToggleToc}
+            aria-expanded={open}
+            aria-label="Toggle table of contents"
+        >
             {#if !activeText}
                 <span>Table of contents</span>
             {:else}
                 {#key activeText}
-                    <span class="line-clamp-1" in:fade={{ duration: 250, easing: sineInOut }}>{activeText.text}</span>
+                    <span class="line-clamp-1" in:fade={{ duration: reducedMotion ? 0 : 250, easing: sineInOut }}>{activeText.text}</span>
                 {/key}
             {/if}
         </button>
