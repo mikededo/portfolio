@@ -10,28 +10,29 @@
 </script>
 
 <aside
-    class="3xl:translate-x-0 fixed top-64 left-3/4 hidden w-full max-w-64 bg-background/75 transition-none xl:inline-block xl:translate-x-16 2xl:max-w-80 2xl:translate-x-0"
+    class="3xl:translate-x-0 fixed top-64 right-0 hidden w-full max-w-64 bg-background/75 transition-none xl:inline-block 2xl:right-12 2xl:max-w-80 2xl:translate-x-0"
 >
     <CornerMarkers
-        class="**:data-[corner=bottom-left]:hidden **:data-[corner=top-left]:-left-3"
+        class="**:data-[corner=bottom-left]:-left-3 **:data-[corner=top-left]:-left-3"
     />
 
-    <div class="absolute top-7 bottom-2 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
+    <div class="absolute inset-y-5 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
         <div
             class="w-0.5 rounded-full bg-blue-500 transition-all duration-150 ease-out"
             style:height="{tocState.progress}%"
         ></div>
     </div>
 
-    <div class="space-y-3 p-2">
-        <p class="font-mono text-[11px] -tracking-widest text-muted-foreground/75">
-            &uarr; j / k &darr;
-        </p>
+    <div class="space-y-3 p-2 pr-3">
+        <div class="flex items-center justify-between">
+            <p class="font-mono text-xs font-normal tracking-tight text-muted-foreground/75 uppercase">
+                On this page
+            </p>
 
-        <p class="font-mono text-xs font-normal tracking-tight text-muted-foreground/75 uppercase">
-            On this page
-        </p>
-
+            <p class="text-right font-mono text-[11px] -tracking-widest text-muted-foreground/75">
+                &uarr; j / k &darr;
+            </p>
+        </div>
         <nav class="max-h-[calc(100vh-calc(var(--spacing)*24))] overflow-auto pr-0 text-xs">
             <ul class="w-full space-y-2">
                 {#each tocState.headings as heading}
