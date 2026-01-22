@@ -26,6 +26,7 @@ export const PostMetaSchema = v.object({
   ),
   description: v.pipe(v.string(), v.trim()),
   id: v.pipe(v.string(), v.trim()),
+  ogImage: v.optional(v.pipe(v.string(), v.trim())),
   tags: v.pipe(
     v.optional(v.string(), ''),
     v.transform((v) => v.split(',').map((v) => v.trim())),

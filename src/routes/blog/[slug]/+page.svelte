@@ -11,7 +11,7 @@
     const { data }: PageProps = $props()
     const post = $derived(data.metadata)
     const baseUrl = $derived(getBaseUrl())
-    const ogImage = $derived(`${baseUrl}/og.png`)
+    const ogImage = $derived(post.ogImage ? `${baseUrl}${post.ogImage}` : `${baseUrl}/og.png`)
 
     useBlogNavigation({
         backUrl: '/blog',
@@ -35,6 +35,11 @@
     <meta content={post.title} property="og:title" />
     <meta content={post.description} property="og:description" />
     <meta content={ogImage} property="og:image" />
+    <meta content={post.title} property="og:image:alt" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    <meta content="mikededo" property="og:site_name" />
+    <meta content="en_US" property="og:locale" />
 
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="mikededo.com" property="twitter:domain" />
@@ -42,8 +47,11 @@
     <meta content={post.title} name="twitter:title" />
     <meta content={post.description} name="twitter:description" />
     <meta content={ogImage} name="twitter:image" />
+    <meta content={post.title} name="twitter:image:alt" />
+    <meta content="@miqueldedomini" name="twitter:creator" />
 
     <meta content={post.date.toISOString()} property="article:published_time" />
+    <meta content="mikededo" property="article:author" />
     {#each post.tags as tag}
         <meta content={tag} property="article:tag" />
     {/each}
