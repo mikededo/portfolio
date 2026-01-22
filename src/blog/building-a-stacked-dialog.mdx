@@ -1,0 +1,118 @@
+---
+title: Building a stacked dialog component
+description: Solving double validation UX with CSS Grid and Radix Dialog
+date: '2026-01-22'
+tags: ui, exploration
+---
+
+<script>
+  import StackingPreview from '../lib/components/stacking-preview.svelte';
+  import IterationComparison from '../lib/components/iteration-comparison.svelte';
+  import { STACK_LAYERS, ITERATIONS } from '../lib/static/stacked-dialog.ts';
+</script>
+
+## The problem
+
+You have an edit dialog open. User clicks "Delete" and now you need a
+confirmation. But opening a second modal on top of the first one? That's two
+overlays stacking awkwardly, two dialogs fighting for attention, and an escape
+key that doesn't know what to do.
+
+I wanted something that felt like navigating through cards, where the previous
+context stays visible but recedes into the background.
+
+<StackingPreview layers={STACK_LAYERS} />
+
+## Four iterations
+
+I went through four attempts before landing on something that worked. Each
+failure was basically fighting Radix's internal implementation, which we wanted
+to keep, specifically because of a11y.
+
+<IterationComparison iterations={ITERATIONS} />
+
+### Iteration 1: Multiple Content elements
+
+My first instinct was to render multiple `DialogPrimitive.Content` elements,
+one for each dialog in the stack, see what happened. Base-ui provides better
+handling, or one could say a poor solution to nested dialogs, but didn't work.
+
+Nothing rendered. Radix Dialog assumes a single Content per dialog instance. It
+manages focus trapping and aria attributes for that one element. Multiple
+Contents confused the internal state machine.
+
+### Iteration 2: Single Content, absolute positioning
+
+New approach: single `DialogPrimitive.Content` as a container, stacked dialogs
+as regular divs inside. I used `position: absolute` for inactive dialogs and
+normal flow for the active one.
+
+Almost worked. But z-index was being ignored. The active dialog couldn't appear
+above the inactive ones. I'd forgotten a CSS fundamental: z-index only applies
+to positioned elements.
+
+### Iteration 3: All absolute
+
+Make everything `position: absolute`. Now z-index works.
+
+New problem: container collapses to zero height. All children are out of normal
+flow, nothing establishes dimensions.
+
+### Iteration 4: CSS Grid
+
+CSS Grid lets multiple elements occupy the same cell using `grid-area: 1/1`.
+All children stack in the same position, the tallest determines container
+height, and grid items create a stacking context so z-index works.
+
+```tsx
+<div className="grid *:[grid-area:1/1]">
+  {children}
+</div>
+```
+
+Three iterations of positioning gymnastics solved by a grid trick.
+
+<video
+  class="rounded-lg mx-auto max-h-120 border border-muted-foreground/30" 
+  src="/img/stacked-dialog.webm"
+  autoplay
+  loop
+  muted
+  playsinline
+/>
+
+## The API
+
+The component follows the compound pattern, mirroring Radix's structure:
+
+```tsx
+<StackedDialogRoot open={isOpen} onOpenChange={setIsOpen} initialValue="edit">
+  <StackedDialogPortal>
+    <StackedDialogContent value="edit">
+      <StackedDialogHeader>
+        <StackedDialogTitle>Edit Role</StackedDialogTitle>
+      </StackedDialogHeader>
+      <StackedDialogFooter>
+        <StackedDialogNavigate to="delete" asChild>
+          <Button variant="destructive">Delete</Button>
+        </StackedDialogNavigate>
+      </StackedDialogFooter>
+    </StackedDialogContent>
+
+    <StackedDialogContent value="delete">
+      <StackedDialogHeader>
+        <StackedDialogTitle>Confirm delete</StackedDialogTitle>
+      </StackedDialogHeader>
+      <StackedDialogFooter>
+        <StackedDialogPrevious asChild>
+          <Button variant="outline">Back</Button>
+        </StackedDialogPrevious>
+      </StackedDialogFooter>
+    </StackedDialogContent>
+  </StackedDialogPortal>
+</StackedDialogRoot>
+```
+
+The CSS Grid insight was the key takeaway: `grid-area: 1/1` preserves container
+dimensions while allowing z-index to work, something I hadn't considered for
+complex stacking scenarios before.

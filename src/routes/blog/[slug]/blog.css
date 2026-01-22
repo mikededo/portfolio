@@ -81,4 +81,34 @@ article.blog {
   blockquote.caution {
     @apply border-l-red-500 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-200;
   }
+
+  pre.shiki {
+    @apply my-6 overflow-x-auto rounded-md px-4 py-3 text-xs leading-0 tracking-tight border border-neutral-200 dark:border-neutral-800;
+  }
+
+  pre.shiki code {
+    @apply font-mono;
+  }
+
+  pre.shiki .line {
+    @apply leading-4;
+  }
+
+  pre.shiki,
+  pre.shiki span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
+
+  code:not(pre code) {
+    @apply text-xs font-mono px-1.5 py-0.5 rounded-sm;
+    @apply bg-neutral-100 dark:bg-neutral-800;
+    @apply border border-neutral-200 dark:border-neutral-700;
+  }
+}
+
+:root.dark pre.shiki,
+:root.dark pre.shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
 }

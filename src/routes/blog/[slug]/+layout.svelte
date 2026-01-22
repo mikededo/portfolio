@@ -15,7 +15,7 @@
 
 <hr class="mt-10 mb-4 text-muted" />
 
-<footer class="mx-auto flex w-full flex-col items-center justify-between gap-2 text-sm lg:h-16">
+<footer class="mx-auto flex w-full flex-col items-center justify-between gap-2 text-sm lg:h-24">
     <div class="flex w-full items-center justify-between">
         {#if data.prev}
             <a
@@ -61,7 +61,7 @@
             </span>
         {/if}
     </div>
-    <p class="text-center text-xs text-muted-foreground">
+    <p class="mb-4 text-center text-xs text-muted-foreground">
         Created by
         <Link href="https://github.com/mikdededo">@mikededo</Link>
     </p>
