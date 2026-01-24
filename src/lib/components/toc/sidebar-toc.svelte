@@ -10,15 +10,15 @@
 </script>
 
 <aside
-    class="3xl:translate-x-0 fixed top-64 right-0 hidden w-full max-w-64 bg-background/75 transition-none xl:inline-block 2xl:right-12 2xl:max-w-80 2xl:translate-x-0"
+    class="3xl:translate-x-0 fixed top-4 right-0 hidden w-full max-w-64 bg-background/75 transition-none xl:inline-block 2xl:right-12 2xl:max-w-72 2xl:translate-x-0"
 >
     <CornerMarkers
         class="**:data-[corner=bottom-left]:-left-3 **:data-[corner=top-left]:-left-3"
     />
 
-    <div class="absolute inset-y-5 -left-3 w-0.5 overflow-hidden rounded-full bg-muted">
+    <div class="absolute inset-y-5 -left-3 w-px overflow-hidden rounded-full bg-muted">
         <div
-            class="w-0.5 rounded-full bg-blue-500 transition-all duration-150 ease-out"
+            class="w-px rounded-full bg-blue-500 transition-all duration-150 ease-out"
             style:height="{tocState.progress}%"
         ></div>
     </div>
