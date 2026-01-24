@@ -48,6 +48,25 @@
     })
 </script>
 
+<svelte:head>
+    <title>Miquel de Domingo</title>
+    <meta name="description" content="Miquel de Domingo's portfolio" />
+
+    <meta property="og:url" content="https://mikededo.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Miquel de Domingo" />
+    <meta property="og:description" content="Miquel de Domingo's portfolio" />
+    <meta property="og:image" content="https://mikededo.com/og.png" />
+    <meta property="og:site_name" content="mikededo" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="mikededo.com" />
+    <meta property="twitter:url" content="https://mikededo.com" />
+    <meta name="twitter:title" content="Miquel de Domingo" />
+    <meta name="twitter:description" content="Miquel de Domingo's portfolio" />
+    <meta name="twitter:image" content="https://mikededo.com/og.png" />
+</svelte:head>
+
 <main class="relative mx-auto w-full overflow-hidden bg-background/75 px-6 md:w-3/4 md:px-8">
     <CornerMarkers showCoordinates />
 

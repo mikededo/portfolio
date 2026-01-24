@@ -17,6 +17,23 @@
 </script>
 
 <svelte:head>
+    <title>Blog | Miquel de Domingo</title>
+    <meta name="description" content="Shower thoughts on frontend, design, and life as a cyclist" />
+
+    <meta property="og:url" content="https://mikededo.com/blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Blog | Miquel de Domingo" />
+    <meta property="og:description" content="Shower thoughts on frontend, design, and life as a cyclist" />
+    <meta property="og:image" content="https://mikededo.com/og.png" />
+    <meta property="og:site_name" content="mikededo" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="mikededo.com" />
+    <meta property="twitter:url" content="https://mikededo.com/blog" />
+    <meta name="twitter:title" content="Blog | Miquel de Domingo" />
+    <meta name="twitter:description" content="Shower thoughts on frontend, design, and life as a cyclist" />
+    <meta name="twitter:image" content="https://mikededo.com/og.png" />
+
     <!-- Force the scrollbar-gutter here so we avoid flickering with blog page -->
     <style>
         html {
