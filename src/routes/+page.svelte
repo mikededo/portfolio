@@ -48,7 +48,7 @@
     })
 </script>
 
-<main class="relative mx-auto w-full overflow-hidden bg-background/75 px-6 md:w-3/4 md:px-8" id="main-content">
+<main class="relative mx-auto w-full overflow-hidden bg-background/75 px-6 md:w-3/4 md:px-8">
     <CornerMarkers showCoordinates />
 
     <HomeHeader />

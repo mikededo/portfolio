@@ -77,16 +77,21 @@ body[data-scroll-locked='true'] {
     @apply font-semibold;
   }
 
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-  /* Accessibility: Disable strictly for users who prefer reduced motion */
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: no-preference) {
+    ::view-transition-group(root),
     ::view-transition-old(root),
     ::view-transition-new(root) {
-      animation: auto;
+      animation-duration: 100ms;
+      animation-timing-function: ease-out;
+      mix-blend-mode: normal;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(root),
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none !important;
     }
   }
 }
