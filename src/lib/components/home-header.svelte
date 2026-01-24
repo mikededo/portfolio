@@ -18,7 +18,7 @@
     <div class="pointer-events-none absolute top-5 -right-8 bottom-3 w-px bg-muted" aria-hidden="true"></div>
 
     <Header
-        description="Hey, I'm Miquel de Domingo a passionate software engineer and cyclist!"
+        description="Hey, I'm Miquel de Domingo a passionate software engineer, designer and cyclist!"
         title="mikededo"
     />
 
