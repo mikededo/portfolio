@@ -28,7 +28,7 @@
                     aria-hidden="true"
                 />
                 <span class="flex flex-col items-start">
-                    <span class="text-muted-foreground">Prev post</span>
+                    <span class="text-foreground">Prev post</span>
                     <span class="line-clamp-1 max-w-32 text-xs text-foreground sm:max-w-48">{data.prev.title}</span>
                 </span>
             </a>
@@ -46,7 +46,7 @@
                 aria-label="Next post: {data.next.title}"
             >
                 <span class="flex flex-col items-end">
-                    <span class="text-muted-foreground">Next post</span>
+                    <span class="text-foreground">Next post</span>
                     <span class="line-clamp-1 max-w-32 truncate text-right text-xs text-foreground sm:max-w-48" style="scrollbar-gutter: auto">{data.next.title}</span>
                 </span>
                 <MoveRightIcon
