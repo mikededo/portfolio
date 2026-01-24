@@ -1,13 +1,6 @@
-<script lang="ts" module>
-    export type EffectivenessItem = {
-        task: string
-        level: number // 0-100
-        label: string
-        color: string
-    }
-</script>
-
 <script lang="ts">
+    import type { EffectivenessItem } from '$lib/static/catching-up-with-ai-tools'
+
     type Props = { items: EffectivenessItem[] }
     const { items }: Props = $props()
 </script>

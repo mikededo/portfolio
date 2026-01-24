@@ -55,7 +55,7 @@ article.blog {
   }
 
   blockquote {
-    @apply bg-muted border-l-2 border-muted-foreground px-4 py-2 [&>p]:text-inherit [&>p]:text-sm mb-2;
+    @apply bg-muted border-l-2 border-muted-foreground px-4 py-2 [&>p]:text-inherit [&>p]:text-sm mt-1 mb-2;
 
     p {
       @apply leading-snug m-0;

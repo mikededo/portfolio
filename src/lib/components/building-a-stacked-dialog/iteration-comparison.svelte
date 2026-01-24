@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Iteration } from '$lib/static/stacked-dialog'
+    import type { Iteration } from '$lib/static/building-a-stacked-dialog'
 
     const COLORS: Record<Iteration['status'], string> = {
         failed: '#ef4444',

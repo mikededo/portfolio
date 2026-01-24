@@ -1,13 +1,6 @@
-<script lang="ts" module>
-    export type CostItem = {
-        label: string
-        percentage: number
-        color: string
-        note?: string
-    }
-</script>
-
 <script lang="ts">
+    import type { CostItem } from '$lib/static/catching-up-with-ai-tools'
+
     type Props = {
         items: CostItem[]
         title?: string

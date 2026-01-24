@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { StackLayer } from '$lib/static/stacked-dialog'
+    import type { StackLayer } from '$lib/static/building-a-stacked-dialog'
 
     type Props = { layers: StackLayer[] }
     const { layers }: Props = $props()

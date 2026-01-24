@@ -1,4 +1,9 @@
-import type { ScheduleEvent } from '$lib/components/schedule.svelte'
+export type ScheduleEvent = {
+  label: string
+  width: number
+  color: string
+  content: { left: string, right: string } | string
+}
 
 export const WORK_AND_TRAIN_SCHEDULE: ScheduleEvent[] = [
   {

@@ -1,70 +1,59 @@
 ---
 title: "Catching up: My late adoption of LLMs"
-description: "I joined an AI company without having used LLM tools. Here's what I learned about the hype, the reality, and why adaptability matters more than early adoption."
+description: "I joined an AI company without much trust in AI tools. Here's what I learnt about why adaptability matters more than early adoption."
 date: '2026-01-16'
 tags: ai, tools, productivity, career
 ---
 
 <script>
-  import LlmEffectiveness from '../lib/components/llm-effectiveness.svelte';
-  import HiddenCosts from '../lib/components/hidden-costs.svelte';
-  import { LLM_EFFECTIVENESS, LLM_HIDDEN_COSTS } from '../lib/static/llm-adoption.ts';
+  import LlmEffectiveness from '../lib/components/catching-up-with-ai-tools/llm-effectiveness.svelte';
+  import HiddenCosts from '../lib/components/catching-up-with-ai-tools/hidden-costs.svelte';
+  import { LLM_EFFECTIVENESS, LLM_HIDDEN_COSTS } from '../lib/static/catching-up-with-ai-tools.ts';
 </script>
 
 ## The irony of joining an AI company
 
 In late August 2025, I joined Stack AI, a Y-Combinator startup building AI
 tooling for enterprises. There is an obvious irony here that I need to address
-upfront: I joined an AI company without having seriously used LLM tools in my
-daily work.
+upfront, since I joined an AI company without trustin LLM tools, specifically
+for software development.
 
-I had tried ChatGPT a few times. I had seen the demos. I knew the capabilities
-existed. But I hadn't integrated any of it into my workflow. My editor was still
-my editor, my terminal was still my terminal, and my process for building
-software was largely the same as it had been for years. I was productive. I
-shipped fast. Why fix what wasn't broken?
-
-The first week at Stack AI made it clear that I was behind. Not in a dramatic,
-career-threatening way, but in a quieter, more uncomfortable way. Everyone around
-me used these tools as naturally as breathing. Copilot suggestions appearing mid-thought.
-Claude conversations open in browser tabs. Cursor commands flying across screens.
-And there I was, typing everything character by character, feeling like I had
-shown up to a Formula 1 race on a bicycle.
+I had tried ChatGPT, Claude, Gemini, basically anything new that came up, yet
+nothing was really clicking for me. I was (and I still) code in a terminal, the
+process of building software was what it had been for the past five years, and
+overall I was delivering! Why should I change something that was working, and I
+considered reliable?
 
 ## The skeptic's position
 
-I want to be clear: I wasn't resisting AI tools out of principle or fear. I
-wasn't worried about being replaced or philosophically opposed to the technology.
-My hesitation came from a different place entirely: I had seen hype cycles before.
+I want to be clear: I wasn't resisting AI tools out of principle or fear. I'm
+not worried about being replaced nor against the technology; it was more a
+matter of overhyped stuff, with low performance.
 
 As a frontend engineer, I have lived through the rise and fall of countless
 "revolutionary" tools and frameworks. I have seen technologies that were supposed
-to change everything quietly fade into irrelevance. I have watched colleagues
-spend weeks learning tools that were abandoned six months later. The JavaScript
-ecosystem alone has taught me that not every shiny new thing deserves immediate
-adoption.
+to change everything slowly fade into irrelevance. We've all tried different
+frameworks, while industry standard is still React. The JavaScript ecosystem
+alone has taught me that not every shiny new thing deserves immediate adoption.
 
-My workflow worked. I had spent years refining it. I knew my editor's shortcuts
-by muscle memory. I understood my build tools deeply. I could debug problems
-efficiently because I understood the systems I was working with. There is real
-value in that kind of deep familiarity, and I was reluctant to disrupt it for
-something that might turn out to be another passing trend.
+My workflow worked. I had spent years refining it, specially as a neovim user.
+I understood my build tools deeply. I could debug problems efficiently because
+I understood the systems I was working with. There is real value in that kind
+of deep familiarity, and I was not willing to disrupt it for something that
+might turn out to be another passing trend.
 
-There was also the time factor. I work 40 to 60 hours per week and train 15 to
-25 hours. My schedule is already optimized to the point where there is little
-room for experimentation. Learning a new tool isn't free; it costs focus and
-energy that I couldn't easily spare. So I watched from a distance, waiting to
-see if the hype would settle into something real.
+There was also the time factor. My schedule is already optimized to the point
+where there is little room for experimentation. Learning a new tool isn't free;
+it costs focus and energy that I couldn't easily spare. So I watched from a
+distance, waiting to see if the hype would settle into something real.
 
-## The pressure builds
+## Speed created pressure
 
 But then I joined Stack AI, and watching from a distance was no longer an option.
 
 The pressure came from multiple directions. Twitter was full of threads about
-"10x engineers" who had unlocked superhuman productivity with AI assistants. My
-LinkedIn feed showed developers claiming they had shipped entire features in
-hours that would have taken days. Friends started asking me if I used Cursor,
-and the pause before my answer grew more uncomfortable each time.
+"10x engineers" who had unlocked superhuman productivity with AI assistants,
+shipping lots of things, some of them quite impressive.
 
 The worst part was the internal contradiction. I had built my professional
 identity around shipping fast and iterating faster. I valued efficiency. I
@@ -72,8 +61,8 @@ automated repetitive tasks. I was supposed to be the person who embraced tools
 that made me more effective. And yet here I was, manually writing code while
 everyone around me had discovered what felt like a cheat code.
 
-The imposter syndrome was subtle but persistent. I started questioning whether
-my productivity was actually as good as I thought. Maybe I had been deluding
+The fomo was subtle but persistent. I started questioning whether my
+productivity was actually as good as I thought. Maybe I had been deluding
 myself. Maybe the developers claiming 10x improvements weren't exaggerating.
 Maybe I was falling behind in a way that would compound over time until I was
 no longer competitive.
@@ -89,31 +78,38 @@ but integrate them into my daily workflow and see what happened.
 The first thing I discovered is that the learning curve is steeper than the hype
 suggests. The marketing makes it look effortless: just ask the AI what you want,
 and it appears. The reality is messier. You need to learn how to prompt
-effectively. You need to understand what the model is good at and what it
-struggles with. You need to develop intuition for when to trust its output and
-when to verify everything manually.
+effectively. Rules, hooks, skills, agents, subagents... You need to understand
+what the model is good at and what it struggles with. You need to develop
+intuition for when to trust its output and when to verify everything manually.
 
 I spent the first few weeks being frustrated more often than I was helped. The
-AI would generate code that looked correct but had subtle bugs. It would
-confidently provide outdated information. It would misunderstand my intent and
-produce something completely different from what I needed. I found myself
-spending significant time checking and correcting its output, which sometimes
-felt slower than just writing the code myself.
+AI was generating code that did the work, but didn't fit my style. It was
+buggy, UI's were terrible, and I felt like I had 0 knowledge of the changes
+applied. It would confidently provide outdated information. It would
+misunderstand my intent and produce something completely different from what I
+needed. I found myself spending significant time checking and correcting its
+output, which sometimes felt slower than just writing the code myself.
+
+I realised I was spending more time reviewing than coding.
 
 But then, gradually, things started to click. I learned to use it for
 boilerplate code that I knew how to write but didn't want to type. I learned
 to use it as a rubber duck, explaining problems and letting it suggest angles
 I hadn't considered. I learned to use it for exploring unfamiliar codebases,
 asking it to explain what specific functions did rather than reading through
-everything myself.
+everything myself. A coworker.
 
 The breakthrough wasn't a single moment. It was a slow accumulation of small
 wins where the tool actually saved me time. Not the dramatic "10x productivity"
-that Twitter promised, but something more modest and real: maybe 20 to 30
-percent faster on certain tasks, with the time savings concentrated in
-specific areas.
+bullshit, but something more modest and real, no need to quantify everythin.
 
 <LlmEffectiveness items={LLM_EFFECTIVENESS} />
+
+At the same time, we keep seing articles in which devs take more time for same
+tasks, and we even think we are going faster! 
+
+> [One of my favourite reads](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
+> regarding this topic, from METR
 
 ## Separating hype from reality
 
@@ -151,7 +147,8 @@ productivity in misleading ways, or simply exaggerating.
 
 One thing I did not anticipate is how much my role would change. I used to spend
 most of my time writing code. Now I spend a significant portion of it reviewing
-and validating code that someone else wrote, except that someone is an AI.
+and validating code that someone else wrote, except that someone is an AI. I
+take more decisions on how to do things, rather than implementing.
 
 This is a subtle but important shift. When I write code myself, I build mental
 context as I go. I understand every decision because I made it. I know where the

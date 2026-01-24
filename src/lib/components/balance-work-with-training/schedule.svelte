@@ -1,15 +1,7 @@
-<script lang="ts" module>
+<script lang="ts">
+    import type { ScheduleEvent } from '$lib/static/balance-work-with-training'
     import type { EventHandler } from 'svelte/elements'
 
-    export type ScheduleEvent = {
-        label: string
-        width: number
-        color: string
-        content: { left: string, right: string } | string
-    }
-</script>
-
-<script lang="ts">
     type Props = { events: ScheduleEvent[] }
     const { events }: Props = $props()
 
