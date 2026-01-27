@@ -1,5 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.mikededo.com/</loc>
+    <loc>https://mikededo.com/</loc>
+    <lastmod>2026-01-27T14:01:27.931Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mikededo.com/blog/balance-work-with-training</loc>
+    <lastmod>2025-09-29T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mikededo.com/blog/building-a-stacked-dialog</loc>
+    <lastmod>2026-01-22T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mikededo.com/blog/catching-up-with-ai-tools</loc>
+    <lastmod>2026-01-16T00:00:00.000Z</lastmod>
   </url>
 </urlset>

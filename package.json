@@ -29,14 +29,15 @@
   "packageManager": "bun@1.3.6",
   "private": true,
   "scripts": {
-    "prebuild": "bun run check",
+    "prebuild": "bun run check && bun run sitemap",
     "build": "vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "vite dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "bun run scripts/sitemap.ts"
   },
   "type": "module",
   "dependencies": {
