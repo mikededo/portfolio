@@ -284,9 +284,7 @@ const handleEscape = () => {
 
 Matches how you'd expect browser back to work.
 
----
-
-The interesting part wasn't the visual effect—that's just transforms. It was
+The interesting part wasn't the visual effect, that's just transforms. It was
 finding a layout primitive that let multiple elements share space while keeping
 focus management intact. Grid turned out to be the answer, specifically
 `grid-area: 1/1` for stacking without collapsed containers or z-index fights.

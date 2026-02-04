@@ -10,7 +10,7 @@ import blockquote from './remark/blockquote.ts'
 
 const highlighter = await createHighlighter({
   langs: ['javascript', 'typescript', 'tsx', 'css', 'html', 'bash', 'json', 'svelte'],
-  themes: ['catppuccin-latte', 'catppuccin-macchiato']
+  themes: ['catppuccin-macchiato']
 })
 
 const mdsvexConfig = defineMDSveXConfig({
@@ -20,7 +20,7 @@ const mdsvexConfig = defineMDSveXConfig({
       const html = escapeSvelte(highlighter.codeToHtml(code, {
         defaultColor: false,
         lang,
-        themes: { dark: 'catppuccin-macchiato', light: 'catppuccin-latte' }
+        themes: { dark: 'catppuccin-macchiato', light: 'catppuccin-macchiato' }
       }))
       return `{@html \`${html}\`}`
     }
