@@ -50,21 +50,21 @@
 
 <svelte:head>
     <title>Miquel de Domingo</title>
-    <meta name="description" content="Miquel de Domingo's portfolio" />
+    <meta content="Miquel de Domingo's portfolio" name="description" />
 
-    <meta property="og:url" content="https://mikededo.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Miquel de Domingo" />
-    <meta property="og:description" content="Miquel de Domingo's portfolio" />
-    <meta property="og:image" content="https://mikededo.com/og.png" />
-    <meta property="og:site_name" content="mikededo" />
+    <meta content="https://mikededo.com" property="og:url" />
+    <meta content="website" property="og:type" />
+    <meta content="Miquel de Domingo" property="og:title" />
+    <meta content="Miquel de Domingo's portfolio" property="og:description" />
+    <meta content="https://mikededo.com/og.png" property="og:image" />
+    <meta content="mikededo" property="og:site_name" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="mikededo.com" />
-    <meta property="twitter:url" content="https://mikededo.com" />
-    <meta name="twitter:title" content="Miquel de Domingo" />
-    <meta name="twitter:description" content="Miquel de Domingo's portfolio" />
-    <meta name="twitter:image" content="https://mikededo.com/og.png" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="mikededo.com" property="twitter:domain" />
+    <meta content="https://mikededo.com" property="twitter:url" />
+    <meta content="Miquel de Domingo" name="twitter:title" />
+    <meta content="Miquel de Domingo's portfolio" name="twitter:description" />
+    <meta content="https://mikededo.com/og.png" name="twitter:image" />
 </svelte:head>
 
 <main class="relative mx-auto w-full overflow-hidden bg-background/75 px-6 md:w-3/4 md:px-8">
@@ -82,10 +82,7 @@
             </li>
             <li>Fast problem solver, ship fast</li>
             <li>Design oriented</li>
-            <li>
-                Obsessed in providing best user experience, while ensuring best
-                developer experience
-            </li>
+            <li>Obsessed in providing best user experience</li>
             <li>Active sports person, mostly cycling</li>
             <li>
                 <Link href="https://www.strava.com/athletes/mikededo">Last 7 days</Link>
@@ -132,6 +129,7 @@
                 <strong>Design driven.</strong> Consistent design adds as much value
                 as new features
             </li>
+            <li><strong>User focused.</strong> Analize users, build designs around them</li>
             <li>
                 <strong>Learn in public.</strong> Contribute to OS and share within the
                 community
