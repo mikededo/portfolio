@@ -26,9 +26,11 @@ const themeChangeAnimation = async (theme: Theme) => {
     return
   }
 
+  root.dataset.themeTransition = ''
   const transition = document.startViewTransition(() => {
     root.classList = theme
   })
+  transition.finished.then(() => delete root.dataset.themeTransition)
   await transition.ready
 
   document.documentElement.animate(

@@ -85,6 +85,11 @@ body[data-scroll-locked='true'] {
       animation-timing-function: ease-out;
       mix-blend-mode: normal;
     }
+
+    :root[data-theme-transition]::view-transition-old(root),
+    :root[data-theme-transition]::view-transition-new(root) {
+      animation: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
