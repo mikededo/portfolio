@@ -13,64 +13,188 @@ tags: ui, exploration
 
 ## The problem
 
-You have an edit dialog open. User clicks "Delete" and now you need a
-confirmation. But opening a second modal on top of the first one? That's two
-overlays stacking awkwardly, two dialogs fighting for attention, and an escape
-key that doesn't know what to do.
+Edit dialog is open. User clicks "Delete" and now you need confirmation. The
+usual approach—spawning another modal on top—feels off. Two overlays fighting
+for attention, focus trap confusion, and that awkward moment when Escape
+dismisses the wrong thing.
 
-I wanted something that felt like navigating through cards, where the previous
-context stays visible but recedes into the background.
+I wanted something that felt more like flipping through cards. The previous
+step stays visible behind, scaled down, giving you spatial context of where you
+came from.
 
 <StackingPreview layers={STACK_LAYERS} />
 
-## Four iterations
+The key behaviors:
+- Background dialogs scale down (0.95) and shift up (8px per level)
+- Only the top dialog is interactive
+- You can visually trace your way back
 
-I went through four attempts before landing on something that worked. Each
-failure was basically fighting Radix's internal implementation, which we wanted
-to keep, specifically because of a11y.
+## Finding the right transforms
+
+I spent more time than I'd like to admit tweaking the scale value. 0.9 made the
+dialog look like it was shrinking into nothing. 0.98 was barely noticeable.
+0.95 landed in a spot where you register the change without feeling like
+content is being crushed.
+
+The 8px vertical offset came from wanting a "peeking" effect—each layer showing
+just a sliver above the one in front. Stacking three or four dialogs deep still
+feels ordered rather than chaotic.
+
+I briefly tried adding a slight rotation to each layer. Looked fun but felt
+wrong for the context. This is a confirmation dialog, not a card gallery.
+
+### Pointer events
+
+Learned this one the hard way: you need `pointer-events: none` on inactive
+dialogs. Even at 40% opacity, users will click the background thinking they're
+interacting with something visible.
+
+```tsx
+<div
+  className="transition-opacity"
+  style={{
+    opacity: isActive ? 1 : 0.4,
+    pointerEvents: isActive ? 'auto' : 'none'
+  }}
+>
+```
+
+0.4 opacity keeps the background readable but clearly secondary. Lower and you
+lose context, higher and it competes with the active dialog.
+
+## The layout problem
+
+Getting multiple dialogs to stack visually while preserving Radix's focus
+management was the actual challenge. I tried several approaches before landing
+on one that worked.
 
 <IterationComparison iterations={ITERATIONS} />
 
-### Iteration 1: Multiple Content elements
+### Attempt 1: Separate containers
 
-My first instinct was to render multiple `DialogPrimitive.Content` elements,
-one for each dialog in the stack, see what happened. Base-ui provides better
-handling, or one could say a poor solution to nested dialogs, but didn't work.
+First instinct was separate portal containers per dialog. Broke immediately—
+focus trapping doesn't work across multiple containers. I'd have to reimplement
+all the a11y logic Radix already handles (tab navigation, Escape key, ARIA
+state). Not happening.
 
-Nothing rendered. Radix Dialog assumes a single Content per dialog instance. It
-manages focus trapping and aria attributes for that one element. Multiple
-Contents confused the internal state machine.
+### Attempt 2: Absolute + relative mix
 
-### Iteration 2: Single Content, absolute positioning
-
-New approach: single `DialogPrimitive.Content` as a container, stacked dialogs
-as regular divs inside. I used `position: absolute` for inactive dialogs and
-normal flow for the active one.
-
-Almost worked. But z-index was being ignored. The active dialog couldn't appear
-above the inactive ones. I'd forgotten a CSS fundamental: z-index only applies
-to positioned elements.
-
-### Iteration 3: All absolute
-
-Make everything `position: absolute`. Now z-index works.
-
-New problem: container collapses to zero height. All children are out of normal
-flow, nothing establishes dimensions.
-
-### Iteration 4: CSS Grid
-
-CSS Grid lets multiple elements occupy the same cell using `grid-area: 1/1`.
-All children stack in the same position, the tallest determines container
-height, and grid items create a stacking context so z-index works.
+Put inactive dialogs in `position: absolute`, kept the active one in normal
+flow.
 
 ```tsx
-<div className="grid *:[grid-area:1/1]">
-  {children}
+<div className="relative">
+  {inactiveDialogs.map(dialog => (
+    <div className="absolute inset-0" style={{ zIndex: dialog.depth }}>
+      {dialog.content}
+    </div>
+  ))}
+  <div className="relative">{activeDialog.content}</div>
 </div>
 ```
 
-Three iterations of positioning gymnastics solved by a grid trick.
+z-index was ignored. The active dialog created its own stacking context at
+z-index auto, and the absolute children couldn't layer behind it. Classic
+stacking context gotcha.
+
+### Attempt 3: All absolute
+
+Made everything absolute so they'd share a stacking context.
+
+```tsx
+<div className="relative">
+  {dialogs.map(dialog => (
+    <div 
+      className="absolute inset-0" 
+      style={{ zIndex: dialog.isActive ? 10 : dialog.depth }}
+    >
+      {dialog.content}
+    </div>
+  ))}
+</div>
+```
+
+Container collapsed to zero height. No children in flow, nothing to size
+against. Could've set explicit heights but dialog content is dynamic—error
+states expand, forms grow. Fixed heights would clip or leave gaps.
+
+### Attempt 4: CSS Grid
+
+`grid-area: 1/1` lets multiple elements occupy the same cell. They stack
+naturally, the tallest one sizes the container, and z-index just works.
+
+```tsx
+<div className="grid *:[grid-area:1/1]">
+  {dialogs.map((dialog, i) => {
+    const depth = dialogs.length - 1 - i;
+    const isActive = depth === 0;
+    
+    return (
+      <div
+        key={dialog.id}
+        style={{
+          zIndex: isActive ? 10 : depth,
+          transform: isActive 
+            ? 'scale(1) translateY(0)' 
+            : `scale(0.95) translateY(${-8 * depth}px)`,
+          opacity: isActive ? 1 : 0.4,
+          pointerEvents: isActive ? 'auto' : 'none',
+          transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms'
+        }}
+      >
+        {dialog.content}
+      </div>
+    );
+  })}
+</div>
+```
+
+Grid solves three things at once: stacking context for z-index, container
+sizing from the tallest child, and centered transform origins for balanced
+scaling.
+
+## Why transforms
+
+Using `transform` instead of animating `width`/`top` directly matters when
+you're moving 3-4 layers at once.
+
+```tsx
+// Triggers layout every frame
+<div style={{
+  width: isActive ? '100%' : '95%',
+  top: isActive ? '0' : '-8px'
+}} />
+
+// Compositor only, no layout
+<div style={{
+  transform: isActive 
+    ? 'scale(1) translateY(0)' 
+    : 'scale(0.95) translateY(-8px)'
+}} />
+```
+
+Transform animations skip the layout step entirely—browser just composites the
+layers. With positional properties, you're recalculating layout every frame.
+Noticeable on lower-end devices.
+
+## Timing
+
+Spent way too long on the easing curve. `linear` felt robotic. `ease-in-out` at
+300ms drew too much attention to itself. `ease-out` at 200ms was close but the
+start felt abrupt.
+
+Ended up with Material's deceleration curve:
+
+```tsx
+transition: 'transform 200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms'
+```
+
+The dialog settles into place with a slight slowdown at the end. Feels like
+something with weight coming to rest.
+
+Kept opacity on linear—syncing its easing with transform made things feel off.
+The dialog would fully fade in before finishing its motion, or the opposite.
+Separate curves for each property worked better.
 
 <video
   class="rounded-lg mx-auto max-h-120 border border-muted-foreground/30" 
@@ -81,9 +205,34 @@ Three iterations of positioning gymnastics solved by a grid trick.
   playsinline
 />
 
-## The API
+## Deep stacks
 
-The component follows the compound pattern, mirroring Radix's structure:
+Pushed the pattern to 4+ dialogs to see where it breaks. Two issues: background
+dialogs get clipped off-screen (8px × 4 adds up), and visually it's just too
+much to parse.
+
+Capped visible depth at 3. Anything deeper fades out:
+
+```tsx
+const isVisible = depth <= 2; 
+
+<div
+  style={{
+    opacity: !isVisible ? 0 : (isActive ? 1 : 0.4),
+    transform: !isVisible 
+      ? 'scale(0.9) translateY(-24px)'
+      : (isActive 
+          ? 'scale(1) translateY(0)' 
+          : `scale(0.95) translateY(${-8 * Math.min(depth, 2)}px)`)
+  }}
+/>
+```
+
+Hidden dialogs stay in memory, so navigating back reveals them smoothly.
+
+## API
+
+Followed Radix's compound component pattern to keep the API familiar:
 
 ```tsx
 <StackedDialogRoot open={isOpen} onOpenChange={setIsOpen} initialValue="edit">
@@ -113,6 +262,31 @@ The component follows the compound pattern, mirroring Radix's structure:
 </StackedDialogRoot>
 ```
 
-The CSS Grid insight was the key takeaway: `grid-area: 1/1` preserves container
-dimensions while allowing z-index to work, something I hadn't considered for
-complex stacking scenarios before.
+Each content panel has a `value`, navigation uses `StackedDialogNavigate` with
+a `to` prop. The root manages the stack internally.
+
+## Escape key
+
+Escape behavior depends on depth:
+
+- At root: closes everything
+- Nested: goes back one level
+
+```tsx
+const handleEscape = () => {
+  if (depth === 0) {
+    onOpenChange(false);
+  } else {
+    navigateBack();
+  }
+};
+```
+
+Matches how you'd expect browser back to work.
+
+---
+
+The interesting part wasn't the visual effect—that's just transforms. It was
+finding a layout primitive that let multiple elements share space while keeping
+focus management intact. Grid turned out to be the answer, specifically
+`grid-area: 1/1` for stacking without collapsed containers or z-index fights.
