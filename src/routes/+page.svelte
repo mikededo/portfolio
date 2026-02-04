@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { PageData } from './$types'
-    import type { ActivitySummary } from '$lib/server'
 
     import { SvelteSet } from 'svelte/reactivity'
 
@@ -18,7 +17,6 @@
     const { data }: Props = $props()
 
     const expanded = new SvelteSet<string>(['stackai'])
-    let stats = $state<ActivitySummary | null>(null)
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
@@ -40,12 +38,6 @@
     }
 
     const formatNumber = (digits: number = 2) => (value: number): string => value.toFixed(digits)
-
-    $effect(() => {
-        data.statsPromise.then((data: ActivitySummary | null) => {
-            stats = data
-        })
-    })
 </script>
 
 <svelte:head>
@@ -86,26 +78,24 @@
             <li>Active sports person, mostly cycling</li>
             <li>
                 <Link href="https://www.strava.com/athletes/mikededo">Last 7 days</Link>
-                {#await data.recoveryPeriodPromise then response}
-                    {#if response}
-                        Currently in recovery period! -
-                    {:else}
-                        <span class="inline-flex flex-wrap gap-1.5 align-middle">
-                            <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
-                                <span class="text-foreground/70">↗</span>
-                                <AnimatedNumber format={formatNumber()} value={stats?.distance ?? 0} />km
-                            </span>
-                            <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
-                                <span class="text-foreground/70">▲</span>
-                                <AnimatedNumber format={formatNumber(0)} value={stats?.elevation ?? 0} />m
-                            </span>
-                            <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
-                                <span class="text-foreground/70">⏱</span>
-                                <AnimatedNumber format={formatTime} value={stats?.time ?? 0} />
-                            </span>
+                {#if data.isRecoveryPeriod}
+                    Currently in recovery period! -
+                {:else}
+                    <span class="inline-flex flex-wrap gap-1.5 align-middle">
+                        <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
+                            <span class="text-foreground/70">↗</span>
+                            <AnimatedNumber format={formatNumber()} value={data.stats?.distance ?? 0} />km
                         </span>
-                    {/if}
-                {/await}
+                        <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
+                            <span class="text-foreground/70">▲</span>
+                            <AnimatedNumber format={formatNumber(0)} value={data.stats?.elevation ?? 0} />m
+                        </span>
+                        <span class="inline-flex items-center gap-1 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
+                            <span class="text-foreground/70">⏱</span>
+                            <AnimatedNumber format={formatTime} value={data.stats?.time ?? 0} />
+                        </span>
+                    </span>
+                {/if}
             </li>
             <li>
                 Helping other friends and athletes achieve their fitness goals, as a

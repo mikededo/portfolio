@@ -59,6 +59,27 @@ const EventDataArraySchema = v.array(EventSchema)
 let cachedSummary: ActivitySummary | null = null
 let cachedRecoveryPeriod: { lastFetched: Date, value: boolean } | null = null
 
+const CACHE_FRESH_MS = 60 * 60 * 1000
+const CACHE_STALE_MS = 24 * 60 * 60 * 1000
+
+type CacheStatus = 'expired' | 'fresh' | 'stale'
+
+const getCacheStatus = <T extends { lastFetched: Date }>(cache: null | T): CacheStatus => {
+  if (!cache) {
+    return 'expired'
+  }
+
+  const age = Date.now() - cache.lastFetched.getTime()
+  if (age < CACHE_FRESH_MS) {
+    return 'fresh'
+  }
+  if (age < CACHE_STALE_MS) {
+    return 'stale'
+  }
+
+  return 'expired'
+}
+
 const parseResponse = async <T extends v.GenericSchema>(
   schema: T,
   url: string
@@ -125,24 +146,59 @@ const withDevDefaultValue = <T>(cb: () => Promise<Result<T, Error>>, value: T) =
   return cb()
 }
 
-const getFromCache = <T extends { lastFetched: Date }>(cache: null | T): null | T => {
-  const now = new Date()
-  if (cache && (now.getTime() - cache.lastFetched.getTime() < 60 * 60 * 1000)) {
-    // eslint-disable-next-line no-console
-    console.log('Using cached value:', cache)
-    // eslint-disable-next-line no-console
-    console.log('Last fetched at:', cache.lastFetched.toISOString())
-    return cache
-  }
+const revalidateSummary = () => {
+  fetchAthletesSummary().then((result) => {
+    if (result.isOk()) {
+      const summary = result.value.reduce<ActivitySummary>(
+        (acc, { athlete_id: athleteId, byCategory: categories }) => {
+          if (athleteId !== INTERVALS_ID) {
+            return acc
+          }
+          categories.forEach((activity) => {
+            const { category, distance, moving_time, total_elevation_gain: elevation } = activity
+            if (category !== 'Ride') {
+              return
+            }
+            acc.distance += distance / 1000
+            acc.elevation += elevation
+            acc.time += moving_time / 3600
+          })
+          return acc
+        },
+        { distance: 0, elevation: 0, lastFetched: new Date(), time: 0 }
+      )
+      cachedSummary = summary
+    }
+  })
+}
 
-  return null
+const revalidateRecoveryPeriod = () => {
+  fetchEvents().then((result) => {
+    if (result.isOk()) {
+      const now = new Date()
+      const isRecoveryPeriod = result.value.some((event) => {
+        if (!event.name.toLowerCase().includes(RECOVERY_NOTE_NAME)) {
+          return false
+        }
+        return v.safeParse(
+          getDateRangeSchema(event.start_date_local, event.end_date_local),
+          now
+        ).success
+      })
+      cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod }
+    }
+  })
 }
 
 export const getIsRecoveryPeriod = withDevDefaultValue(
   async (): Promise<Result<boolean, Error>> => {
-    const cached = getFromCache(cachedRecoveryPeriod)
-    if (cached !== null) {
-      return ok(cached.value)
+    const status = getCacheStatus(cachedRecoveryPeriod)
+    if (status === 'fresh' && cachedRecoveryPeriod) {
+      return ok(cachedRecoveryPeriod.value)
+    }
+    if (status === 'stale' && cachedRecoveryPeriod) {
+      revalidateRecoveryPeriod()
+      return ok(cachedRecoveryPeriod.value)
     }
 
     const maybeEvents = await fetchEvents()
@@ -172,9 +228,13 @@ export const getIsRecoveryPeriod = withDevDefaultValue(
 
 export const getWeeklyActivitySummary = withDevDefaultValue(
   async (): Promise<Result<ActivitySummary, Error>> => {
-    const cached = getFromCache(cachedSummary)
-    if (cached) {
-      return ok(cached)
+    const status = getCacheStatus(cachedSummary)
+    if (status === 'fresh' && cachedSummary) {
+      return ok(cachedSummary)
+    }
+    if (status === 'stale' && cachedSummary) {
+      revalidateSummary()
+      return ok(cachedSummary)
     }
 
     const maybeAthletes = await fetchAthletesSummary()
