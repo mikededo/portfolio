@@ -187,20 +187,6 @@
                 barrel files. It's also a cli tool to use outside vscode
             </Project>
             <Project
-                repo="eslint plugin svelte tailwindcss"
-                repoHref="https://github.com/mikededo/eslint-plugin-svelte-tailwindcss"
-                topics={['typescript', 'eslint']}
-            >
-                I prefer eslint over prettier, and i created this port of
-                <Link
-                    class="font-mono text-sm"
-                    href="https://github.com/tailwindlabs/prettier-plugin-tailwindcss"
-                >
-                    prettier-plugin-tailwindcss
-                </Link>
-                for eslint and svelte
-            </Project>
-            <Project
                 repo=".dotfiles"
                 repoHref="https://github.com/mikededo/.dotfiles"
                 topics={['lua', 'sh']}
@@ -211,8 +197,9 @@
                 repo="other repos"
                 repoHref="https://github.com/mikededo?tab=repositories"
             >
-                Here you can find other projects I've done in my spare time. I also
-                enjoy contributing to os projects whenever I can
+                Here you can find other projects I've done in my spare time. I
+                also contribute to os projects whenever I can, specially to
+                those projects I use on a daily basis
             </Project>
         </ul>
     </Section>
