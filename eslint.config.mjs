@@ -1,14 +1,10 @@
 import antfu from '@antfu/eslint-config'
 import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import perfectionist from 'eslint-plugin-perfectionist'
-import svelteSortAttributes from 'eslint-plugin-svelte-sort-attributes'
 
 export default antfu(
   {
-    formatters: {
-      css: true,
-      html: true
-    },
+    formatters: false,
     ignores: [
       '!.env.example',
       '.DS_Store',
@@ -17,6 +13,7 @@ export default antfu(
       '**/*/.svelte-kit',
       '.vercel',
       '**/*/src/app.html',
+      'src/app.html',
       '**/*/build/',
       '**/*/dist/',
       'node_modules/',
@@ -84,10 +81,6 @@ export default antfu(
     rules: { 'ts/consistent-type-definitions': ['off'] }
   },
   {
-    files: ['**/*.html'],
-    rules: { 'style/indent': ['error', 4] }
-  },
-  {
     ...betterTailwindcss.configs['stylistic-error'],
     rules: {
       'better-tailwindcss/enforce-consistent-line-wrapping': 'off'
@@ -97,42 +90,6 @@ export default antfu(
         callees: ['tv'],
         entryPoint: './src/app.css'
       }
-    }
-  },
-  {
-    plugins: { 'svelte-sort-attributes': svelteSortAttributes },
-    rules: {
-      'svelte-sort-attributes/sort-attributes': [
-        'error',
-        {
-          customGroups: {
-            aria: 'aria-*',
-            'bind-directives': 'bind:*',
-            'bind-this': 'bind:this',
-            class: 'class',
-            data: 'data-*',
-            effects: 'on*',
-            'style-props': '--style-props',
-            this: 'this',
-            'use-directives': 'use:*'
-          },
-          groups: [
-            ['this', 'bind-this'],
-            'style-props',
-            'class',
-            ['bind-directives', 'use-directives'],
-            'unknown',
-            ['shorthand', 'svelte-shorthand'],
-            'effects',
-            'aria',
-            'data',
-            'multiline'
-          ],
-          ignoreCase: true,
-          order: 'asc',
-          type: 'alphabetical'
-        }
-      ]
     }
   }
 )
