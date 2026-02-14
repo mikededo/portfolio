@@ -1,7 +1,7 @@
 import antfu from '@antfu/eslint-config'
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import perfectionist from 'eslint-plugin-perfectionist'
 import svelteSortAttributes from 'eslint-plugin-svelte-sort-attributes'
-import svelteTailwindcss from 'eslint-plugin-svelte-tailwindcss'
 
 export default antfu(
   {
@@ -88,13 +88,15 @@ export default antfu(
     rules: { 'style/indent': ['error', 4] }
   },
   {
-    plugins: { 'svelte-tailwindcss': svelteTailwindcss },
+    ...betterTailwindcss.configs['stylistic-error'],
     rules: {
-      'svelte-tailwindcss/sort-classes': ['error', {
+      'better-tailwindcss/enforce-consistent-line-wrapping': 'off'
+    },
+    settings: {
+      'better-tailwindcss': {
         callees: ['tv'],
-        config: './src/app.css',
-        removeDuplicates: true
-      }]
+        entryPoint: './src/app.css'
+      }
     }
   },
   {
