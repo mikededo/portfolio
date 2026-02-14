@@ -2,7 +2,11 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mikededo.com/</loc>
-    <lastmod>2026-01-27T14:01:27.931Z</lastmod>
+    <lastmod>2026-02-14T08:38:24.647Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mikededo.com/blog</loc>
+    <lastmod>2026-02-14T08:38:24.647Z</lastmod>
   </url>
   <url>
     <loc>https://mikededo.com/blog/balance-work-with-training</loc>
