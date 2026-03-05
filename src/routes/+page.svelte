@@ -216,7 +216,10 @@
                     onExpand={onToggleExpand('stackai')}
                 >
                     <li>Y-combinator startup, joined after a-series</li>
-                    <li>Streamlining the design system</li>
+                    <li>Streamlining the design system, promoting consistency within the app</li>
+                    <li>Defining guidelines and techniques to improve performances of LLMs in our codebase</li>
+                    <li>Defined technical roadmaps and driving a high-speed team</li>
+                    <li>Spontaneus backend work</li>
                 </Experience>
             </li>
             <li>
