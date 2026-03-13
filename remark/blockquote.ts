@@ -4,6 +4,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
 const ALERT_REGEX = /^::(info|tip|success|warning|caution)::/i
+const NEWLINE_REGEX = /^\n+/
 
 const blockquote: Plugin<[], Root> = () => (tree) => {
   visit(tree, 'blockquote', (node) => {
@@ -23,7 +24,7 @@ const blockquote: Plugin<[], Root> = () => (tree) => {
     }
 
     const alertType = match[1].toLowerCase()
-    const textAfterAlert = firstNode.value.replace(ALERT_REGEX, '').replace(/^\n+/, '')
+    const textAfterAlert = firstNode.value.replace(ALERT_REGEX, '').replace(NEWLINE_REGEX, '')
     if (textAfterAlert) {
       firstNode.value = textAfterAlert
     } else {

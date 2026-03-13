@@ -5,6 +5,8 @@ import * as v from 'valibot'
 
 import { dev } from '$app/environment'
 
+const MDX_EXTENSION_REGEX = /\.mdx$/
+
 export const getBaseUrl = () => dev ? 'http://localhost:5173' : 'https://mikededo.com'
 
 const getModulePathFromSlug = (slug: string) => `/src/blog/${slug}.mdx`
@@ -50,7 +52,7 @@ export const getPostsMetadata = () => Object.entries(rawBlogPosts)
     const id = filePath
       .split('/')
       .pop()
-      ?.replace(/\.mdx$/, '') as string
+      ?.replace(MDX_EXTENSION_REGEX, '') as string
 
     const post = v.parse(PostMetaSchema, { id, ...data })
 

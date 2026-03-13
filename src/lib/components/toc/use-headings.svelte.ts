@@ -12,9 +12,7 @@ export const useHeadingsState = () => {
   let headings = $state<TOCItem[]>([])
 
   onMount(() => {
-    headings = [
-      ...document.querySelectorAll('h2,h3,h4,h5,h6').values()
-    ].map((e) => {
+    headings = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6').values(), (e) => {
       const element = e as HTMLHeadingElement
 
       return {

@@ -35,7 +35,7 @@
 <figure>
     <div class="relative mt-4 mb-2 flex items-center justify-center py-12">
         <div class="relative h-48 w-64">
-            {#each [...layers].reverse() as layer (layer.depth)}
+            {#each layers.toReversed() as layer (layer.depth)}
                 {@const state = getLayerState(layer)}
                 <div
                     class="absolute inset-0 flex flex-col rounded-md border border-muted-foreground/30 bg-background transition-all duration-300"
