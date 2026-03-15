@@ -10,8 +10,7 @@
 
     const { children, data }: LayoutProps = $props()
 
-    // svelte-ignore state_referenced_locally
-    initThemeContext(data.theme)
+    initThemeContext(() => data.theme)
 
     onNavigate((navigation) => {
         if (prefersReducedMotion() || !document.startViewTransition) {

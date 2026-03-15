@@ -4,8 +4,8 @@ import { Theme } from '$lib/utils/theme'
 
 const value = $state<{ theme: Theme }>({ theme: Theme.Light })
 
-export const initThemeContext = (initialValue: Theme) => {
-  value.theme = initialValue
+export const initThemeContext = (initialGetter: () => Theme) => {
+  value.theme = initialGetter()
   setContext('context:theme', () => value.theme)
 }
 
