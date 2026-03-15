@@ -82,7 +82,6 @@ body[data-scroll-locked='true'] {
     ::view-transition-old(root),
     ::view-transition-new(root) {
       animation-duration: 100ms;
-      animation-timing-function: ease-out;
       mix-blend-mode: normal;
     }
 
