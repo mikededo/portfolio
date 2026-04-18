@@ -20,7 +20,7 @@
     class={cn('cursor-pointer hover:underline', props.class)}
     type="button"
     onclick={onThemeChange}
-    aria-label={theme() === Theme.Light ? 'Switch to dark mode' : 'Switch to light mode'}
+    aria-label={theme() === Theme.light ? 'Switch to dark mode' : 'Switch to light mode'}
 >
-    {theme() === Theme.Light ? 'dark' : 'light'}
+    {theme() === Theme.light ? 'dark' : 'light'}
 </button>

@@ -1,7 +1,7 @@
 import type { Component } from '@lucide/svelte'
 
 import matter from 'gray-matter'
-import * as v from 'valibot'
+import * as z from 'zod'
 
 import { dev } from '$app/environment'
 
@@ -20,48 +20,43 @@ const rawBlogPosts = import.meta.glob('/src/blog/*.mdx', {
 })
 const mdxModules = import.meta.glob('/src/blog/*.mdx')
 
-export const PostMetaSchema = v.object({
-  date: v.pipe(
-    v.string(),
-    v.transform((i) => new Date(i)),
-    v.date()
-  ),
-  description: v.pipe(v.string(), v.trim()),
-  id: v.pipe(v.string(), v.trim()),
-  ogImage: v.optional(v.pipe(v.string(), v.trim())),
-  tags: v.pipe(
-    v.optional(v.string(), ''),
-    v.transform((v) => v.split(',').map((v) => v.trim())),
-    v.array(v.string())
-  ),
-  title: v.pipe(v.string(), v.trim())
+export const PostMetaSchema = z.object({
+  date: z.string().transform((value) => new Date(value)),
+  description: z.string().trim(),
+  id: z.string().trim(),
+  ogImage: z.string().trim().optional(),
+  tags: z.string().transform((v) => v.split(',').map((v) => v.trim())).optional(),
+  title: z.string().trim()
 })
 export type PostMeta = {
   relativeURL: string
   canonicalURL: string
-} & v.InferOutput<typeof PostMetaSchema>
+} & z.infer<typeof PostMetaSchema>
 
 export const getPostsMetadata = () => Object.entries(rawBlogPosts)
   .reduce((agg: PostMeta[], [filePath, rawContent]) => {
-    const parsed = v.safeParse(v.string(), rawContent)
+    const parsed = z.string().safeParse(rawContent)
     if (!parsed.success) {
       return agg
     }
 
-    const { data } = matter(parsed.output)
+    const { data } = matter(parsed.data)
     const id = filePath
       .split('/')
       .pop()
       ?.replace(MDX_EXTENSION_REGEX, '') as string
 
-    const post = v.parse(PostMetaSchema, { id, ...data })
+    const post = PostMetaSchema.safeParse({ id, ...data })
+    if (post.error) {
+      return agg
+    }
 
     return [
       ...agg,
       {
-        ...post,
-        canonicalURL: new URL(`/blog/${post.id}`, getBaseUrl()).toString(),
-        relativeURL: `/blog/${post.id}`
+        ...post.data,
+        canonicalURL: new URL(`/blog/${post.data.id}`, getBaseUrl()).toString(),
+        relativeURL: `/blog/${post.data.id}`
       }
     ]
   }, [])
@@ -71,13 +66,13 @@ export const getMetadataFromMatter = (
   id: string,
   data: { [key: string]: unknown }
 ) => {
-  const result = v.safeParse(PostMetaSchema, { id, ...data })
+  const result = PostMetaSchema.safeParse({ id, ...data })
   if (!result.success) {
     console.error(`Unable to parse metadata for ${id}`)
     return null
   }
 
-  const post = result.output
+  const post = result.data
   return {
     ...post,
     canonicalURL: new URL(getPostUrl(post.id), getBaseUrl()).toString(),

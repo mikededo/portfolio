@@ -2,7 +2,7 @@ import type { Result } from 'neverthrow'
 
 import dayjs from 'dayjs'
 import { err, ok, ResultAsync } from 'neverthrow'
-import * as v from 'valibot'
+import * as z from 'zod'
 
 import { dev } from '$app/environment'
 import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private'
@@ -10,36 +10,40 @@ import { INTERVALS_API_KEY, INTERVALS_ID } from '$env/static/private'
 const BASE_URL = 'https://intervals.icu/api/v1'
 const RECOVERY_NOTE_NAME = 'Time off bike'
 
-const getDateRangeSchema = (min: Date, max: Date) => v.pipe(
-  v.date(),
-  v.minValue(min),
-  v.maxValue(max)
-)
+const IntervalsDateSchema = z.coerce.date()
+
+const NullableNumberWithZeroDefaultSchema = z.nullable(z.number())
+  .transform((value) => value ?? 0)
+
+const getDateRangeSchema = (min: Date, max: Date) => z.date().min(min).max(max)
+
+const isWithinDateRange = (date: Date, min: Date, max: Date) =>
+  getDateRangeSchema(min, max).safeParse(date).success
 
 /**
  * Type definition from schema in:
  * https://intervals.icu/api-docs.html#get-/api/v1/athlete/-id-/athlete-summary-ext-
  */
-const ByCategoryItemSchema = v.object({
-  calories: v.nullable(v.number()),
-  category: v.nullable(v.string()),
-  count: v.nullable(v.number()),
-  distance: v.nullable(v.number(), 0),
-  eftp: v.nullable(v.number()),
-  eftpPerKg: v.nullable(v.number()),
-  elapsed_time: v.nullable(v.number()),
-  moving_time: v.nullable(v.number(), 0),
-  srpe: v.nullable(v.number()),
-  time: v.nullable(v.number()),
-  total_elevation_gain: v.nullable(v.number(), 0),
-  training_load: v.nullable(v.number())
+const ByCategoryItemSchema = z.object({
+  calories: z.nullable(z.number()),
+  category: z.nullable(z.string()),
+  count: z.nullable(z.number()),
+  distance: NullableNumberWithZeroDefaultSchema,
+  eftp: z.nullable(z.number()),
+  eftpPerKg: z.nullable(z.number()),
+  elapsed_time: z.nullable(z.number()),
+  moving_time: NullableNumberWithZeroDefaultSchema,
+  srpe: z.nullable(z.number()),
+  time: z.nullable(z.number()),
+  total_elevation_gain: NullableNumberWithZeroDefaultSchema,
+  training_load: z.nullable(z.number())
 })
 // Partial definition of the response
-const ActivityDataSchema = v.object({
-  athlete_id: v.string(),
-  byCategory: v.array(ByCategoryItemSchema)
+const ActivityDataSchema = z.object({
+  athlete_id: z.string(),
+  byCategory: z.array(ByCategoryItemSchema)
 })
-const ActivityDataArraySchema = v.array(ActivityDataSchema)
+const ActivityDataArraySchema = z.array(ActivityDataSchema)
 
 export type ActivitySummary = {
   distance: number
@@ -48,12 +52,12 @@ export type ActivitySummary = {
   elevation: number
 }
 
-const EventSchema = v.object({
-  end_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date()),
-  name: v.string(),
-  start_date_local: v.pipe(v.string(), v.transform((s) => new Date(s)), v.date())
+const EventSchema = z.object({
+  end_date_local: IntervalsDateSchema,
+  name: z.string(),
+  start_date_local: IntervalsDateSchema
 })
-const EventDataArraySchema = v.array(EventSchema)
+const EventDataArraySchema = z.array(EventSchema)
 
 // Home-made cache so that we do not fetch the data on every request
 let cachedSummary: ActivitySummary | null = null
@@ -80,10 +84,10 @@ const getCacheStatus = <T extends { lastFetched: Date }>(cache: null | T): Cache
   return 'expired'
 }
 
-const parseResponse = async <T extends v.GenericSchema>(
+const parseResponse = async <T extends z.ZodType>(
   schema: T,
   url: string
-): Promise<Result<v.InferOutput<T>, Error>> => {
+): Promise<Result<z.infer<T>, Error>> => {
   const fetchResult = await ResultAsync.fromPromise(
     fetch(url, {
       headers: {
@@ -110,12 +114,12 @@ const parseResponse = async <T extends v.GenericSchema>(
     return err(json.error)
   }
 
-  const parsed = v.safeParse(schema, json.value)
+  const parsed = schema.safeParse(json.value)
   if (!parsed.success) {
     return err(new Error('Validation failed for activity data'))
   }
 
-  return ok(parsed.output)
+  return ok(parsed.data)
 }
 
 const fetchAthletesSummary = async () => {
@@ -180,10 +184,7 @@ const revalidateRecoveryPeriod = () => {
         if (!event.name.toLowerCase().includes(RECOVERY_NOTE_NAME)) {
           return false
         }
-        return v.safeParse(
-          getDateRangeSchema(event.start_date_local, event.end_date_local),
-          now
-        ).success
+        return isWithinDateRange(now, event.start_date_local, event.end_date_local)
       })
       cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod }
     }
@@ -214,10 +215,7 @@ export const getIsRecoveryPeriod = withDevDefaultValue(
           return false
         }
 
-        return v.safeParse(
-          getDateRangeSchema(event.start_date_local, event.end_date_local),
-          now
-        ).success
+        return isWithinDateRange(now, event.start_date_local, event.end_date_local)
       })
 
     cachedRecoveryPeriod = { lastFetched: now, value: isRecoveryPeriod }

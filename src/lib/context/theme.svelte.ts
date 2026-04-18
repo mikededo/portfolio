@@ -1,16 +1,18 @@
+import type { ThemeType } from '$lib/utils/theme'
+
 import { getContext, setContext } from 'svelte'
 
 import { Theme } from '$lib/utils/theme'
 
-const value = $state<{ theme: Theme }>({ theme: Theme.Light })
+const value = $state<{ theme: ThemeType }>({ theme: Theme.light })
 
-export const initThemeContext = (initialGetter: () => Theme) => {
+export const initThemeContext = (initialGetter: () => ThemeType) => {
   value.theme = initialGetter()
   setContext('context:theme', () => value.theme)
 }
 
 export const getThemeContext = () => {
-  const ctx = getContext<() => Theme>('context:theme')
+  const ctx = getContext<() => ThemeType>('context:theme')
   if (!ctx) {
     throw new Error('Theme context not found')
   }
@@ -18,7 +20,7 @@ export const getThemeContext = () => {
   return ctx
 }
 
-const themeChangeAnimation = async (theme: Theme) => {
+const themeChangeAnimation = async (theme: ThemeType) => {
   const root = document.documentElement
 
   if (!document.startViewTransition) {
@@ -49,7 +51,7 @@ const themeChangeAnimation = async (theme: Theme) => {
 }
 
 export const toggleTheme = () => {
-  const newTheme = value.theme === Theme.Light ? Theme.Dark : Theme.Light
+  const newTheme = value.theme === Theme.light ? Theme.dark : Theme.light
 
   value.theme = newTheme
   themeChangeAnimation(newTheme)
