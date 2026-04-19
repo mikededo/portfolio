@@ -16,7 +16,7 @@
     type Props = { data: PageData }
     const { data }: Props = $props()
 
-    const expanded = new SvelteSet<string>(['stackai'])
+    const expanded = new SvelteSet<string>(['restream'])
 
     const onToggleExpand = (id: string) => () => {
         if (expanded.has(id)) {
@@ -206,6 +206,18 @@
 
     <Section number={4} title="Experience">
         <ul class="space-y-2">
+            <li>
+                <Experience
+                    company="Restream"
+                    companyHref="https://www.restream.io"
+                    expanded={expanded.has('restream')}
+                    subtitle="Multistreaming platform"
+                    title="Software engineer"
+                    onExpand={onToggleExpand('restream')}
+                >
+                    <li>Work in progress</li>
+                </Experience>
+            </li>
             <li>
                 <Experience
                     company="Stack AI"
